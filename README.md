@@ -1,4 +1,3 @@
+# CS171 healthy eating visualization project
+
 TODO
-
-CS171 healthy eating visualization project
-
