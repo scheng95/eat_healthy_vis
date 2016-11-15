@@ -1,0 +1,1199 @@
+[
+    {
+        "data": [
+            {
+                "cup_equiv": 0.451947637478999,
+                "price_cup": 1.1553598970855439,
+                "yield": 0.4585537918871252,
+                "form": "fresh",
+                "price_pound": 1.172247884197676
+            }
+        ],
+        "name": "acorn_squash"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 1.1891020280290363,
+                "yield": 0.93,
+                "form": "fresh",
+                "price_pound": 3.040071967096438
+            },
+            {
+                "cup_equiv": 0.54013254235295,
+                "price_cup": 0.8898625630087,
+                "yield": 1,
+                "form": "canned_juice",
+                "price_pound": 1.6474892609362881
+            },
+            {
+                "cup_equiv": 0.44092452436975516,
+                "price_cup": 1.0528209465507523,
+                "yield": 0.65,
+                "form": "canned_nojuice",
+                "price_pound": 1.552042532077697
+            },
+            {
+                "cup_equiv": 0.1433004704201704,
+                "price_cup": 1.1082818387118443,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 7.733972089988665
+            }
+        ],
+        "name": "apricots"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 2.274966802638781,
+                "yield": 0.37530864197530867,
+                "form": "fresh",
+                "price_pound": 2.213050479286032
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 2.0095366958714562,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 3.385610474934269
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 2.551753610994625,
+                "yield": 0.9406389853221443,
+                "form": null,
+                "price_pound": 6.221418327758323
+            }
+        ],
+        "name": "artichoke"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.39683207193277964,
+                "price_cup": 2.582272039052205,
+                "yield": 0.49383546729412575,
+                "form": "fresh",
+                "price_pound": 3.213494093042744
+            },
+            {
+                "cup_equiv": 0.39683207193277964,
+                "price_cup": 1.5752994946110475,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 2.5802971682959877
+            },
+            {
+                "cup_equiv": 0.39683207193277964,
+                "price_cup": 2.248970956730312,
+                "yield": 1.033527085122706,
+                "form": null,
+                "price_pound": 5.857319913973168
+            }
+        ],
+        "name": "asparagus"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 0.9648862658592255,
+                "yield": 0.7407532009411887,
+                "form": "fresh",
+                "price_pound": 2.23587438157724
+            }
+        ],
+        "name": "avocados"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.292965108255256,
+                "yield": 0.64,
+                "form": "fresh",
+                "price_pound": 0.5669834145314481
+            }
+        ],
+        "name": "bananas"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.5865545304870146,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.0172754632446908
+            }
+        ],
+        "name": "beets"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 1.1277354985140675,
+                "yield": 1,
+                "form": null,
+                "price_pound": 3.4102147833608494
+            }
+        ],
+        "name": "berries_mixed"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 1.9229193794576958,
+                "yield": 0.96,
+                "form": "fresh",
+                "price_pound": 5.774708250353515
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 1.1205548456196528,
+                "yield": 1,
+                "form": null,
+                "price_pound": 3.3885008542640165
+            }
+        ],
+        "name": "blackberries"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.5249543542015718,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9104408134215987
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.23499379149568378,
+                "yield": 2.6102731842689506,
+                "form": "dried",
+                "price_pound": 1.589900852176512
+            }
+        ],
+        "name": "blackeye_peas"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.5820252922314949,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9805797177548408
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.25068484178942496,
+                "yield": 2.2928075267227266,
+                "form": "dried",
+                "price_pound": 1.489784202634297
+            }
+        ],
+        "name": "black_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 1.5931766758360333,
+                "yield": 0.95,
+                "form": "fresh",
+                "price_pound": 4.734621689725025
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 1.2047988425974179,
+                "yield": 1,
+                "form": null,
+                "price_pound": 3.643250415913465
+            }
+        ],
+        "name": "blueberries"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.34171650638656026,
+                "price_cup": 0.8908979276644674,
+                "yield": 1.06,
+                "form": "fresh",
+                "price_pound": 2.7635533715074785
+            },
+            {
+                "cup_equiv": 0.34171650638656026,
+                "price_cup": 0.7611214297654075,
+                "yield": 0.96,
+                "form": null,
+                "price_pound": 2.1382536661785583
+            }
+        ],
+        "name": "brussels_sprouts"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.451947637478999,
+                "price_cup": 0.7878932949565811,
+                "yield": 0.714,
+                "form": "fresh",
+                "price_pound": 1.2447367038734427
+            }
+        ],
+        "name": "butternut_squash"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.2459438997176832,
+                "yield": 0.778797073364374,
+                "form": null,
+                "price_pound": 0.5792083942582089
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.4484122317975593,
+                "yield": 0.7791066357593831,
+                "form": null,
+                "price_pound": 1.0564497279090856
+            },
+            {
+                "cup_equiv": 0.3086471670588286,
+                "price_cup": 0.6005015977588855,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.264635092111112
+            }
+        ],
+        "name": "cabbage"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.3937998164199316,
+                "yield": 0.51,
+                "form": "fresh",
+                "price_pound": 0.5358737761064452
+            }
+        ],
+        "name": "cantaloupe"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 0.2905597104633725,
+                "yield": 0.8158333333333333,
+                "form": null,
+                "price_pound": 0.7415399923792381
+            },
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.22960896660180294,
+                "yield": 0.89,
+                "form": null,
+                "price_pound": 0.7415399923792381
+            },
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.39888734480925847,
+                "yield": 1,
+                "form": null,
+                "price_pound": 1.4474580487603101
+            },
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 0.5215496003383115,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.0604903278517581
+            },
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 0.4764107276826222,
+                "yield": 0.98,
+                "form": null,
+                "price_pound": 1.4605127285636244
+            }
+        ],
+        "name": "carrots"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.9289659883022945,
+                "yield": 0.9702380952380952,
+                "form": null,
+                "price_pound": 3.270648435152338
+            },
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.3793701550001536,
+                "yield": 0.8926190476190476,
+                "form": null,
+                "price_pound": 1.228810856226643
+            },
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.5084255713850335,
+                "yield": 0.9303507464201833,
+                "form": null,
+                "price_pound": 1.7164447289958733
+            }
+        ],
+        "name": "cauliflower"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.4035923342961845,
+                "yield": 0.73,
+                "form": null,
+                "price_pound": 1.1136539541823682
+            },
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.5833350581191521,
+                "yield": 1,
+                "form": null,
+                "price_pound": 2.2049694293029494
+            }
+        ],
+        "name": "celery"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.34171650638656026,
+                "price_cup": 1.3345477247068338,
+                "yield": 0.92,
+                "form": "fresh",
+                "price_pound": 3.5929897554945156
+            },
+            {
+                "cup_equiv": 0.44092452436975516,
+                "price_cup": 2.3869234615791783,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 3.518743377325486
+            }
+        ],
+        "name": "cherries"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2866009408403408,
+                "price_cup": 0.6500005334602684,
+                "yield": 1.16,
+                "form": "fresh",
+                "price_pound": 2.6308379051482205
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.5051230697403379,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9025938225719811
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.610729391337376,
+                "yield": 0.8818490487395103,
+                "form": null,
+                "price_pound": 1.4805561002118208
+            }
+        ],
+        "name": "collard_greens"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 1.8124970976676653,
+                "yield": 0.54,
+                "form": "fresh",
+                "price_pound": 2.6906231590337386
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.5058570390513949,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9039053369450188
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.6116003143848672,
+                "yield": 0.9629791612235452,
+                "form": null,
+                "price_pound": 1.6190728322624848
+            }
+        ],
+        "name": "corn_sweet"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.12316327496361876,
+                "price_cup": 0.589550744476609,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 4.78674137766113
+            }
+        ],
+        "name": "cranberries"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.35344819924452003,
+                "yield": 0.97,
+                "form": null,
+                "price_pound": 1.2959313681377287
+            },
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.46965034694134855,
+                "yield": 0.73,
+                "form": null,
+                "price_pound": 1.2959313681377287
+            }
+        ],
+        "name": "cucumbers"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.16534669663865817,
+                "price_cup": 0.7922341321767193,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 4.791351434785752
+            }
+        ],
+        "name": "dates"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.16534669663865817,
+                "price_cup": 0.9900680550567041,
+                "yield": 0.96,
+                "form": "dried",
+                "price_pound": 5.7483176390971
+            }
+        ],
+        "name": "figs"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.54013254235295,
+                "price_cup": 0.804880435811697,
+                "yield": 1,
+                "form": "canned_juice",
+                "price_pound": 1.4901535691692267
+            },
+            {
+                "cup_equiv": 0.44092452436975516,
+                "price_cup": 0.8407807242745056,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.239458094465466
+            }
+        ],
+        "name": "fruit_cocktail"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.5483923419142945,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9239158762182337
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.2467417553165684,
+                "yield": 2.398629412571468,
+                "form": "dried",
+                "price_pound": 1.5340287416252933
+            }
+        ],
+        "name": "great_northern_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.696605550913473,
+                "yield": 0.8465750867899299,
+                "form": "fresh",
+                "price_pound": 2.139972252406189
+            },
+            {
+                "cup_equiv": 0.29762405394958474,
+                "price_cup": 0.37864148025798045,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.8269390827173453
+            },
+            {
+                "cup_equiv": 0.29762405394958474,
+                "price_cup": 0.5501826694042166,
+                "yield": 0.9030134259092585,
+                "form": null,
+                "price_pound": 1.6692949732442006
+            }
+        ],
+        "name": "green_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 0.5497686735334381,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.0130691820428905
+            },
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 0.6504239823403363,
+                "yield": 0.8924312373243843,
+                "form": null,
+                "price_pound": 1.6455726753210507
+            }
+        ],
+        "name": "green_peas"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.4550220530379474,
+                "yield": 0.82,
+                "form": "fresh",
+                "price_pound": 1.4103626315049465
+            }
+        ],
+        "name": "green_peppers"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.6490771080340273,
+                "yield": 0.45999999999999996,
+                "form": "fresh",
+                "price_pound": 0.7966562054300836
+            }
+        ],
+        "name": "honeydew"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2866009408403408,
+                "price_cup": 0.766262219205846,
+                "yield": 1.05,
+                "form": "fresh",
+                "price_pound": 2.8073017757968555
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.5980517528960165,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.0686461380981396
+            },
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.6940617545838381,
+                "yield": 0.8994860297143005,
+                "form": null,
+                "price_pound": 1.7162254295163997
+            }
+        ],
+        "name": "kale"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.5351941309797364,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9016799044729881
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.2689159518646185,
+                "yield": 2.398629412571468,
+                "form": "dried",
+                "price_pound": 1.671888889306885
+            }
+        ],
+        "name": "kidney_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 1.037969969409293,
+                "yield": 0.76,
+                "form": "fresh",
+                "price_pound": 2.0446834079658482
+            }
+        ],
+        "name": "kiwi"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.1967380404977376,
+                "yield": 2.716095070117692,
+                "form": "dried",
+                "price_pound": 1.3850358051040728
+            }
+        ],
+        "name": "lentils"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.24250848840336534,
+                "price_cup": 0.30965511413501356,
+                "yield": 0.95,
+                "form": "fresh",
+                "price_pound": 1.2130394295269566
+            }
+        ],
+        "name": "lettuce_iceberg"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.20943914907563368,
+                "price_cup": 0.4090966691048973,
+                "yield": 0.94,
+                "form": null,
+                "price_pound": 1.8360983161736038
+            },
+            {
+                "cup_equiv": 0.20943914907563368,
+                "price_cup": 0.6783371579642917,
+                "yield": 0.85,
+                "form": null,
+                "price_pound": 2.7530028975692034
+            }
+        ],
+        "name": "lettuce_romaine"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.7977571958055035,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.3835692654969534
+            },
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.6271567050718378,
+                "yield": 1.0970202166319507,
+                "form": null,
+                "price_pound": 1.835724567316156
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.2666062830531105,
+                "yield": 2.5044512984202094,
+                "form": "dried",
+                "price_pound": 1.7306556431333346
+            }
+        ],
+        "name": "lima_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.7057834420129279,
+                "yield": 0.71,
+                "form": "fresh",
+                "price_pound": 1.3775634470319702
+            },
+            {
+                "cup_equiv": 0.12526264896868042,
+                "price_cup": 1.0653149000777193,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 8.504649301677162
+            }
+        ],
+        "name": "mangoes"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3391727110536578,
+                "price_cup": 0.6910923032554915,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.3244284769272123
+            },
+            {
+                "cup_equiv": 0.30200309888339394,
+                "price_cup": 0.42362552804550196,
+                "yield": 0.99,
+                "form": null,
+                "price_pound": 1.388691951558341
+            },
+            {
+                "cup_equiv": 0.3736648511608095,
+                "price_cup": 0.6366290015471219,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.1074331709822594
+            },
+            {
+                "cup_equiv": 0.3736648511608095,
+                "price_cup": 0.6731918667404424,
+                "yield": 1,
+                "form": null,
+                "price_pound": 1.8015926963671764
+            }
+        ],
+        "name": "mixed_vegetables"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.1543235835294143,
+                "price_cup": 0.5428348518991978,
+                "yield": 0.97,
+                "form": null,
+                "price_pound": 3.411985351168706
+            },
+            {
+                "cup_equiv": 0.1543235835294143,
+                "price_cup": 0.5897605962292448,
+                "yield": 1,
+                "form": null,
+                "price_pound": 3.8215843796605173
+            }
+        ],
+        "name": "mushrooms"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3086471670588286,
+                "price_cup": 0.9440322729608263,
+                "yield": 0.84,
+                "form": "fresh",
+                "price_pound": 2.5692350162927284
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.4969515735304017,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9767915820558316
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.6438426012227675,
+                "yield": 0.7478079933311047,
+                "form": null,
+                "price_pound": 1.455942735565085
+            }
+        ],
+        "name": "mustard_greens"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.5759969366920463,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9704233151855739
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.24219802713586577,
+                "yield": 2.398629412571468,
+                "form": "dried",
+                "price_pound": 1.5057797344218395
+            }
+        ],
+        "name": "navy_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 0.6186668449589843,
+                "yield": 0.91,
+                "form": "fresh",
+                "price_pound": 1.7611484827950696
+            }
+        ],
+        "name": "nectarines"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 1.4731461807212616,
+                "yield": 0.7694736842105263,
+                "form": "fresh",
+                "price_pound": 3.2135523100028136
+            },
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.651202614009094,
+                "yield": 0.8994860297143005,
+                "form": null,
+                "price_pound": 1.5628862736218256
+            }
+        ],
+        "name": "okra"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.29762405394958474,
+                "price_cup": 1.2461018280968343,
+                "yield": 1,
+                "form": null,
+                "price_pound": 4.186831714576116
+            }
+        ],
+        "name": "olives"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 0.40686835807611793,
+                "yield": 0.9,
+                "form": "fresh",
+                "price_pound": 1.0381071533498718
+            }
+        ],
+        "name": "onions"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3086471670588286,
+                "price_cup": 0.6461735480929415,
+                "yield": 0.62,
+                "form": "fresh",
+                "price_pound": 1.2980115892049107
+            },
+            {
+                "cup_equiv": 0.1543235835294143,
+                "price_cup": 0.7046279851580048,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 4.565912539373489
+            }
+        ],
+        "name": "papaya"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.44768632275641496,
+                "yield": 0.51,
+                "form": "fresh",
+                "price_pound": 0.6276619459356987
+            },
+            {
+                "cup_equiv": 0.54013254235295,
+                "price_cup": 0.617600034497824,
+                "yield": 1,
+                "form": "canned_juice",
+                "price_pound": 1.1434231157548969
+            },
+            {
+                "cup_equiv": 0.44092452436975516,
+                "price_cup": 0.7654778307375815,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.128448436136835
+            },
+            {
+                "cup_equiv": 0.1543235835294143,
+                "price_cup": 0.8483300638340933,
+                "yield": 1,
+                "form": "dried",
+                "price_pound": 5.497086345667967
+            },
+            {
+                "cup_equiv": 8,
+                "price_cup": 0.5480164100022136,
+                "yield": 1,
+                "form": null,
+                "price_pound": 1.0960328200044271
+            },
+            {
+                "cup_equiv": 8,
+                "price_cup": 0.29537617886263373,
+                "yield": 1,
+                "form": null,
+                "price_pound": 0.5907523577252675
+            }
+        ],
+        "name": "pineapple"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.5141288428947393,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.8661897040976491
+            },
+            {
+                "cup_equiv": 0.3858089588235358,
+                "price_cup": 0.1936271298304146,
+                "yield": 2.398629412571468,
+                "form": "dried",
+                "price_pound": 1.2038075271742346
+            }
+        ],
+        "name": "pinto_beans"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.363762732605048,
+                "price_cup": 0.7071764261778065,
+                "yield": 0.94,
+                "form": "fresh",
+                "price_pound": 1.827416007809903
+            },
+            {
+                "cup_equiv": 0.18739292285714593,
+                "price_cup": 0.7563825174992741,
+                "yield": 1,
+                "form": null,
+                "price_pound": 4.036345161636026
+            },
+            {
+                "cup_equiv": 8,
+                "price_cup": 0.5777246359256731,
+                "yield": 1,
+                "form": null,
+                "price_pound": 1.1554492718513463
+            }
+        ],
+        "name": "plums"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.34171650638656026,
+                "price_cup": 1.3263423604548736,
+                "yield": 0.56,
+                "form": "fresh",
+                "price_pound": 2.173590411855919
+            },
+            {
+                "cup_equiv": 8,
+                "price_cup": 1.471392553655722,
+                "yield": 1,
+                "form": null,
+                "price_pound": 2.942785107311444
+            }
+        ],
+        "name": "pomegranate"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.54013254235295,
+                "price_cup": 0.7304106555153704,
+                "yield": 1,
+                "form": null,
+                "price_pound": 1.3522804094223284
+            }
+        ],
+        "name": "pumpkin"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.27557782773109696,
+                "price_cup": 0.4016175575563925,
+                "yield": 0.9,
+                "form": "fresh",
+                "price_pound": 1.3116287503124315
+            }
+        ],
+        "name": "radish"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 2.3228743671557686,
+                "yield": 0.96,
+                "form": "fresh",
+                "price_pound": 6.975810798855296
+            },
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 1.471408570502552,
+                "yield": 1,
+                "form": null,
+                "price_pound": 4.449464671550431
+            }
+        ],
+        "name": "raspberries"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.2645547146218531,
+                "price_cup": 0.734926460046116,
+                "yield": 0.82,
+                "form": "fresh",
+                "price_pound": 2.277939737718192
+            }
+        ],
+        "name": "red_peppers"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 1.6464733213785239,
+                "yield": 0.77,
+                "form": null,
+                "price_pound": 3.8337157113940625
+            },
+            {
+                "cup_equiv": 0.1543235835294143,
+                "price_cup": 0.5916327468153496,
+                "yield": 1,
+                "form": null,
+                "price_pound": 3.8337157113940625
+            },
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.6614404892532427,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 1.147151961395998
+            },
+            {
+                "cup_equiv": 0.37478584571429185,
+                "price_cup": 0.9190239350283138,
+                "yield": 0.776027162890769,
+                "form": null,
+                "price_pound": 1.9029201478233322
+            }
+        ],
+        "name": "spinach"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.39683207193277964,
+                "price_cup": 0.8454802696549902,
+                "yield": 0.7695,
+                "form": "fresh",
+                "price_pound": 1.639477032011972
+            }
+        ],
+        "name": "summer_squash"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.44092452436975516,
+                "price_cup": 0.49940029869535,
+                "yield": 0.8113011248403494,
+                "form": "fresh",
+                "price_pound": 0.918896549599444
+            }
+        ],
+        "name": "sweet_potatoes"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.4078551850420235,
+                "price_cup": 0.7594714816479184,
+                "yield": 0.74,
+                "form": "fresh",
+                "price_pound": 1.3779618772323634
+            }
+        ],
+        "name": "tangerines"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.3196702801680725,
+                "price_cup": 1.0535261842249284,
+                "yield": 0.75,
+                "form": "fresh",
+                "price_pound": 2.4717488211705616
+            },
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 0.5238202420017888,
+                "yield": 0.65,
+                "form": null,
+                "price_pound": 0.9652535141582325
+            },
+            {
+                "cup_equiv": 0.3527396194958041,
+                "price_cup": 0.6695651423037291,
+                "yield": 0.776027162890769,
+                "form": null,
+                "price_pound": 1.473043313068204
+            }
+        ],
+        "name": "turnip_greens"
+    },
+    {
+        "data": [
+            {
+                "cup_equiv": 0.33069339327731634,
+                "price_cup": 0.21203299484729216,
+                "yield": 0.52,
+                "form": "fresh",
+                "price_pound": 0.33341203532340097
+            }
+        ],
+        "name": "watermelon"
+    }
+]
