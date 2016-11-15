@@ -1,0 +1,12 @@
+price per hundredweight
+based on california
+2015 dollars
+
+broccoli: 48.10
+cucumbers: 26.30
+eggplant: 37.05
+escarole/endive: 34.62
+garlic: 73.00
+potatoes: 10.28
+tomatoes: 46.00
+
