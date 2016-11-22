@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eating Healthy</title>
+
+    <!-- Load Google Font -->
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto:100,400,300,400italic,700' rel='stylesheet' type='text/css'>-->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="content container">
+            <div class="row header">
+                <h1 class="text-center">Healthy Eating</h1>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <h3>Intro</h3>
+                <p>
+                    Introduction text about health and its relation to food. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam id lacus auctor, mattis nulla eget, feugiat risus. Nullam pretium id leo tincidunt euismod. Nunc ac dui sit amet justo accumsan fermentum. Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus. Nam quis interdum magna, sed tincidunt ligula. Sed at ligula vestibulum, mollis lacus quis, congue tellus. Proin facilisis, dui id ultrices sodales, elit lectus ultrices odio, quis blandit mi ante non augue. Quisque ut tortor id lectus tempor venenatis. Aenean posuere ultrices nisi ut aliquam. Ut vitae augue sit amet urna elementum pellentesque. Vestibulum vehicula, odio et efficitur facilisis, augue neque condimentum risus, vel tempus diam lectus sit amet arcu. In pulvinar scelerisque nulla, et gravida elit pretium sed. Vivamus consequat facilisis viverra. Fusce at nunc id metus commodo pharetra eget vel est.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h3>Food/Health Trends in US</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nulla eu ipsum ut nisi lobortis malesuada.
+                  Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                  Nullam id lacus auctor, mattis nulla eget, feugiat risus.
+                  Nullam pretium id leo tincidunt euismod.
+                  Nunc ac dui sit amet justo accumsan fermentum.
+                  Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
+                  Nam quis interdum magna, sed tincidunt ligula.
+                </p>
+              </div>
+              <div class="col-xs-12 col-sm-6 img-placeholder" id="health-trends">
+                  Visualization
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 img-placeholder" id="areachart-FAFH">
+                  <h3>Food Spending Away from Home</h3>
+              </div>
+              <div class="col-xs-12 col-sm-6">
+                <h3>People are Eating Out More</h3>
+              </div>
+            </div>
+            <div  class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h3>Comparison of food items</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nulla eu ipsum ut nisi lobortis malesuada.
+                  Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                  Nullam id lacus auctor, mattis nulla eget, feugiat risus.
+                  Nullam pretium id leo tincidunt euismod.
+                  Nunc ac dui sit amet justo accumsan fermentum.
+                  Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
+                  Nam quis interdum magna, sed tincidunt ligula.
+                </p>
+              </div>
+            </div>
+            <div  class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h3>Obstacles to eating healthy</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nulla eu ipsum ut nisi lobortis malesuada.
+                  Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                  Nullam id lacus auctor, mattis nulla eget, feugiat risus.
+                  Nullam pretium id leo tincidunt euismod.
+                  Nunc ac dui sit amet justo accumsan fermentum.
+                  Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
+                  Nam quis interdum magna, sed tincidunt ligula.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <h3>Menu Builder</h3>
+              </div>
+              <div class="col-xs-12 col-sm-6 img-placeholder">
+                  Visualization
+              </div>
+            </div>
+            <div class="row footer">
+                <h5>Acknowledgement</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS libraries -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.tip.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/topojson.v1.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/FAFH.js"></script>
+</body>
+</html>
