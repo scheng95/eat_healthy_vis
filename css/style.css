@@ -1,6 +1,9 @@
 .content {
     margin: auto;
-    width: 960px;
+}
+
+h1,h2,h3 {
+  text-align: center;
 }
 
 .header,
@@ -8,12 +11,19 @@
     padding: 20px;
 }
 
-#health-trends {
+.img-placeholder {
     background-color: lightgray;
-    height: 500px;
+    min-height: 300px;
+    text-align: center;
 }
 
-#menu-vis {
-    background-color: lightgray;
-    height: 500px;
+.bar {
+  fill: steelblue;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #666;
+  shape-rendering: crispEdges;
 }
