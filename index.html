@@ -38,6 +38,46 @@
             </div>
             <div>
                 <h3>Menu Builder</h3>
+                <div>
+                    <div>
+                        <h4>1. Tell us about yourself</h4>
+                        <form class="form-inline">
+                            <div class="form-group" id="input-age-group">
+                                <label for="input-age">Age </label>
+                                <input type="number" id="input-age" class="form-control" min="2" max="76" value="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="dropdown-gender">Gender </label>
+                                <select class="form-control" id="dropdown-gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dropdown-lifestyle">Lifestyle </label>
+                                <select class="form-control" id="dropdown-lifestyle">
+                                    <option value="sedentary">Sedentary</option>
+                                    <option value="moderate">Moderately Active</option>
+                                    <option value="active">Active</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row" id="recipe-block">
+                        <h4>2. What do you eat in a day?</h4>
+                        <div class="col-md-3">
+                            Meals:
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search recipes..." id="input-recipe-search">
+                                <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
+                            </div>
+                            <div class="" id="recipe-results"></div>
+                        </div>
+                    </div>
+                    <h4>3. How nutritious is your daily diet?</h4>
+                </div>
                 <div id="menu-vis">
                     Visualization
                 </div>
@@ -57,5 +97,6 @@
     <script src="js/topojson.v1.min.js"></script>
 
     <script src="js/nutrition.js"></script>
+    <script src="js/mealSelector.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var testRecipe =
+const testRecipe =
     {
         "title": "Fresh Ham Roasted With Rye Bread and Dried Fruit Stuffing",
         "prep": "1. Have your butcher bone and butterfly the ham and score the fat in a diamond pattern. ...",
@@ -21,43 +21,79 @@ var testRecipe =
         ]
     };
 
-$(function() {
-    console.log("Ready");
-    recipeSearch("chicken");
-});
+let currRecipes = [];
 
+// TODO take these functions out of the global namespace
 function nutritionAnalysis(recipe) {
-    var app_id = "11d4d52e";
-    var app_key = "2d7e359cd72a42a1da103d23be96280d";
+    const app_id = "11d4d52e";
+    const app_key = "2d7e359cd72a42a1da103d23be96280d";
 
     // var proxyUrl = "http://localhost:5000/n";
-    var git = "https://flaskwebproject120161124101015.scm.azurewebsites.net:443/flaskwebproject120161124101015.git";
-    var baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/n";
+    const git = "https://flaskwebproject120161124101015.scm.azurewebsites.net:443/flaskwebproject120161124101015.git";
+    const baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/n";
 
-    var payload = {
+    const payload = {
         "app_id": app_id,
         "app_key": app_key,
         "recipe": JSON.stringify(recipe)
     };
 
-    $.post(proxyUrl, payload, function(data, status) {
-        console.log(data);
+    return $.post(proxyUrl, payload, function(data, status) {
         console.log(status);
+        return data;
     });
 }
 
 function recipeSearch(query) {
-    var app_id = "58b4a2d1";
-    var app_key = "6632220a737740e2eeb51be026a62788";
+    // first, clear all current results
+    $("#recipe-results").empty()
+        .addClass("loader");
+
+    const app_id = "58b4a2d1";
+    const app_key = "6632220a737740e2eeb51be026a62788";
 
     // var baseUrl = "http://edamamproxy.azurewebsites.net/r";
-    var baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/r";
+    const baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/r";
     // var baseUrl = "http://localhost:5000/r";
 
-    var proxyUrl = baseUrl + `?q=${query}&app_id=${app_id}&app_key=${app_key}`;
+    const proxyUrl = baseUrl + `?q=${query}&app_id=${app_id}&app_key=${app_key}`;
 
     $.get(proxyUrl, function(data, status) {
-        console.log(data);
         console.log(status);
+        $("#recipe-results").removeClass("loader");
+        displayRecipes(JSON.parse(data));
     });
+}
+
+function displayRecipes(data) {
+    console.log(data);
+    globe = data;
+    let resultsHTML = "";
+
+    // TODO if no results returned, display message
+    const numDisplay = 6;
+    currRecipes = data.hits.slice(0, numDisplay);
+    currRecipes.forEach(function(d, i) {
+        const recipe = d.recipe;
+
+        resultsHTML +=
+        `<div class="col-md-4">
+            <div class="thumbnail">
+                <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
+                <div class="caption">
+                    <h5 class="recipe-title">${recipe.label}</h5>
+                    <p>Calories per serving: ${Math.floor(recipe.calories / recipe.yield)}</p>
+                    <p><button class="btn btn-primary add-recipe-button" type="button" id="recipe-button-${i}" onclick="addRecipe(${i})">Add to menu</button></p>
+                </div>
+            </div>
+        </div>`;
+    });
+
+    // TODO allow users to search for more recipes with same query?
+
+    $("#recipe-results").append("<div class='row'>" + resultsHTML + "</div>");
+}
+
+function addRecipe(idx) {
+    console.log(idx);
 }
