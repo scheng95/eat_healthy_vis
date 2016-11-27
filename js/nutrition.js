@@ -1,27 +1,6 @@
-const testRecipe =
-    {
-        "title": "Fresh Ham Roasted With Rye Bread and Dried Fruit Stuffing",
-        "prep": "1. Have your butcher bone and butterfly the ham and score the fat in a diamond pattern. ...",
-        "yield": "About 15 servings",
-        "ingr": [
-            "1 fresh ham, about 18 pounds, prepared by your butcher (See Step 1)",
-            "7 cloves garlic, minced",
-            "1 tablespoon caraway seeds, crushed",
-            "4 teaspoons salt",
-            "Freshly ground pepper to taste",
-            "1 teaspoon olive oil",
-            "1 medium onion, peeled and chopped",
-            "3 cups sourdough rye bread, cut into 1/2-inch cubes",
-            "1 1/4 cups coarsely chopped pitted prunes",
-            "1 1/4 cups coarsely chopped dried apricots",
-            "1 large tart apple, peeled, cored and cut into 1/2-inch cubes",
-            "2 teaspoons chopped fresh rosemary",
-            "1 egg, lightly beaten",
-            "1 cup chicken broth, homemade or low-sodium canned"
-        ]
-    };
-
 let currRecipes = [];
+let selectRecipes = {};
+let recipeCount = 0;
 
 // TODO take these functions out of the global namespace
 function nutritionAnalysis(recipe) {
@@ -72,18 +51,36 @@ function displayRecipes(data) {
 
     // TODO if no results returned, display message
     const numDisplay = 6;
-    currRecipes = data.hits.slice(0, numDisplay);
-    currRecipes.forEach(function(d, i) {
-        const recipe = d.recipe;
+    currRecipes = data.hits.slice(0, numDisplay).map(d => d.recipe);
+    currRecipes.forEach(function(recipe, i) {
+        // TODO can do this better with a reduce
+        let ingredientsListHTML = "";
+        recipe.ingredientLines.forEach(function(ing) {
+            ingredientsListHTML += `<li><a>${ing}</a></li>`;
+        });
+
+        const ingredientsHTML =
+        `<div class="dropdown dropdown-ingredients">
+            <button class="btn btn-default dropdown-toggle" type="button" id="ingredients-dropdown-${i}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Ingredients<span class="caret"></span></button>
+            <ul class="dropdown-menu" aria-labelledby="ingredients-dropdown-${i}">
+                ${ingredientsListHTML}
+            </ul>
+        </div>`;
 
         resultsHTML +=
         `<div class="col-md-4">
             <div class="thumbnail">
                 <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
                 <div class="caption">
-                    <h5 class="recipe-title">${recipe.label}</h5>
-                    <p>Calories per serving: ${Math.floor(recipe.calories / recipe.yield)}</p>
-                    <p><button class="btn btn-primary add-recipe-button" type="button" id="recipe-button-${i}" onclick="addRecipe(${i})">Add to menu</button></p>
+                    <h5 class="recipe-title" title="${recipe.label}">${recipe.label}</h5>
+                    <p>
+                        Serves ${recipe.yield}
+                        <br>
+                        <!-- TODO handle overflow here? -->
+                        Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
+                    </p>
+                    ${ingredientsHTML}
+                    <p><button class="btn btn-primary add-recipe-button" type="button" id="recipe-add-button-${i}" onclick="addRecipe(${i})">Add to menu</button></p>
                 </div>
             </div>
         </div>`;
@@ -94,6 +91,41 @@ function displayRecipes(data) {
     $("#recipe-results").append("<div class='row'>" + resultsHTML + "</div>");
 }
 
-function addRecipe(idx) {
-    console.log(idx);
+function addRecipe(selectIdx) {
+    const recipe = currRecipes[selectIdx];
+    const currIdx = recipeCount;
+    selectRecipes[currIdx] = recipe;
+
+    const newMenuItem =
+    `<div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-menu" href="#collapse${currIdx}">
+            ${recipe.label}</a></h4>
+    </div>
+    <div id="collapse${currIdx}" class="panel-collapse collapse">
+        <div class="panel-body">
+            <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
+            <p>
+                Serves ${recipe.yield}
+                <br>
+                <!-- TODO handle overflow here? -->
+                Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
+            </p>
+            <p><button class="btn btn-primary remove-recipe-button" type="button" id="recipe-remove-button-${currIdx}" onclick="removeRecipe(${currIdx})">Remove</button></p>
+        </div>
+    </div>`;
+
+    $("#accordion-menu").append(`<div class="panel panel-default" id="menu-panel-${currIdx}">${newMenuItem}</div>`);
+
+    recipeCount += 1;
+
+    updateVis();
+}
+
+function removeRecipe(idx) {
+    // remove from stored recipes
+    delete selectRecipes[idx];
+    // remove rom DOM
+    $(`#menu-panel-${idx}`).remove();
+
+    updateVis();
 }

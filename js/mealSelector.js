@@ -49,17 +49,18 @@ $(function() {
         const query = $("#input-recipe-search").val();
         recipeSearch(query);
     });
-
-    function updateVis() {
-        console.log("updateVis");
-        // TODO get values
-        let age = $("#input-age").val();
-        let gender = $("#dropdown-gender").val();
-        let lifestyle = $("#dropdown-lifestyle").val();
-        console.log(age);
-        console.log(gender);
-        console.log(lifestyle);
-
-        // TODO update
-    }
 });
+
+// TODO decide where this should actually go
+function updateVis() {
+    console.log("updateVis");
+    // TODO get values
+    let age = $("#input-age").val();
+    let gender = $("#dropdown-gender").val();
+    let lifestyle = $("#dropdown-lifestyle").val();
+    // console.log(age);
+    // console.log(gender);
+    // console.log(lifestyle);
+
+    // TODO update
+}
