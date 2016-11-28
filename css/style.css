@@ -13,9 +13,8 @@
     height: 500px;
 }
 
-#menu-vis {
-    background-color: lightgray;
-    height: 500px;
+#recipe-results {
+    margin-top: 30px;
 }
 
 /* TODO should we hard code height here? */
@@ -61,4 +60,13 @@
     height: auto;
     vertical-align: middle;
     border: 0;
+}
+
+.arc text {
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.arc path {
+    stroke: #fff;
 }

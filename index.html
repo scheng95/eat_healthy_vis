@@ -19,29 +19,29 @@
                 <h1 class="text-center">Healthy Eating</h1>
             </div>
             <div>
-                <h3>Intro</h3>
+                <h2>Intro</h2>
                 <p>
                     Introduction text about health and its relation to food. Test Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam id lacus auctor, mattis nulla eget, feugiat risus. Nullam pretium id leo tincidunt euismod. Nunc ac dui sit amet justo accumsan fermentum. Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus. Nam quis interdum magna, sed tincidunt ligula. Sed at ligula vestibulum, mollis lacus quis, congue tellus. Proin facilisis, dui id ultrices sodales, elit lectus ultrices odio, quis blandit mi ante non augue. Quisque ut tortor id lectus tempor venenatis. Aenean posuere ultrices nisi ut aliquam. Ut vitae augue sit amet urna elementum pellentesque. Vestibulum vehicula, odio et efficitur facilisis, augue neque condimentum risus, vel tempus diam lectus sit amet arcu. In pulvinar scelerisque nulla, et gravida elit pretium sed. Vivamus consequat facilisis viverra. Fusce at nunc id metus commodo pharetra eget vel est.
                 </p>
             </div>
             <div>
-                <h3>Food/Health Trends in US</h3>
+                <h2>Food/Health Trends in US</h2>
                 <div id="health-trends">
                     Visualization
                 </div>
             </div>
             <div>
-                <h3>Comparison of food items</h3>
+                <h2>Comparison of food items</h2>
             </div>
             <div>
-                <h3>Obstacles to eating healthy</h3>
+                <h2>Obstacles to eating healthy</h2>
             </div>
             <div>
-                <h3>Menu Builder</h3>
+                <h2>Menu Builder</h2>
                 <div>
                     <div class="container-fluid">
                         <div class="row">
-                            <h4>1. Tell us about yourself</h4>
+                            <h3>1. Tell us about yourself</h3>
                             <!-- TODO figure out how to word this so we don't offend people by promoting gender binaries -->
                             <form class="form-inline">
                                 <div class="form-group" id="input-age-group">
@@ -51,16 +51,16 @@
                                 <div class="form-group">
                                     <label for="dropdown-gender"> year old </label>
                                     <select class="form-control" id="dropdown-gender">
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="dropdown-lifestyle"> who is </label>
                                     <select class="form-control" id="dropdown-lifestyle">
-                                        <option value="sedentary">Sedentary</option>
-                                        <option value="moderate">Moderately Active</option>
-                                        <option value="active">Active</option>
+                                        <option value="Sedentary">Sedentary</option>
+                                        <option value="Moderately Active">Moderately Active</option>
+                                        <option value="Active">Active</option>
                                     </select>
                                 </div>
                             </form>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="container-fluid">
                         <div class="row" id="recipe-block">
-                            <h4>2. What do you eat in a day?</h4>
+                            <h3>2. What do you eat in a day?</h3>
                             <div class="col-md-3">
                                 <!-- TODO make overflow scroll, or limit num items -->
                                 <h4>Daily Menu</h4>
@@ -85,12 +85,10 @@
                     </div>
                     <div class="container-fluid">
                         <div class="row">
-                            <h4>3. How nutritious is your daily diet?</h4>
+                            <h3>3. How nutritious is your daily diet?</h3>
+                            <div id="menu-vis"></div>
                         </div>
                     </div>
-                </div>
-                <div id="menu-vis">
-                    Visualization
                 </div>
             </div>
             <div class="footer">
@@ -106,6 +104,7 @@
     <script src="js/d3.tip.js"></script>
     <script src="js/queue.v1.min.js"></script>
     <script src="js/topojson.v1.min.js"></script>
+    <script src="js/colorbrewer.js"></script>
 
     <script src="js/nutrition.js"></script>
     <script src="js/mealSelector.js"></script>

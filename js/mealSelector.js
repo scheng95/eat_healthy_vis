@@ -1,5 +1,3 @@
-var globe;
-
 // prevent form submission using enter button (script makes it reactive to changes)
 // from http://stackoverflow.com/questions/895171/prevent-users-from-submitting-form-by-hitting-enter
 $(document).ready(function() {
@@ -50,17 +48,3 @@ $(function() {
         recipeSearch(query);
     });
 });
-
-// TODO decide where this should actually go
-function updateVis() {
-    console.log("updateVis");
-    // TODO get values
-    let age = $("#input-age").val();
-    let gender = $("#dropdown-gender").val();
-    let lifestyle = $("#dropdown-lifestyle").val();
-    // console.log(age);
-    // console.log(gender);
-    // console.log(lifestyle);
-
-    // TODO update
-}
