@@ -317,9 +317,21 @@ function updateVis(data) {
         .attr("d", function(d, i) { return arc.outerRadius(maxRad)(d, i); })
         .style("fill", "Lightgray");
 
+    let pieGrads = svgPie.append("defs").selectAll("radialGradient").data(pie(displayData))
+        .enter().append("radialGradient")
+        .attr("gradientUnits", "userSpaceOnUse")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", "100%")
+        .attr("id", function(d, i) { return "grad" + i; });
+    pieGrads.append("stop").attr("offset", "19%").style("stop-color", function(d, i) { return color(i); });
+    pieGrads.append("stop").attr("offset", "25%").style("stop-color", "white");
+
     g.append("path")
         .attr("class", "foreground-arc")
-        .style("fill", function(d, i) { return color(i); });
+        // .style("fill", function(d, i) { return color(i); });
+        .style("fill", function(d, i) { return "url(#grad" + i + ")"; });
+
     // update
     groups.select(".foreground-arc")
         .transition()
@@ -352,6 +364,7 @@ function updateVis(data) {
         .attr("class", "bars");
 
     const barHeight = 30;
+    const barColor = "Cyan";
 
     // background, only draw once
     bargroup.append("rect")
@@ -362,13 +375,25 @@ function updateVis(data) {
         .attr("height", barHeight)
         .attr("fill", "Lightgray");
 
+    let barGrads = svgBar.append("defs").selectAll("linearGradient").data(calData)
+        .enter().append("linearGradient")
+        .attr("id", "bar-gradient")
+        .attr("gradientUnits", "userSpaceOnUse")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "100%")
+        .attr("y2", "0%")
+        .attr("spreadMethod", "pad");
+    barGrads.append("stop").attr("offset", "70%").style("stop-color", barColor);
+    barGrads.append("stop").attr("offset", "80%").style("stop-color", "White");
+
     // foreground
     bargroup.append("rect")
         .attr("class", "foreground-bar")
         .attr("x", 0.1 * width)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("height", barHeight)
-        .attr("fill", "Cyan");
+        .attr("fill", "url(#bar-gradient)");
     // update
     bars.select(".foreground-bar")
         .transition()
@@ -386,4 +411,12 @@ function updateVis(data) {
         .attr("stroke-opacity", 1)
         .attr("stroke", "Gray")
         .attr("stroke-dasharray", "10, 5");
+
+    // labels, only draw once
+    bargroup.append("text")
+        .attr("x", 0.1 * width + 5)
+        .attr("y", margin.top/2)
+        .attr("dy", ".35em")
+        .text("Calories");
+
 }

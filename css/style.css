@@ -62,9 +62,10 @@
     border: 0;
 }
 
+.bars text,
 .arc text {
     font: 10px sans-serif;
-    text-anchor: middle;
+    text-anchor: left;
 }
 
 .arc path {
