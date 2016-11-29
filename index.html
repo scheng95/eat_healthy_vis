@@ -13,88 +13,204 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="content">
-            <div class="header">
-                <h1 class="text-center">Healthy Eating</h1>
+  <div class="container-fluid A">
+    <div class="row">
+      <h1 class="text-center">How to Eat Better?</h1>
+    </div>
+  </div>
+  <div class="container-fluid B">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Intro</h3>
+        <p>
+            Introduction text about health and its relation to food. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam id lacus auctor, mattis nulla eget, feugiat risus. Nullam pretium id leo tincidunt euismod. Nunc ac dui sit amet justo accumsan fermentum. Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus. Nam quis interdum magna, sed tincidunt ligula. Sed at ligula vestibulum, mollis lacus quis, congue tellus. Proin facilisis, dui id ultrices sodales, elit lectus ultrices odio, quis blandit mi ante non augue. Quisque ut tortor id lectus tempor venenatis. Aenean posuere ultrices nisi ut aliquam. Ut vitae augue sit amet urna elementum pellentesque. Vestibulum vehicula, odio et efficitur facilisis, augue neque condimentum risus, vel tempus diam lectus sit amet arcu. In pulvinar scelerisque nulla, et gravida elit pretium sed. Vivamus consequat facilisis viverra. Fusce at nunc id metus commodo pharetra eget vel est.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid C">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>Food/Health Trends in US</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nulla eu ipsum ut nisi lobortis malesuada.
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Nullam id lacus auctor, mattis nulla eget, feugiat risus.
+          Nullam pretium id leo tincidunt euismod.
+          Nunc ac dui sit amet justo accumsan fermentum.
+          Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
+          Nam quis interdum magna, sed tincidunt ligula.
+        </p>
+      </div>
+      <div class="col-xs-12 col-sm-6 img-placeholder" id="health-trends">
+          Visualization
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid D">
+    <div class="row">
+      <h3>Historic Nutritional Intake</h3>
+      <br><br>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6" id="timeSeriesChart_WWEIA">
+        <div class="row" id="WWEIA_dropdowns">
+            <div class="col-xs-6">
+              <form class="form-inline">
+        				<div class="form-group">
+        					Nutrient:
+                  <select class="form-control" id="nutrient_type">
+        						<option value="Calories (kcal)">Calories</option>
+                    <option value="Protein (g)">Protein</option>
+                    <option value="Carbohydrate (g)">Carbohydrate</option>
+                    <option value="Sugar (g)">Sugar</option>
+        						<option value="Fat (g)">Fat</option>
+                    <option value="Fiber (g)">Fiber</option>
+          					<option value="Sodium (mg)">Sodium</option>
+          					<option value="Cholesterol (mg)">Cholesterol</option>
+        					</select>
+        				</div>
+        			</form>
             </div>
-            <div>
-                <h2>Intro</h2>
-                <p>
-                    Introduction text about health and its relation to food. Test Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam id lacus auctor, mattis nulla eget, feugiat risus. Nullam pretium id leo tincidunt euismod. Nunc ac dui sit amet justo accumsan fermentum. Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus. Nam quis interdum magna, sed tincidunt ligula. Sed at ligula vestibulum, mollis lacus quis, congue tellus. Proin facilisis, dui id ultrices sodales, elit lectus ultrices odio, quis blandit mi ante non augue. Quisque ut tortor id lectus tempor venenatis. Aenean posuere ultrices nisi ut aliquam. Ut vitae augue sit amet urna elementum pellentesque. Vestibulum vehicula, odio et efficitur facilisis, augue neque condimentum risus, vel tempus diam lectus sit amet arcu. In pulvinar scelerisque nulla, et gravida elit pretium sed. Vivamus consequat facilisis viverra. Fusce at nunc id metus commodo pharetra eget vel est.
-                </p>
+            <!--<div class="col-xs-4">
+              <form class="form-inline">
+        				<div class="form-group">
+        					<select class="form-control" id="income_group">
+        						<option value="All individuals">All</option>
+        						<option value="$0 - $24,999">$0 - $24,999</option>
+                    <option value="$25,000 - $74,999">$25,000 - $74,999</option>
+          					<option value="$75,000 and higher">$75,000 and higher</option>
+        					</select>
+        				</div>
+        			</form>
             </div>
+          -->
+          <div class="col-xs-6">
+            <form class="form-inline">
+      				<div class="form-group">
+      					Age:
+                <select class="form-control" id="age_group">
+      						<option value="2 and over">All</option>
+      						<option value="2-5">2 - 5</option>
+                  <option value="6-11">6 - 11</option>
+        					<option value="12-19">12 - 19</option>
+                  <option value="20 and over">20 and over</option>
+      					</select>
+      				</div>
+      			</form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="row" id="WWEIA_spacer"></div>
+        <div class="row">
+          <div class="col-xs-12" id="WWEIA_Income"></div>
+          <div class="col-xs-12" id="WWEIA_Gender"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid E">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 img-placeholder" id="areachart_FAFH">
+          <h3>Food Spending Away from Home</h3>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h3>People are Eating Out More</h3>
+      </div>
+    </div>
+  </div>
+  <!--<div class="container-fluid">
+    <div  class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>Comparison of food items</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div  class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>Comparison of food items</h3>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div  class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>Menu Builder</h3>
+      </div>
+      <div class="col-xs-12 col-sm-6 img-placeholder">
+          Visualization
+      </div>
+    </div>
+  </div>
+  -->
+
+  <div class="container-fluid">
+    <div class="content">
+        <div>
+            <h2>Menu Builder</h2>
             <div>
-                <h2>Food/Health Trends in US</h2>
-                <div id="health-trends">
-                    Visualization
-                </div>
-            </div>
-            <div>
-                <h2>Comparison of food items</h2>
-            </div>
-            <div>
-                <h2>Obstacles to eating healthy</h2>
-            </div>
-            <div>
-                <h2>Menu Builder</h2>
-                <div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <h3>1. Tell us about yourself</h3>
-                            <!-- TODO figure out how to word this so we don't offend people by promoting gender binaries -->
-                            <form class="form-inline">
-                                <div class="form-group" id="input-age-group">
-                                    <label for="input-age">I am a </label>
-                                    <input type="number" id="input-age" class="form-control" min="2" max="76" value="20">
-                                </div>
-                                <div class="form-group">
-                                    <label for="dropdown-gender"> year old </label>
-                                    <select class="form-control" id="dropdown-gender">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="dropdown-lifestyle"> who is </label>
-                                    <select class="form-control" id="dropdown-lifestyle">
-                                        <option value="Sedentary">Sedentary</option>
-                                        <option value="Moderately Active">Moderately Active</option>
-                                        <option value="Active">Active</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="row" id="recipe-block">
-                            <h3>2. What do you eat in a day?</h3>
-                            <div class="col-md-3">
-                                <!-- TODO make overflow scroll, or limit num items -->
-                                <h4>Daily Menu</h4>
-                                <div class="panel-group" id="accordion-menu"></div>
+                <div class="container">
+                    <div class="row">
+                        <h3>1. Tell us about yourself</h3>
+                        <!-- TODO figure out how to word this so we don't offend people by promoting gender binaries -->
+                        <form class="form-inline">
+                            <div class="form-group" id="input-age-group">
+                                <label for="input-age">I am a </label>
+                                <input type="number" id="input-age" class="form-control" min="2" max="76" value="20">
                             </div>
-                            <div class="col-md-9">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search recipes..." id="input-recipe-search">
-                                    <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
-                                </div>
-                                <div class="" id="recipe-results"></div>
+                            <div class="form-group">
+                                <label for="dropdown-gender"> year old </label>
+                                <select class="form-control" id="dropdown-gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="dropdown-lifestyle"> who is </label>
+                                <select class="form-control" id="dropdown-lifestyle">
+                                    <option value="Sedentary">Sedentary</option>
+                                    <option value="Moderately Active">Moderately Active</option>
+                                    <option value="Active">Active</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <h3>3. How nutritious is your daily diet?</h3>
-                            <div id="menu-vis"></div>
+                </div>
+                <div class="container">
+                    <div class="row" id="recipe-block">
+                        <h3>2. What do you eat in a day?</h3>
+                        <div class="col-md-3">
+                            <!-- TODO make overflow scroll, or limit num items -->
+                            <h4>Daily Menu</h4>
+                            <div class="panel-group" id="accordion-menu"></div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search recipes..." id="input-recipe-search">
+                                <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
+                            </div>
+                            <div class="" id="recipe-results"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer">
-                <h5>Acknowledgement</h5>
+                <div class="container">
+                    <div class="row">
+                        <h3>3. How nutritious is your daily diet?</h3>
+                        <div id="menu-vis"></div>
+                    </div>
+                </div>
             </div>
         </div>
+
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row footer">
+          <h5>Acknowledgement</h5>
+      </div>
     </div>
 
     <!-- JS libraries -->
@@ -105,8 +221,13 @@
     <script src="js/queue.v1.min.js"></script>
     <script src="js/topojson.v1.min.js"></script>
     <script src="js/colorbrewer.js"></script>
+    <script src="js/d3-queue.v3.min.js"></script>
 
+
+    <script src="js/main.js"></script>
     <script src="js/nutrition.js"></script>
     <script src="js/mealSelector.js"></script>
+    <script src="js/WWEIA_timeSeries.js"></script>
+    <script src="js/WWEIA_bar.js"></script>
 </body>
 </html>

@@ -1,11 +1,6 @@
 .content {
-    margin: auto;
-    width: 960px;
-}
-
-.header,
-.footer {
-    padding: 20px;
+  margin: auto;
+  width: 960px;
 }
 
 #health-trends {
@@ -71,3 +66,110 @@
 .arc path {
     stroke: #fff;
 }
+
+
+:root {
+  --colorLightest: #3DC3CC;
+  --colorLight: #00BFCC;
+  --colorMedium: #2D8E95;
+  --colorDark: #00777F;
+  --colorDarkest: #00484C;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+h1,h2,h3 {
+  text-align: center;
+}
+
+.header,
+.footer {
+    padding: 20px;
+}
+.container-fluid {
+  width: 100%;
+  padding: 50px;
+}
+
+.container-fluid.A{
+  height: 100%;
+}
+.container-fluid.A,
+.container-fluid.C,
+.container-fluid.E{
+  background-color: #f3f3f3;
+}
+
+.bar {
+  fill: colorMedium;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+path {
+    stroke: var(--colorDark);
+    stroke-width: 2;
+    fill: none;
+}
+.lineRef {
+  stroke: red;
+}
+
+rect {
+  shape-rendering: crispEdges;
+}
+
+.y-axis-hide {
+  display: none;
+}
+
+svg text, .axis-label, .label {
+  fill: #666;
+  font-size: 12px;
+  font-weight: normal;
+}
+.label-white {
+ fill: #eee;
+ font-size: 11px;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+.clickable:hover, .hoverable:hover{
+  cursor: pointer;
+}
+/* Responsive SVG
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+*/

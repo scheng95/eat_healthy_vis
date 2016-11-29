@@ -149,7 +149,7 @@ function addRecipe(selectIdx) {
 
     recipeCount += 1;
 
-    wrangleData();
+    wrangleMenuData();
 }
 
 function removeRecipe(idx) {
@@ -158,11 +158,11 @@ function removeRecipe(idx) {
     // remove rom DOM
     $(`#menu-panel-${idx}`).remove();
 
-    wrangleData();
+    wrangleMenuData();
 }
 
-function wrangleData() {
-    console.log("wrangleData");
+function wrangleMenuData() {
+    console.log("wrangleMenuData");
     // TODO wrangle data in selectRecipes
 
     // TODO get values
@@ -251,7 +251,7 @@ function wrangleData() {
             })
         });
         console.log(displayData);
-        updateVis({
+        updateNutritionVis({
             "calData": [{
                 "tot": totCal,
                 "rec": recCal
@@ -284,11 +284,11 @@ const absMaxRad = Math.min(width, height) / 2;
 const maxRad = absMaxRad * 0.7;
 
 // TODO decide where this should actually go
-function updateVis(data) {
+function updateNutritionVis(data) {
     const calData = data.calData;
     const displayData = data.nutData;
 
-    console.log("updateVis");
+    console.log("updateNVis");
 
     let color = d3.scale.ordinal()
         .domain([0, 5])
