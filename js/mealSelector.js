@@ -26,17 +26,17 @@ $(function() {
                 $("#input-age-group").addClass("has-error");
             } else {
                 $("#input-age-group").removeClass("has-error");
-                updateVis();
+                wrangleMenuData();
             }
         });
         $('#dropdown-gender').on('input', function() {
             if (!$("#input-age-group").hasClass("has-error")) {
-                updateVis();
+                wrangleMenuData();
             }
         });
         $('#dropdown-lifestyle').on('input', function() {
             if (!$("#input-age-group").hasClass("has-error")) {
-                updateVis();
+                wrangleMenuData();
             }
         });
     })();
