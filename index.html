@@ -13,43 +13,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container-fluid A">
-    <div class="row"><h1 class="text-center">How can we eat better?</h1></div>
+  <div class="container-fluid A text-center">
+    <div class="row"><h1>How can we eat better?</h1></div>
     <div class="row">
-      <button class="button btn " id="buttonToB">
+      <br><br>
+      <button class="button btn" id="buttonToB">
         <a href="#B">Continue</a>
       </button>
       <br><br><br>
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-4">
-        <h3>Who cares?</h3>
-        <p>Intro about health and its relation to food. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <h3>What is healthy?</h3>
+        <p>Confused? So is everyone. Generally, eating more healthy means spending as much energy as you eat, eating a variety of nutritious foods and limiting empty calories. </p>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <h3>What is "Healthy"?</h3>
-        <p>Confused? So is everyone. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <h3>Why does it matter?</h3>
+        <p>Over 2/3 of American adults are overweight or obese. Heart disease, stroke, and diabetes are among the top ten causes of death, and they are all diet-related. See how the average American is eating.</p>
       </div>
       <div class="col-xs-12 col-sm-4">
         <h3>What can you do?</h3>
-        <p>Analyze general food/nutrition data. Personalize. Mobilize? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu ipsum ut nisi lobortis malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <p>Get to know your food better. Studies have shown that eating at home has higher nutrition density than eating out at restaurants. Figure out what to make with our nutritional analysis tool.</p>
       </div>
     </div>
   </div>
-  <div class="container-fluid B"  id="B">
+  <div class="container-fluid B text-center"   id="B">
     <div class="row">
-      <h2>How healthy are Americans in general?</h2>
-      <br><br>
-      <p>diet trends etc</p>
+      <h2>What is Healthy?</h1>
+      <br>
+      <p>Over the years, nutrition experts have stayed consistent on two recommendations:</p>
+      <br>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <h3>Calories In = Calories Out</h3>
+        <p>If you consume more energy than you spend, you'll gain weight. Maintain a balance to maintain a healthy weight.</p>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h3>Not All Calories are Equal</h3>
+        <p>You need enough of the good nutrients (vitamins, minerals, etc) and not too much of the bad (sugar, fats, cholesterol, sodium)</p>
+      </div>
     </div>
   </div>
   <div class="container-fluid C">
     <div class="row" id="WWEIA_dropdowns">
-        <div class="col-xs-1 col-sm-2 col-md-3"></div>
+      <h2>How healthy are Americans?</h2>
+      <br>
+      <p class="text-center">In general, people overconsume in calories, sugar, and sodium, and don't get enough fiber.</p>
+      <br><br>
+      <div class="col-xs-1 col-sm-2 col-md-3"></div>
         <div class="col-xs-10 col-sm-8 col-md-6">
           <form class="form-inline float-left">
             <div class="form-group">
-              Nutrient:
+              Type:
               <select class="form-control" id="nutrient_type">
                 <option value="Calories (kcal)">Calories</option>
                 <option value="Protein (g)">Protein</option>
@@ -59,6 +75,11 @@
                 <option value="Fiber (g)">Fiber</option>
                 <option value="Sodium (mg)">Sodium</option>
                 <option value="Cholesterol (mg)">Cholesterol</option>
+                <option value="Vitamin A (mg)">Vitamin A</option>
+                <option value="Vitamin C (mg)">Vitamin C</option>
+                <option value="Vitamin E (mg)">Vitamin E</option>
+                <option value="Calcium (mg)">Calcium</option>
+                <option value="Iron (mg)">Iron</option>
               </select>
             </div>
           </form>
@@ -66,29 +87,15 @@
             <div class="form-group">
               Age:
               <select class="form-control" id="age_group">
-                <option value="2 and over">All</option>
+                <option value="20 and over">20 and over</option>
                 <option value="2-5">2 - 5</option>
                 <option value="6-11">6 - 11</option>
                 <option value="12-19">12 - 19</option>
-                <option value="20 and over">20 and over</option>
+                <option value="2 and over">All</option>
               </select>
             </div>
           </form>
         </div>
-        <!--<div class="col-xs-4">
-          <form class="form-inline">
-            <div class="form-group">
-              <select class="form-control" id="income_group">
-                <option value="All individuals">All</option>
-                <option value="$0 - $24,999">$0 - $24,999</option>
-                <option value="$25,000 - $74,999">$25,000 - $74,999</option>
-                <option value="$75,000 and higher">$75,000 and higher</option>
-              </select>
-            </div>
-          </form>
-        </div>
-      -->
-
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-6" id="timeSeriesChart_WWEIA"></div>
@@ -100,86 +107,26 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid D">
+  <div class="container-fluid D text-center ">
+    <div class="row"><h2>Why does a healthy diet matter and what can you do?</h1></div>
     <div class="row">
       <div class="col-xs-12 col-sm-6">
-        <h3>Where are people buying?</h3>
-        <br>
-        <p>
-          More food consumed away from home. Less cooking.
-          Less healthy. Cook more!
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Nulla eu ipsum ut nisi lobortis malesuada.
-          Interdum et malesuada fames ac ante ipsum primis in faucibus.
-          Nullam id lacus auctor, mattis nulla eget, feugiat risus.
-          Nullam pretium id leo tincidunt euismod.
-          Nunc ac dui sit amet justo accumsan fermentum.
-          Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
-          Nam quis interdum magna, sed tincidunt ligula.
-        </p>
+        <h3>We're getting sicker.</h3>
+        <p>Over 2/3 of American adults are overweight or obese. Heart disease, stroke, and diabetes are among the top ten causes of death, and they are all diet-related.</p>
       </div>
-      <div class="col-xs-12 col-sm-6 img-placeholder" id="health-trends">
-          Visualization
+      <div class="col-xs-12 col-sm-6">
+        <h3>We're not trying to change.</h3>
+        <p>The amount of money spent eating out has surpassed 50% of the average consumer's food budget. Studies have shown that restaurant foods are less nutritious and more caloric than home-made meals.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>What can you do?</h3>
+        <p>Get to know your food better and have better control over your caloric/nutrition intake by preparing your own food! Don't know what to make or how healthy a recipe is? Analyze it here.</p>
       </div>
     </div>
   </div>
-
   <div class="container-fluid E">
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 img-placeholder" id="areachart_FAFH">
-          <h3>Food Spending Away from Home</h3>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <h3>People are Eating Out More</h3>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-2 col-sm-3"></div>
-      <div class="col-xs-8 col-sm-6">
-        <h3>Why does it Matter?</h3>
-        <br>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Nulla eu ipsum ut nisi lobortis malesuada.
-          Interdum et malesuada fames ac ante ipsum primis in faucibus.
-          Nullam id lacus auctor, mattis nulla eget, feugiat risus.
-          Nullam pretium id leo tincidunt euismod.
-          Nunc ac dui sit amet justo accumsan fermentum.
-          Cras feugiat dolor vel tortor sodales, ac pellentesque magna finibus.
-          Nam quis interdum magna, sed tincidunt ligula.
-        </p>
-      </div>
-    </div>
-  </div>
-  <!--<div class="container-fluid">
-    <div  class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h3>Comparison of food items</h3>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div  class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h3>Comparison of food items</h3>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div  class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h3>Menu Builder</h3>
-      </div>
-      <div class="col-xs-12 col-sm-6 img-placeholder">
-          Visualization
-      </div>
-    </div>
-  </div>
-  -->
-
-  <div class="container-fluid D">
     <div class="content">
         <div>
             <h2>Menu Builder</h2>
@@ -239,9 +186,9 @@
 
       </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid footer text-center">
       <div class="row footer">
-          <h5>Acknowledgement</h5>
+          <h5>Acknowledgements</h5>
       </div>
     </div>
 
