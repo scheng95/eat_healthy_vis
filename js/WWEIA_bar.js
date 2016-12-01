@@ -14,7 +14,7 @@ BarChart = function(_chartType, _data, _dataDRImin, _dataDRImax, _yMin, _yMax, _
 	if (_chartType == "Income") { this.xGroups = ["$0 - $24,999","$25,000 - $74,999","$75,000 and higher","All"];}
 	else { this.xGroups = ["Male", "Female"];}
 
-	$("#WWEIA_spacer").height($("#WWEIA_dropdowns").height());
+	//$("#WWEIA_spacer").height($("#WWEIA_dropdowns").height());
 
   this.initVis();
 }

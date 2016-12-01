@@ -104,8 +104,9 @@ h1,h2,h3 {
   height: 100%;
 }
 .container-fluid.A,
+.container-fluid.B,
 .container-fluid.C,
-.container-fluid.E{
+.container-fluid.D{
   background-color: #f3f3f3;
 }
 
@@ -157,6 +158,36 @@ svg text, .axis-label, .label {
 .clickable:hover, .hoverable:hover{
   cursor: pointer;
 }
+button { margin: 0 auto; }
+button:hover, button>a:hover {
+  text-decoration: none;
+  filter: brightness(90%);
+}
+
+/* TEMP HACKY STYLING */
+h1 {
+  margin-top: 150px;
+  margin-bottom: 50px;
+}
+button {
+  width: 120px;
+  margin-bottom: 60px;
+}
+.A {
+  text-align: center;
+}
+
+.float-right {
+  float:right;
+}
+.float-left {
+  float:left;
+}
+
+#WWEIA_dropdowns {
+  margin-bottom: 30px;
+}
+/* TEMP HACKY STYLING */
 /* Responsive SVG
 .svg-container {
     display: inline-block;

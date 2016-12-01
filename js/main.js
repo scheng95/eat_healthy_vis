@@ -14,6 +14,12 @@ var trans = 400;
 // Start app by loading  data
 loadData();
 
+// Scroll to div\
+$("#buttonToB").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#B").offset().top},'slow');
+});
+
 function loadData() {
 	/* FAFH
 	d3.csv("data/food_expenditures_1929-2014.csv", function(error, dataIncome){

@@ -22,9 +22,11 @@ TimeSeriesChart = function(_parentElement, _dataIncome, _dataGender, _dataDRImin
 TimeSeriesChart.prototype.initVis = function(){
 	var vis = this;
 	var width = $("#"+vis.parentElement).width();
+	var height = $("#B").height()/2;
+	console.log(height);
 	vis.margin = { top: 40, right: 40, bottom: 60, left: 65 };
 	vis.width = width - vis.margin.left - vis.margin.right,
-  vis.height = Math.max(315,(width - vis.margin.top - vis.margin.bottom));
+  vis.height = Math.max(315,(height - vis.margin.top - vis.margin.bottom));
 
 	vis.wrangleData();
   // SVG drawing area
@@ -233,7 +235,8 @@ TimeSeriesChart.prototype.updateVis = function(){
 	});
 */
 
-
+	// Create bar charts without waiting for user to click on a year
+	vis.showSpecificYear(2013);
 
   // Update tooltip text
 	vis.tip.html(function(d){ return d.Value; });
