@@ -133,23 +133,32 @@ function addRecipe(selectIdx) {
 
     const newMenuItem =
     `<div class="panel-heading">
-        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion-menu" href="#collapse${currIdx}">
-            ${recipe.label}</a></h4>
+        <div class="row">
+            <div class="col-md-11">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion-menu" href="#collapse${currIdx}">${recipe.label}</a>
+                </h4>
+            </div>
+            <div class="col-md-1">
+                <span class="clickable glyphicon glyphicon-remove-circle" onclick="removeRecipe(${currIdx})"></span>
+            </div>
+        </div>
     </div>
     <div id="collapse${currIdx}" class="panel-collapse collapse">
         <div class="panel-body">
-            <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
             <p>
-                Serves ${recipe.yield}
-                <br>
-                <!-- TODO handle overflow here? -->
-                Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
+                <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
             </p>
-            <p><button class="btn btn-primary remove-recipe-button" type="button" id="recipe-remove-button-${currIdx}" onclick="removeRecipe(${currIdx})">Remove</button></p>
+            Serves ${recipe.yield}
+            <br>
+            <!-- TODO handle overflow here? -->
+            Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
         </div>
     </div>`;
 
     $("#accordion-menu").append(`<div class="panel panel-default" id="menu-panel-${currIdx}">${newMenuItem}</div>`);
+    // TODO this is super bad, but just do it for now
+    $("#static-menu").append(`<div class="panel panel-default" id="static-menu-panel-${currIdx}">${newMenuItem}</div>`);
 
     recipeCount += 1;
 
@@ -161,6 +170,7 @@ function removeRecipe(idx) {
     delete selectRecipes[idx];
     // remove rom DOM
     $(`#menu-panel-${idx}`).remove();
+    $(`#static-menu-panel-${idx}`).remove();
 
     wrangleMenuData();
 }
@@ -267,7 +277,7 @@ function wrangleMenuData() {
 
 // top margin space for the calories bar
 let margin = {top: 80, right: 0, bottom: 0, left: 0},
-    width = 960 - margin.left - margin.right,
+    width = 1040/12*9 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 let svg = d3.select("#menu-vis").append("svg")
@@ -353,6 +363,7 @@ function updateNutritionVis(data) {
 
     // labels, only draw once
     g.append("text")
+        .attr("class", "pie-label")
         .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
         .attr("dy", ".35em")
         .text(function(d) { return d.data.name; });
@@ -368,12 +379,12 @@ function updateNutritionVis(data) {
         .attr("class", "bars");
 
     const barHeight = 30;
-    const barColor = "Cyan";
+    const barColor = "rgb(45, 142, 149)";
 
     // background, only draw once
     bargroup.append("rect")
         .attr("class", "background-bar")
-        .attr("x", 0.1 * width)
+        .attr("x", d => (width - barScale(d.rec)) / 2)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("width", d => barScale(d.rec))
         .attr("height", barHeight)
@@ -394,7 +405,7 @@ function updateNutritionVis(data) {
     // foreground
     bargroup.append("rect")
         .attr("class", "foreground-bar")
-        .attr("x", 0.1 * width)
+        .attr("x", d => (width - barScale(d.rec)) / 2)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("height", barHeight)
         .attr("fill", "url(#bar-gradient)");
@@ -407,7 +418,7 @@ function updateNutritionVis(data) {
     // draw boundaries
     bargroup.append("rect")
         .attr("class", "outline-rect")
-        .attr("x", 0.1 * width)
+        .attr("x", d => (width - barScale(d.rec)) / 2)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("width", d => barScale(d.rec))
         .attr("height", barHeight)
@@ -418,7 +429,8 @@ function updateNutritionVis(data) {
 
     // labels, only draw once
     bargroup.append("text")
-        .attr("x", 0.1 * width + 5)
+        .attr("class", "calorie-label")
+        .attr("x", d => (width - barScale(d.rec)) / 2 + 5)
         .attr("y", margin.top/2)
         .attr("dy", ".35em")
         .text("Calories");
