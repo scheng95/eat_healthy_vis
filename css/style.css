@@ -165,14 +165,47 @@ h1,h2,h3 {
   padding: 50px;
 }
 
-.container-fluid.A{
-  height: 100%;
+.container-fluid.A {
+  min-height: 100%;
+  padding-top: 20%;
+  text-align: center;
 }
+
+.container-fluid.B {
+  background:
+  linear-gradient(
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.85)
+  ),
+  url('../img/fruits-veg.jpg') no-repeat center center;
+  min-width: 100%
+  background-size:cover;
+}
+.container-fluid.D {
+  background:
+  linear-gradient(
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.85)
+  ),
+  url('../img/burgers.jpg') no-repeat center center;
+  width: 100%
+  background-size:cover;
+}
+.container-fluid.footer{
+  gackground-color: #f0f0f0;
+}
+/*
+.container-fluid.B,
+.container-fluid.D,
+.container-fluid.F {
+=======
 .container-fluid.A,
 .container-fluid.C,
 .container-fluid.D{
+>>>>>>> 90ff89711837fa4953de5060014047a28a1a915f
   background-color: #f3f3f3;
 }
+*/
 
 .bar {
   fill: colorMedium;
@@ -222,25 +255,19 @@ svg text, .axis-label, .label {
 .clickable:hover, .hoverable:hover{
   cursor: pointer;
 }
-button { margin: 0 auto; }
+button {
+  margin: 0 auto;
+  background-color: var(--colorMedium);
+}
+button>a {
+  color: white;
+}
 button:hover, button>a:hover {
   text-decoration: none;
   filter: brightness(90%);
 }
 
 /* TEMP HACKY STYLING */
-h1 {
-  margin-top: 150px;
-  margin-bottom: 50px;
-}
-/*button {*/
-  /*width: 120px;*/
-  /*margin-bottom: 60px;*/
-/*}*/
-.A {
-  text-align: center;
-}
-
 .float-right {
   float:right;
 }
