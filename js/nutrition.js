@@ -92,22 +92,26 @@ function displayRecipes(data) {
                 <ul class="dropdown-menu" aria-labelledby="ingredients-dropdown-${i}">
                     ${ingredientsListHTML}
                 </ul>
+                <button class="btn btn-primary add-recipe-button pull-right" type="button" id="recipe-add-button-${i}" onclick="addRecipe(${i})">Add</button>
             </div>`;
 
             resultsHTML +=
-            `<div class="col-md-4">
+            `<div class="col-md-6 thumb-container">
                 <div class="thumbnail">
-                    <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
-                    <div class="caption">
-                        <h5 class="recipe-title" title="${recipe.label}">${recipe.label}</h5>
-                        <p>
-                            Serves ${recipe.yield}
-                            <br>
-                            <!-- TODO handle overflow here? -->
-                            Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
-                        </p>
-                        ${ingredientsHTML}
-                        <p><button class="btn btn-primary add-recipe-button" type="button" id="recipe-add-button-${i}" onclick="addRecipe(${i})">Add to menu</button></p>
+                    <div class="row thumb-grid">
+                        <div class="col-md-4 thumb-image">
+                            <a href="${recipe.url}" target="_blank"><img src="${recipe.image}" alt="${recipe.label}"></a>
+                        </div>
+                        <div class="col-md-8 thumb-text">
+                            <div class="caption">
+                                <h5 class="recipe-title" title="${recipe.label}">${recipe.label}</h5>
+                                <p>
+                                    Serves ${recipe.yield} | Calories/serving: ${Math.floor(recipe.calories / recipe.yield)}
+                                    <!-- TODO handle overflow here? -->
+                                </p>
+                                  ${ingredientsHTML}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>`;

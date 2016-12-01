@@ -1,6 +1,6 @@
 .content {
   margin: auto;
-  width: 960px;
+  width: 1040px;
 }
 
 #health-trends {
@@ -9,7 +9,12 @@
 }
 
 #recipe-results {
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+#recipe-results > .row {
+    margin-left: 0;
+    margin-right: -10px;
 }
 
 /* TODO should we hard code height here? */
@@ -36,14 +41,34 @@
 
 .recipe-title {
     font-weight: 700;
-    width: 180px;
+    width: 222px;
     text-overflow: ellipsis;
     overflow:hidden;
     white-space:nowrap;
+    margin-top: 0;
+}
+
+.thumbnail {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.thumb-grid {
+    margin: 0;
+}
+
+.thumb-container,
+.thumb-image,
+.thumb-text {
+    padding: 0
 }
 
 .dropdown-ingredients {
-    padding-bottom: 10px;
+    padding-bottom: 0;
+}
+
+.dropdown-menu {
+    margin: 0;
 }
 
 .panel-body a>img,
@@ -104,7 +129,6 @@ h1,h2,h3 {
   height: 100%;
 }
 .container-fluid.A,
-.container-fluid.B,
 .container-fluid.C,
 .container-fluid.D{
   background-color: #f3f3f3;
@@ -169,10 +193,10 @@ h1 {
   margin-top: 150px;
   margin-bottom: 50px;
 }
-button {
-  width: 120px;
-  margin-bottom: 60px;
-}
+/*button {*/
+  /*width: 120px;*/
+  /*margin-bottom: 60px;*/
+/*}*/
 .A {
   text-align: center;
 }
