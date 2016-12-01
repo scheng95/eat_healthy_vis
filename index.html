@@ -131,7 +131,7 @@
         <div>
             <h2>Menu Builder</h2>
             <div>
-                <div class="container">
+                <div>
                     <div class="row">
                         <h3>1. Tell us about yourself</h3>
                         <!-- TODO figure out how to word this so we don't offend people by promoting gender binaries -->
@@ -158,12 +158,15 @@
                         </form>
                     </div>
                 </div>
-                <div class="container">
+                <div>
                     <div class="row" id="recipe-block">
                         <h3>2. What do you eat in a day?</h3>
                         <div class="col-md-3">
                             <!-- TODO make overflow scroll, or limit num items -->
-                            <h4>Daily Menu</h4>
+                            <div>
+                                <h4 class="inline">Daily Menu</h4>
+                                <a class="btn-vis pull-right" href="#V"><button class="btn btn-primary btn-sm" onclick="wrangleMenuData()">Visualize</button></a>
+                            </div>
                             <div class="panel-group" id="accordion-menu"></div>
                         </div>
                         <div class="col-md-9">
@@ -175,10 +178,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
+                <div id="V">
                     <div class="row">
                         <h3>3. How nutritious is your daily diet?</h3>
-                        <div id="menu-vis"></div>
+                        <div class="col-md-3">
+                            <div class="panel-group" id="static-menu"></div>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="menu-vis"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,15 @@
+.inline {
+    display: inline-block;
+}
+
+.btn-vis {
+    color: white;
+    display: inline-block;
+}
+
 .content {
   margin: auto;
-  max-width: 960px;
+  width: 1040px;
 }
 
 #health-trends {
@@ -9,7 +18,12 @@
 }
 
 #recipe-results {
-    margin-top: 30px;
+    margin-top: 20px;
+}
+
+#recipe-results > .row {
+    margin-left: 0;
+    margin-right: -10px;
 }
 
 /* TODO should we hard code height here? */
@@ -36,14 +50,38 @@
 
 .recipe-title {
     font-weight: 700;
-    width: 180px;
+    width: 222px;
     text-overflow: ellipsis;
     overflow:hidden;
     white-space:nowrap;
+    margin-top: 0;
+}
+
+.thumbnail {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.thumb-grid {
+    margin: 0;
+}
+
+.thumb-container,
+.thumb-image,
+.thumb-text {
+    padding: 0
 }
 
 .dropdown-ingredients {
-    padding-bottom: 10px;
+    padding-bottom: 0;
+}
+
+.dropdown-menu {
+    margin: 0;
+}
+
+.panel-default > .panel-heading {
+    background-color: white;
 }
 
 .panel-body a>img,
@@ -57,6 +95,14 @@
     border: 0;
 }
 
+.panel-heading > .row {
+    margin: 0;
+}
+
+.panel-heading > .row  div {
+    padding: 0;
+}
+
 .bars text,
 .arc text {
     font: 10px sans-serif;
@@ -65,6 +111,14 @@
 
 .arc path {
     stroke: #fff;
+}
+
+.calorie-label {
+    fill: white;
+}
+
+.pie-label {
+    text-anchor: middle;
 }
 
 
@@ -105,6 +159,7 @@ h1,h2,h3 {
   padding-top: 20%;
   text-align: center;
 }
+
 .container-fluid.B {
   background:
   linear-gradient(
@@ -132,6 +187,11 @@ h1,h2,h3 {
 .container-fluid.B,
 .container-fluid.D,
 .container-fluid.F {
+=======
+.container-fluid.A,
+.container-fluid.C,
+.container-fluid.D{
+>>>>>>> 90ff89711837fa4953de5060014047a28a1a915f
   background-color: #f3f3f3;
 }
 */
@@ -197,7 +257,6 @@ button:hover, button>a:hover {
 }
 
 /* TEMP HACKY STYLING */
-
 .float-right {
   float:right;
 }
