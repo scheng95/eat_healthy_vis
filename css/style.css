@@ -167,7 +167,7 @@ h1,h2,h3 {
     rgba(255, 255, 255, 0.85)
   ),
   url('../img/fruits-veg.jpg') no-repeat center center;
-  min-width: 100%
+  min-width: 100%;
   background-size:cover;
 }
 .container-fluid.D {
@@ -177,7 +177,7 @@ h1,h2,h3 {
     rgba(255, 255, 255, 0.85)
   ),
   url('../img/burgers.jpg') no-repeat center center;
-  width: 100%
+  min-width: 100%;
   background-size:cover;
 }
 .container-fluid.footer{
