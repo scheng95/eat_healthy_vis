@@ -156,9 +156,23 @@ function addRecipe(selectIdx) {
         </div>
     </div>`;
 
+    const staticMenuItem =
+    `<div class="panel-heading">
+        <div class="row">
+            <div class="col-md-11">
+                <h4 class="panel-title clickable" onclick="pieHighlight(${currIdx})">
+                    ${recipe.label}
+                </h4>
+            </div>
+            <div class="col-md-1">
+                <span class="clickable glyphicon glyphicon-remove-circle" onclick="removeRecipe(${currIdx})"></span>
+            </div>
+        </div>
+     </div>`;
+
     $("#accordion-menu").append(`<div class="panel panel-default" id="menu-panel-${currIdx}">${newMenuItem}</div>`);
     // TODO this is super bad, but just do it for now
-    $("#static-menu").append(`<div class="panel panel-default" id="static-menu-panel-${currIdx}">${newMenuItem}</div>`);
+    $("#static-menu").append(`<div class="panel panel-default" id="static-menu-panel-${currIdx}">${staticMenuItem}</div>`);
 
     recipeCount += 1;
 
@@ -168,18 +182,33 @@ function addRecipe(selectIdx) {
 function removeRecipe(idx) {
     // remove from stored recipes
     delete selectRecipes[idx];
-    // remove rom DOM
+    // remove from DOM
     $(`#menu-panel-${idx}`).remove();
     $(`#static-menu-panel-${idx}`).remove();
 
     wrangleMenuData();
 }
 
+let detailIndex = new Set();
+
+function pieHighlight(idx) {
+    console.log(idx);
+
+    // TODO change how dom looks
+    if (detailIndex.has(idx)) {
+        $(`#static-menu-panel-${idx}`).removeClass("highlighted");
+        detailIndex.delete(idx);
+    } else {
+        $(`#static-menu-panel-${idx}`).addClass("highlighted");
+        detailIndex.add(idx);
+    }
+
+    wrangleMenuData();
+}
+
 function wrangleMenuData() {
     console.log("wrangleMenuData");
-    // TODO wrangle data in selectRecipes
 
-    // TODO get values
     let age = $("#input-age").val();
     let gender = $("#dropdown-gender").val();
     let lifestyle = $("#dropdown-lifestyle").val();
@@ -193,7 +222,7 @@ function wrangleMenuData() {
         "CHOCDF": "Carbohydrate (g)",
         "FIBTG": "Fiber (g)"
     };
-    let itemNutrients = [];
+    let itemNutrients = {};
     let totIntake = {
         "Calories": 0,
         "Fat (g)": 0,
@@ -203,6 +232,7 @@ function wrangleMenuData() {
         "Carbohydrate (g)": 0,
         "Fiber (g)": 0
     };
+    let selectIntake = $.extend(true, {}, totIntake);
     for (let key in selectRecipes) {
         if (selectRecipes.hasOwnProperty(key)) {
             const recipe = selectRecipes[key];
@@ -212,20 +242,27 @@ function wrangleMenuData() {
             let itemNut = {};
             for (let code in nutrientCodes) {
                 if (totNuts.hasOwnProperty(code)) {
-                    totIntake[nutrientCodes[code]] += totNuts[code]["quantity"] / servings;
-                    itemNut[nutrientCodes[code]] = totNuts[code]["quantity"] / servings;
+                    const perServNutrient = totNuts[code]["quantity"] / servings;
+                    totIntake[nutrientCodes[code]] += perServNutrient;
+                    itemNut[nutrientCodes[code]] = perServNutrient;
+                    if (detailIndex.has(parseInt(key))) {
+                        selectIntake[nutrientCodes[code]] += perServNutrient;
+                    }
                 } else {
                     itemNut[nutrientCodes[code]] = 0;
                 }
             }
-            itemNutrients.push(itemNut);
+            itemNutrients[key] = itemNut;
         }
     }
 
-    console.log(totIntake);
+    // aggregate nutrient info for selected items
+
+    // console.log(totIntake);
 
     const recCal = driCalories[gender][lifestyle][age];
     const totCal = totIntake["Calories"];
+    const subCal = selectIntake["Calories"];
 
     let displayData = [];
 
@@ -253,7 +290,8 @@ function wrangleMenuData() {
                 "slice": 1,
                 "name": d,
                 "limit": +recs[d],
-                "tot": totIntake[d]
+                "tot": totIntake[d],
+                "subset": selectIntake[d]
             })
         });
         depNuts.forEach(function(d) {
@@ -261,14 +299,16 @@ function wrangleMenuData() {
                 "slice": 1,
                 "name": d,
                 "limit": recCal * depNutsFactor[d],
-                "tot": totIntake[d]
+                "tot": totIntake[d],
+                "subset": selectIntake[d]
             })
         });
-        console.log(displayData);
+        // console.log(displayData);
         updateNutritionVis({
             "calData": [{
                 "tot": totCal,
-                "rec": recCal
+                "rec": recCal,
+                "sub": subCal
             }],
             "nutData": displayData
         });
@@ -304,9 +344,11 @@ function updateNutritionVis(data) {
 
     console.log("updateNVis");
 
+    console.log(data);
+
     let color = d3.scale.ordinal()
         .domain([0, 5])
-        .range(colorbrewer.RdBu[6]);
+        .range(colorbrewer.Set2[6]);
 
     // don't define outer radius yet
     let arc = d3.svg.arc()
@@ -324,13 +366,17 @@ function updateNutritionVis(data) {
         .data(pie(displayData));
     let g = groups.enter().append("g")
         .attr("class", "arc");
-
+    groups.exit()
+        .transition().duration(1000)
+        .remove();
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
         .attr("d", function(d, i) { return arc.outerRadius(maxRad)(d, i); })
         .style("fill", "Lightgray");
 
+    // TODO only need to append defs once
+    // definitions for gradient fill
     let pieGrads = svgPie.append("defs").selectAll("radialGradient").data(pie(displayData))
         .enter().append("radialGradient")
         .attr("gradientUnits", "userSpaceOnUse")
@@ -341,17 +387,47 @@ function updateNutritionVis(data) {
     pieGrads.append("stop").attr("offset", "19%").style("stop-color", function(d, i) { return color(i); });
     pieGrads.append("stop").attr("offset", "25%").style("stop-color", "white");
 
+    // // definitions for stripe fill
+    // let stripes = svgPie.append("defs");
+    // stripes.append("pattern")
+    //     .attr("id", "pattern-stripe")
+    //     .attr("width", 4)
+    //     .attr("height", 4)
+    //     .attr("patternUnits", "userSpaceOnUse")
+    //     .attr("patternTransform", "rotate(45)")
+    //     .append("rect")
+    //     .attr("width", 4)
+    //     .attr("height", 4)
+    //     .attr("transform", "translate(0,0)")
+    //     .attr("fill", "white");
+    // stripes.append("mask")
+    //     .attr("id", "mask-stripe")
+    //     .append("rect")
+    //     .attr("x", 0)
+    //     .attr("y", 0)
+    //     .attr("width", "100%")
+    //     .attr("height", "100%")
+    //     .attr("fill", "url(#pattern-stripe)");
+
+    // draw new slice
     g.append("path")
         .attr("class", "foreground-arc")
         // .style("fill", function(d, i) { return color(i); });
         .style("fill", function(d, i) { return "url(#grad" + i + ")"; });
-
     // update
     groups.select(".foreground-arc")
         .transition()
         .duration(1000)
         .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.tot / d.data.limit)))(d, i); });
 
+    // draw selected slices
+    g.append("path")
+        .attr("class", "overlay-arc");
+    groups.select(".overlay-arc")
+        .transition().duration(1000)
+        .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.subset / d.data.limit)))(d, i); });
+
+    // TODO don't draw this 6 times
     // draw boundaries
     g.append("circle")
         .attr("class", "outline-circle")
@@ -415,6 +491,18 @@ function updateNutritionVis(data) {
         .duration(1000)
         .attr("width", d => barScale(d.tot));
 
+    // draw overlay
+    bargroup.append("rect")
+        .attr("class", "overlay-bar")
+        .attr("x", d => (width - barScale(d.rec)) / 2)
+        .attr("y", margin.top/2 - barHeight/2)
+        .attr("height", barHeight);
+    // update
+    bars.select(".overlay-bar")
+        .transition()
+        .duration(1000)
+        .attr("width", d => barScale(d.sub));
+
     // draw boundaries
     bargroup.append("rect")
         .attr("class", "outline-rect")
@@ -436,3 +524,4 @@ function updateNutritionVis(data) {
         .text("Calories");
 
 }
+
