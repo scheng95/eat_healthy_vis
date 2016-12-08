@@ -176,6 +176,11 @@ function addRecipe(selectIdx) {
 
     recipeCount += 1;
 
+    // control visualize button
+    if (Object.keys(selectRecipes).length > 0) {
+        $('#vis-button').show();
+    }
+
     wrangleMenuData();
 }
 
@@ -186,6 +191,17 @@ function removeRecipe(idx) {
     $(`#menu-panel-${idx}`).remove();
     $(`#static-menu-panel-${idx}`).remove();
 
+    // control visualize button
+    if (Object.keys(selectRecipes).length <= 0) {
+        $('#vis-button').hide();
+    }
+
+    wrangleMenuData();
+}
+
+function flipVis() {
+    $("#recipe-block").toggle();
+    $("#menu-vis-block").toggle();
     wrangleMenuData();
 }
 
