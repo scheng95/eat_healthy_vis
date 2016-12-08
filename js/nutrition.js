@@ -375,8 +375,7 @@ function updateNutritionVis(data) {
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
-        .attr("d", d => arc.outerRadius(maxRad)(d))
-        .style("fill", "Lightgray");
+        .attr("d", d => arc.outerRadius(maxRad)(d));
 
     // TODO only need to append defs once
     // definitions for gradient fill
@@ -408,15 +407,10 @@ function updateNutritionVis(data) {
         .transition().duration(1000)
         .attr("d", d => arc.outerRadius(radScale(d.data.subset, d.data.limit))(d));
 
-    // TODO don't draw this 6 times
-    // draw boundaries
-    g.append("circle")
-        .attr("class", "outline-circle")
-        .attr("r", maxRad)
-        .attr("fill-opacity", 0)
-        .attr("stroke-opacity", 1)
-        .attr("stroke", "Gray")
-        .attr("stroke-dasharray", "10, 5");
+    // draw outline over everything else
+    g.append("path")
+        .attr("class", "outline-arc")
+        .attr("d", d => arc.outerRadius(maxRad)(d));
 
     // labels, only draw once
     g.append("text")
@@ -494,8 +488,8 @@ function updateNutritionVis(data) {
         .attr("height", barHeight)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 1)
-        .attr("stroke", "Gray")
-        .attr("stroke-dasharray", "10, 5");
+        // .attr("stroke-dasharray", "10, 5")
+        .attr("stroke", "Gray");
 
     // labels, only draw once
     bargroup.append("text")

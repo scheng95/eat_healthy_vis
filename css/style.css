@@ -113,8 +113,14 @@
     text-anchor: left;
 }
 
-.arc path {
-    stroke: #fff;
+.arc .background-arc {
+    fill: Lightgray;
+}
+
+.arc .outline-arc {
+    fill-opacity: 0.0;
+    stroke-opacity: 1.0;
+    stroke: Gray;
 }
 
 .calorie-label {
@@ -194,18 +200,6 @@ h1,h2,h3 {
 .container-fluid.footer{
   background-color: #f0f0f0;
 }
-/*
-.container-fluid.B,
-.container-fluid.D,
-.container-fluid.F {
-=======
-.container-fluid.A,
-.container-fluid.C,
-.container-fluid.D{
->>>>>>> 90ff89711837fa4953de5060014047a28a1a915f
-  background-color: #f3f3f3;
-}
-*/
 
 .bar {
   fill: colorMedium;
@@ -218,7 +212,7 @@ h1,h2,h3 {
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
-path {
+path.lineChart {
     stroke: var(--colorDark);
     stroke-width: 2;
     fill: none;
