@@ -1,14 +1,3 @@
-// prevent form submission using enter button (script makes it reactive to changes)
-// from http://stackoverflow.com/questions/895171/prevent-users-from-submitting-form-by-hitting-enter
-$(document).ready(function() {
-    $(window).keydown(function(event){
-        if(event.keyCode == 13) {
-            event.preventDefault();
-            return false;
-        }
-    });
-});
-
 $(function() {
     // control for "about me" input
     (function() {
@@ -41,10 +30,27 @@ $(function() {
         });
     })();
 
+    // prevent enter form submit on age
+    $("#input-age").keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
     // search recipe API and display results
     $("#recipe-search-button").click(function() {
         console.log("searching");
         const query = $("#input-recipe-search").val();
         recipeSearch(query);
+    });
+    // user can also submit query with enter key
+    $("#input-recipe-search").keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            console.log("searching");
+            const query = $("#input-recipe-search").val();
+            recipeSearch(query);
+        }
     });
 });

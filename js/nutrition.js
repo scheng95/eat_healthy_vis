@@ -123,7 +123,7 @@ function displayRecipes(data) {
 }
 
 function addRecipe(selectIdx) {
-    if (Object.keys(selectRecipes).length >= 15) {
+    if (Object.keys(selectRecipes).length >= 12) {
         console.log("over limit");
         return false;
     }
