@@ -386,8 +386,8 @@ function updateNutritionVis(data) {
         .attr("cy", 0)
         .attr("r", "100%")
         .attr("id", function(d, i) { return "grad" + i; });
-    pieGrads.append("stop").attr("offset", "19%").style("stop-color", function(d, i) { return color(i); });
-    pieGrads.append("stop").attr("offset", "25%").style("stop-color", "white");
+    pieGrads.append("stop").attr("offset", "22%").style("stop-color", function(d, i) { return color(i); });
+    pieGrads.append("stop").attr("offset", "28%").style("stop-color", "white");
 
     // draw new slice
     g.append("path")
@@ -451,8 +451,8 @@ function updateNutritionVis(data) {
         .attr("x2", "100%")
         .attr("y2", "0%")
         .attr("spreadMethod", "pad");
-    barGrads.append("stop").attr("offset", "70%").style("stop-color", barColor);
-    barGrads.append("stop").attr("offset", "80%").style("stop-color", "White");
+    barGrads.append("stop").attr("offset", "80%").style("stop-color", barColor);
+    barGrads.append("stop").attr("offset", "85%").style("stop-color", "White");
 
     // foreground
     bargroup.append("rect")
