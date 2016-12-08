@@ -350,6 +350,9 @@ function updateNutritionVis(data) {
         .domain([0, 5])
         .range(colorbrewer.Set2[6]);
 
+    // TODO should this be here?
+    let radScale = (r, rmax) => Math.max(Math.sqrt(maxRad*maxRad * (r / rmax)), 0.00001);
+
     // don't define outer radius yet
     let arc = d3.svg.arc()
         .innerRadius(0);
@@ -360,7 +363,7 @@ function updateNutritionVis(data) {
 
     let pie = d3.layout.pie()
         .sort(null)
-        .value(function(d) { return d.slice; });
+        .value(d => d.slice);
 
     let groups = svgPie.selectAll(".arc")
         .data(pie(displayData));
@@ -372,7 +375,7 @@ function updateNutritionVis(data) {
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
-        .attr("d", function(d, i) { return arc.outerRadius(maxRad)(d, i); })
+        .attr("d", d => arc.outerRadius(maxRad)(d))
         .style("fill", "Lightgray");
 
     // TODO only need to append defs once
@@ -387,45 +390,23 @@ function updateNutritionVis(data) {
     pieGrads.append("stop").attr("offset", "19%").style("stop-color", function(d, i) { return color(i); });
     pieGrads.append("stop").attr("offset", "25%").style("stop-color", "white");
 
-    // // definitions for stripe fill
-    // let stripes = svgPie.append("defs");
-    // stripes.append("pattern")
-    //     .attr("id", "pattern-stripe")
-    //     .attr("width", 4)
-    //     .attr("height", 4)
-    //     .attr("patternUnits", "userSpaceOnUse")
-    //     .attr("patternTransform", "rotate(45)")
-    //     .append("rect")
-    //     .attr("width", 4)
-    //     .attr("height", 4)
-    //     .attr("transform", "translate(0,0)")
-    //     .attr("fill", "white");
-    // stripes.append("mask")
-    //     .attr("id", "mask-stripe")
-    //     .append("rect")
-    //     .attr("x", 0)
-    //     .attr("y", 0)
-    //     .attr("width", "100%")
-    //     .attr("height", "100%")
-    //     .attr("fill", "url(#pattern-stripe)");
-
     // draw new slice
     g.append("path")
         .attr("class", "foreground-arc")
         // .style("fill", function(d, i) { return color(i); });
-        .style("fill", function(d, i) { return "url(#grad" + i + ")"; });
+        .style("fill", (d, i) => "url(#grad" + i + ")");
     // update
     groups.select(".foreground-arc")
         .transition()
         .duration(1000)
-        .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.tot / d.data.limit)))(d, i); });
+        .attr("d", d => arc.outerRadius(radScale(d.data.tot, d.data.limit))(d));
 
     // draw selected slices
     g.append("path")
         .attr("class", "overlay-arc");
     groups.select(".overlay-arc")
         .transition().duration(1000)
-        .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.subset / d.data.limit)))(d, i); });
+        .attr("d", d => arc.outerRadius(radScale(d.data.subset, d.data.limit))(d));
 
     // TODO don't draw this 6 times
     // draw boundaries
@@ -440,9 +421,9 @@ function updateNutritionVis(data) {
     // labels, only draw once
     g.append("text")
         .attr("class", "pie-label")
-        .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+        .attr("transform", d => "translate(" + labelArc.centroid(d) + ")")
         .attr("dy", ".35em")
-        .text(function(d) { return d.data.name; });
+        .text(d => d.data.name);
 
     //////// draw calories bar
     let barScale = d3.scale.linear()
@@ -460,6 +441,7 @@ function updateNutritionVis(data) {
     // background, only draw once
     bargroup.append("rect")
         .attr("class", "background-bar")
+        // TODO refactor these x, y
         .attr("x", d => (width - barScale(d.rec)) / 2)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("width", d => barScale(d.rec))
