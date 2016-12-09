@@ -2,6 +2,10 @@
     display: inline-block;
 }
 
+.menu-panel-header {
+    margin-bottom: 10px;
+}
+
 .btn-vis {
     color: white;
     display: inline-block;
@@ -27,9 +31,10 @@
 }
 
 /* TODO should we hard code height here? */
-#recipe-block {
+#recipe-block,
+#menu-vis-block {
     width: 100%;
-    height: 780px;
+    min-height: 300px;
 }
 
 .loader {
@@ -113,8 +118,14 @@
     text-anchor: left;
 }
 
-.arc path {
-    stroke: #fff;
+.arc .background-arc {
+    fill: Lightgray;
+}
+
+.arc .outline-arc {
+    fill-opacity: 0.0;
+    stroke-opacity: 1.0;
+    stroke: Gray;
 }
 
 .calorie-label {
@@ -194,18 +205,6 @@ h1,h2,h3 {
 .container-fluid.footer{
   background-color: #f0f0f0;
 }
-/*
-.container-fluid.B,
-.container-fluid.D,
-.container-fluid.F {
-=======
-.container-fluid.A,
-.container-fluid.C,
-.container-fluid.D{
->>>>>>> 90ff89711837fa4953de5060014047a28a1a915f
-  background-color: #f3f3f3;
-}
-*/
 
 .bar {
   fill: colorMedium;
@@ -218,7 +217,7 @@ h1,h2,h3 {
   stroke-width: 1;
   shape-rendering: crispEdges;
 }
-path {
+path.lineChart {
     stroke: var(--colorDark);
     stroke-width: 2;
     fill: none;
@@ -295,3 +294,49 @@ button:hover, button>a:hover {
     left: 0;
 }
 */
+
+
+/*!*********************!*/
+/*!*  TOOLTIP OVERLAY  *!*/
+/*!*********************!*/
+
+/*.background-arc,*/
+/*.overlay-arc,*/
+/*.outline-arc,*/
+/*.pie-label {*/
+    /*pointer-events: none;*/
+/*}*/
+
+/*.tooltip-title {*/
+    /*display: block;*/
+    /*margin-bottom: 5px;*/
+    /*font-weight: 600;*/
+/*}*/
+
+/*.d3-tip {*/
+    /*line-height: 1;*/
+    /*padding: 12px;*/
+    /*background: rgba(0, 0, 0, 0.8);*/
+    /*color: #fff;*/
+    /*border-radius: 2px;*/
+/*}*/
+
+/*!* Creates a small triangle extender for the tooltip *!*/
+/*.d3-tip:after {*/
+    /*box-sizing: border-box;*/
+    /*display: inline;*/
+    /*font-size: 10px;*/
+    /*width: 100%;*/
+    /*line-height: 1;*/
+    /*color: rgba(0, 0, 0, 0.8);*/
+    /*content: "\25BC";*/
+    /*position: absolute;*/
+    /*text-align: center;*/
+/*}*/
+
+/*!* Style northward tooltips differently *!*/
+/*.d3-tip.n:after {*/
+    /*margin: -1px 0 0 0;*/
+    /*top: 100%;*/
+    /*left: 0;*/
+/*}*/

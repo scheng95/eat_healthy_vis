@@ -39,7 +39,7 @@
   </div>
   <div class="container-fluid B text-center"   id="B">
     <div class="row">
-      <h2>What is Healthy?</h1>
+      <h2>What is Healthy?</h2>
       <br>
       <p>Over the years, nutrition experts have stayed consistent on two recommendations:</p>
       <br>
@@ -110,7 +110,7 @@
     </div>
   </div>
   <div class="container-fluid D text-center ">
-    <div class="row"><h2>Why does a healthy diet matter and what can you do?</h1></div>
+    <div class="row"><h2>Why does a healthy diet matter and what can you do?</h2></div>
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <h3>We're getting sicker.</h3>
@@ -160,30 +160,32 @@
                         </form>
                     </div>
                 </div>
-                <div>
+                <div id="meal-planner">
                     <div class="row" id="recipe-block">
                         <h3>2. What do you eat in a day?</h3>
                         <div class="col-md-3">
                             <!-- TODO make overflow scroll, or limit num items -->
                             <div>
                                 <h4 class="inline">Daily Menu</h4>
-                                <a class="btn-vis pull-right" href="#V"><button class="btn btn-primary btn-sm" onclick="wrangleMenuData()">Visualize</button></a>
                             </div>
                             <div class="panel-group" id="accordion-menu"></div>
+                            <a class="btn-vis pull-right" id="vis-button" style="display: none;"><button class="btn btn-primary btn-sm" onclick="flipVis()">Visualize</button></a>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search recipes..." id="input-recipe-search">
+                                <input type="text" class="form-control" placeholder="Search meals..." id="input-recipe-search">
                                 <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
                             </div>
                             <div class="" id="recipe-results"></div>
                         </div>
                     </div>
-                </div>
-                <div id="V">
-                    <div class="row">
+                    <div class="row" id="menu-vis-block" style="display: none;">
                         <h3>3. How nutritious is your daily diet?</h3>
                         <div class="col-md-3">
+                            <div>
+                                <h4 class="inline">Daily Menu</h4>
+                                <a class="btn-vis pull-right"><button class="btn btn-primary btn-sm" onclick="flipVis()">Add more items</button></a>
+                            </div>
                             <div class="panel-group" id="static-menu"></div>
                         </div>
                         <div class="col-md-9">

@@ -123,7 +123,7 @@ function displayRecipes(data) {
 }
 
 function addRecipe(selectIdx) {
-    if (Object.keys(selectRecipes).length >= 15) {
+    if (Object.keys(selectRecipes).length >= 12) {
         console.log("over limit");
         return false;
     }
@@ -176,6 +176,11 @@ function addRecipe(selectIdx) {
 
     recipeCount += 1;
 
+    // control visualize button
+    if (Object.keys(selectRecipes).length > 0) {
+        $('#vis-button').show();
+    }
+
     wrangleMenuData();
 }
 
@@ -186,6 +191,17 @@ function removeRecipe(idx) {
     $(`#menu-panel-${idx}`).remove();
     $(`#static-menu-panel-${idx}`).remove();
 
+    // control visualize button
+    if (Object.keys(selectRecipes).length <= 0) {
+        $('#vis-button').hide();
+    }
+
+    wrangleMenuData();
+}
+
+function flipVis() {
+    $("#recipe-block").toggle();
+    $("#menu-vis-block").toggle();
     wrangleMenuData();
 }
 
@@ -324,6 +340,7 @@ let margin = {top: 80, right: 0, bottom: 0, left: 0},
 let svg = d3.select("#menu-vis").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
+    // .style("background-color", "cyan");
 
 let svgPie = svg.append("g")
     // center the pie
@@ -347,9 +364,37 @@ function updateNutritionVis(data) {
 
     console.log(data);
 
-    let color = d3.scale.ordinal()
-        .domain([0, 5])
-        .range(colorbrewer.Set2[6]);
+    // let color = d3.scale.ordinal()
+    //     .domain([0, 5])
+    //     .range(colorbrewer.Set2[6]);
+
+    const goodColor = "rgb(147, 229, 221)";
+    const medColor = "rgb(255, 240, 156)";
+    const badColor = "rgb(224, 86, 16)";
+    // TODO don't hard code so much
+    let color = function(d) {
+        const ratio = d.data.tot / d.data.limit;
+        let fillColor;
+        if (d.data.name in {"Fat (g)":0, "Carbohydrate (g)":0, "Protein (g)":0}) {
+            if (ratio < 0.9) { fillColor = medColor; }
+            else if (0.9 <= ratio && ratio < 1.1) { fillColor = goodColor; }
+            else { fillColor = badColor; }
+        } else if (d.data.name == "Fiber (g)") {
+            if (ratio < 0.8) { fillColor = badColor; }
+            else { fillColor = goodColor; }
+        } else if (d.data.name == "Sugar (g)") {
+            if (ratio < 1.0) { fillColor = medColor; }
+            else { fillColor = badColor; }
+        } else { // sodium
+            if (ratio < 0.8) { fillColor = badColor; }
+            else if (0.8 <= ratio && ratio < 1.2) { fillColor = goodColor; }
+            else { fillColor = badColor; }
+        }
+        return fillColor;
+    };
+
+    // TODO should this be here?
+    let radScale = (r, rmax) => Math.max(Math.sqrt(maxRad*maxRad * (r / rmax)), 0.00001);
 
     // don't define outer radius yet
     let arc = d3.svg.arc()
@@ -361,7 +406,7 @@ function updateNutritionVis(data) {
 
     let pie = d3.layout.pie()
         .sort(null)
-        .value(function(d) { return d.slice; });
+        .value(d => d.slice);
 
     let groups = svgPie.selectAll(".arc")
         .data(pie(displayData));
@@ -373,77 +418,67 @@ function updateNutritionVis(data) {
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
-        .attr("d", function(d, i) { return arc.outerRadius(maxRad)(d, i); })
-        .style("fill", "Lightgray");
+        .attr("d", d => arc.outerRadius(maxRad)(d));
 
-    // TODO only need to append defs once
+    // TODO only need to append defs once, put it in init
     // definitions for gradient fill
-    let pieGrads = svgPie.append("defs").selectAll("radialGradient").data(pie(displayData))
-        .enter().append("radialGradient")
+    if ($("#pie-grad-def").length <= 0) {
+        svgPie.append("defs").attr("id", "pie-grad-def");
+    }
+    let pieGrad = svgPie.select("defs#pie-grad-def");
+    let pieGrads = pieGrad.selectAll("radialGradient").data(pie(displayData));
+    let pieGradsEnter = pieGrads.enter().append("radialGradient")
         .attr("gradientUnits", "userSpaceOnUse")
         .attr("cx", 0)
         .attr("cy", 0)
         .attr("r", "100%")
-        .attr("id", function(d, i) { return "grad" + i; });
-    pieGrads.append("stop").attr("offset", "19%").style("stop-color", function(d, i) { return color(i); });
-    pieGrads.append("stop").attr("offset", "25%").style("stop-color", "white");
-
-    // // definitions for stripe fill
-    // let stripes = svgPie.append("defs");
-    // stripes.append("pattern")
-    //     .attr("id", "pattern-stripe")
-    //     .attr("width", 4)
-    //     .attr("height", 4)
-    //     .attr("patternUnits", "userSpaceOnUse")
-    //     .attr("patternTransform", "rotate(45)")
-    //     .append("rect")
-    //     .attr("width", 4)
-    //     .attr("height", 4)
-    //     .attr("transform", "translate(0,0)")
-    //     .attr("fill", "white");
-    // stripes.append("mask")
-    //     .attr("id", "mask-stripe")
-    //     .append("rect")
-    //     .attr("x", 0)
-    //     .attr("y", 0)
-    //     .attr("width", "100%")
-    //     .attr("height", "100%")
-    //     .attr("fill", "url(#pattern-stripe)");
+        .attr("id", (d, i) => "grad" + i);
+    pieGradsEnter.append("stop")
+        .attr("class", "pie-grad-start-color")
+        .attr("offset", "22%");
+    pieGradsEnter.append("stop").attr("offset", "28%").style("stop-color", "white");
+    // update gradient color start
+    pieGrads.select(".pie-grad-start-color")
+        .style("stop-color", function(d, i) {
+            console.log("gradient " + i);
+            return color(d);
+        });
 
     // draw new slice
     g.append("path")
-        .attr("class", "foreground-arc")
-        // .style("fill", function(d, i) { return color(i); });
-        .style("fill", function(d, i) { return "url(#grad" + i + ")"; });
+        .attr("class", "foreground-arc");
     // update
     groups.select(".foreground-arc")
+        // .attr("fill", d => color(d))
+        .style("fill", (d, i) => "url(#grad" + i + ")")
         .transition()
         .duration(1000)
-        .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.tot / d.data.limit)))(d, i); });
+        .attr("d", d => arc.outerRadius(radScale(d.data.tot, d.data.limit))(d));
 
     // draw selected slices
     g.append("path")
         .attr("class", "overlay-arc");
     groups.select(".overlay-arc")
         .transition().duration(1000)
-        .attr("d", function(d, i) { return arc.outerRadius(Math.sqrt(maxRad*maxRad * (d.data.subset / d.data.limit)))(d, i); });
+        .attr("d", d => arc.outerRadius(radScale(d.data.subset, d.data.limit))(d));
 
-    // TODO don't draw this 6 times
-    // draw boundaries
-    g.append("circle")
-        .attr("class", "outline-circle")
-        .attr("r", maxRad)
-        .attr("fill-opacity", 0)
-        .attr("stroke-opacity", 1)
-        .attr("stroke", "Gray")
-        .attr("stroke-dasharray", "10, 5");
+    // draw outline over everything else
+    g.append("path")
+        .attr("class", "outline-arc")
+        .attr("d", d => arc.outerRadius(maxRad)(d));
 
     // labels, only draw once
     g.append("text")
-        .attr("class", "pie-label")
-        .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
-        .attr("dy", ".35em")
-        .text(function(d) { return d.data.name; });
+        .attr("class", "pie-label pie-label-static")
+        .attr("transform", d => "translate(" + labelArc.centroid(d) + ")")
+        .attr("dy", "-0.6em")
+        .text(d => d.data.name);
+    g.append("text")
+        .attr("class", "pie-label pie-label-dynamic")
+        .attr("transform", d => "translate(" + labelArc.centroid(d) + ")")
+        .attr("dy", "0.6em");
+    groups.select(".pie-label-dynamic")
+        .text(d => `${Math.round(d.data.tot)}/${Math.round(d.data.limit)}`);
 
     //////// draw calories bar
     let barScale = d3.scale.linear()
@@ -461,6 +496,7 @@ function updateNutritionVis(data) {
     // background, only draw once
     bargroup.append("rect")
         .attr("class", "background-bar")
+        // TODO refactor these x, y
         .attr("x", d => (width - barScale(d.rec)) / 2)
         .attr("y", margin.top/2 - barHeight/2)
         .attr("width", d => barScale(d.rec))
@@ -476,8 +512,8 @@ function updateNutritionVis(data) {
         .attr("x2", "100%")
         .attr("y2", "0%")
         .attr("spreadMethod", "pad");
-    barGrads.append("stop").attr("offset", "70%").style("stop-color", barColor);
-    barGrads.append("stop").attr("offset", "80%").style("stop-color", "White");
+    barGrads.append("stop").attr("offset", "80%").style("stop-color", barColor);
+    barGrads.append("stop").attr("offset", "85%").style("stop-color", "White");
 
     // foreground
     bargroup.append("rect")
@@ -513,15 +549,22 @@ function updateNutritionVis(data) {
         .attr("height", barHeight)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 1)
-        .attr("stroke", "Gray")
-        .attr("stroke-dasharray", "10, 5");
+        // .attr("stroke-dasharray", "10, 5")
+        .attr("stroke", "Gray");
 
     // labels, only draw once
     bargroup.append("text")
-        .attr("class", "calorie-label")
+        .attr("class", "calorie-label calorie-label-static")
         .attr("x", d => (width - barScale(d.rec)) / 2 + 5)
         .attr("y", margin.top/2)
-        .attr("dy", ".35em")
+        .attr("dy", "-0.2em")
         .text("Calories");
+    bargroup.append("text")
+        .attr("class", "calorie-label calorie-label-dynamic")
+        .attr("x", d => (width - barScale(d.rec)) / 2 + 5)
+        .attr("y", margin.top/2)
+        .attr("dy", "1.0em");
+    bars.select(".calorie-label-dynamic")
+        .text(d => `${Math.round(d.tot)}/${Math.round(d.rec)}`);
 
 }
