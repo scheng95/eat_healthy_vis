@@ -339,6 +339,7 @@ let margin = {top: 80, right: 0, bottom: 0, left: 0},
 let svg = d3.select("#menu-vis").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom);
+    // .style("background-color", "cyan");
 
 let svgPie = svg.append("g")
     // center the pie
@@ -430,10 +431,16 @@ function updateNutritionVis(data) {
 
     // labels, only draw once
     g.append("text")
-        .attr("class", "pie-label")
+        .attr("class", "pie-label pie-label-static")
         .attr("transform", d => "translate(" + labelArc.centroid(d) + ")")
-        .attr("dy", ".35em")
+        .attr("dy", "-0.6em")
         .text(d => d.data.name);
+    g.append("text")
+        .attr("class", "pie-label pie-label-dynamic")
+        .attr("transform", d => "translate(" + labelArc.centroid(d) + ")")
+        .attr("dy", "0.6em");
+    groups.select(".pie-label-dynamic")
+        .text(d => `${Math.round(d.data.tot)}/${Math.round(d.data.limit)}`);
 
     //////// draw calories bar
     let barScale = d3.scale.linear()
@@ -509,11 +516,18 @@ function updateNutritionVis(data) {
 
     // labels, only draw once
     bargroup.append("text")
-        .attr("class", "calorie-label")
+        .attr("class", "calorie-label calorie-label-static")
         .attr("x", d => (width - barScale(d.rec)) / 2 + 5)
         .attr("y", margin.top/2)
-        .attr("dy", ".35em")
+        .attr("dy", "-0.2em")
         .text("Calories");
+    bargroup.append("text")
+        .attr("class", "calorie-label calorie-label-dynamic")
+        .attr("x", d => (width - barScale(d.rec)) / 2 + 5)
+        .attr("y", margin.top/2)
+        .attr("dy", "1.0em");
+    bars.select(".calorie-label-dynamic")
+        .text(d => `${Math.round(d.tot)}/${Math.round(d.rec)}`);
 
 }
 
