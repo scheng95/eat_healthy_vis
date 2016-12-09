@@ -13,6 +13,7 @@ BarChart = function(_chartType, _data, _dataDRImin, _dataDRImax, _yMin, _yMax, _
 	this.displayData = [];
 	if (_chartType == "Income") { this.xGroups = ["$0 - $24,999","$25,000 - $74,999","$75,000 and higher","All"];}
 	else { this.xGroups = ["Male", "Female"];}
+	console.log("Min/max = " + this.yMin+" - "+ this.yMax);
 
 	//$("#WWEIA_spacer").height($("#WWEIA_dropdowns").height());
 
@@ -92,13 +93,12 @@ BarChart.prototype.wrangleData = function(){
 			});
 	});
 	if (vis.age_group != "2 and over") {
-		vis.DRI = vis.dataDRImin.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
-	} else { vis.DRI = 0; }
-	console.log(vis.DRI);
-	/*console.log(vis.dataDRImin);
-	console.log(vis.dataDRI);
-	console.log(vis.displayData);
-	*/
+		vis.DRImin = vis.dataDRImin.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
+		vis.DRImax = vis.dataDRImax.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
+	} else {
+		vis.DRImin = 0;
+		vis.DRImax = 0;
+	}
 }
 
 // Update visualization
@@ -146,10 +146,10 @@ BarChart.prototype.updateVis = function(){
 		.transition().duration(300)
 		.attr("d",vis.line);
 
-	if (vis.DRI != 0 && vis.DRI != null) {
+	if (vis.DRImin != 0 && vis.DRImin != null) {
 		// Reference
 		vis.lineRef = vis.svg.selectAll(".lineRef")
-			.data([vis.DRI]);
+			.data([vis.DRImin]);
 
 		vis.lineRef.enter().append("line")
 			.attr("class","lineRef")
@@ -158,9 +158,27 @@ BarChart.prototype.updateVis = function(){
 			.style("stroke-dasharray", "3,3")
 			.style("opacity", 0.5);
 		vis.svg.select(".lineRef").transition().duration(trans)
-			.attr("x1", function(){ return vis.y(vis.DRI)+vis.margin.left;})
+			.attr("x1", function(){ return vis.y(vis.DRImin)+vis.margin.left;})
 	    .attr("y1", 0)
-	    .attr("x2", function(){ return vis.y(vis.DRI)+vis.margin.left;})
+	    .attr("x2", function(){ return vis.y(vis.DRImin)+vis.margin.left;})
+	    .attr("y2", vis.height);
+	}
+
+	if (vis.DRImax != 0 && vis.DRImax != null) {
+		// Reference
+		vis.lineRef2 = vis.svg.selectAll(".lineRef2")
+			.data([vis.DRImax]);
+
+		vis.lineRef2.enter().append("line")
+			.attr("class","lineRef2")
+			.style("stroke", "#222")
+			.style("stroke-width", 2)
+			.style("stroke-dasharray", "3,3")
+			.style("opacity", 0.5);
+		vis.svg.select(".lineRef2").transition().duration(trans)
+			.attr("x1", function(){ return vis.y(vis.DRImax)+vis.margin.left;})
+	    .attr("y1", 0)
+	    .attr("x2", function(){ return vis.y(vis.DRImax)+vis.margin.left;})
 	    .attr("y2", vis.height);
 	}
 /*

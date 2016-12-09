@@ -101,6 +101,9 @@ TimeSeriesChart.prototype.initVis = function(){
 	vis.lineRef = vis.svg.append("line")
 		.style("opacity", 0.5);
 
+		vis.lineRef2 = vis.svg.append("line")
+			.style("opacity", 0.5);
+
 	// Tooltip
 	vis.tip = d3.tip()
 		.attr("class","d3-tip")
@@ -142,8 +145,12 @@ TimeSeriesChart.prototype.wrangleData = function(){
 
 	//DRI does not exist for all ages.
 	if (vis.age_group != "2 and over") {
-		vis.DRI = vis.dataDRImin.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
-	} else { vis.DRI = 0; }
+		vis.DRImin = vis.dataDRImin.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
+		vis.DRImax = vis.dataDRImax.filter(function(d){ return d.Gender=="All" && d.Age==vis.age_group;})[0][vis.nutrient_type];
+	} else {
+		vis.DRImin = 0;
+		vis.DRImax = 0;
+	}
 
 	// Get range for y axis for this nutrient type. Then don't change within age groups.
 	vis.yMin = Math.min(
@@ -158,9 +165,12 @@ TimeSeriesChart.prototype.wrangleData = function(){
 	);
 
 	// Buffer top/bottom of y range
-	var buffer = vis.yMax/20;
+	var buffer = vis.yMax/10;
+	console.log ("NUTRIENT TYPE = " + vis.nutrient_type);
+	console.log ("THIS IS y MIN/MAX:" + this.yMin + " - " + this.yMax);
 	vis.yMax += buffer;
 	vis.yMin -= buffer;
+	console.log ("THIS IS y MIN/MAX:" + this.yMin + " - " + this.yMax);
 }
 
 // Update visualization
@@ -191,15 +201,25 @@ TimeSeriesChart.prototype.updateVis = function(){
 		.transition().duration(300)
 		.attr("d",vis.line);
 	// Draw/update DRI line
-	if (vis.DRI != 0 && vis.DRI != null) {
+	if (vis.DRImin != 0 && vis.DRImin != null) {
 		vis.lineRef.transition().duration(trans)
 			.style("stroke", "#666")
 			.style("stroke-width", 2)
 			.style("stroke-dasharray", "3,3")
 			.attr("x1", 0)
-	    .attr("y1", function(){ return vis.y(vis.DRI);})
+	    .attr("y1", function(){ return vis.y(vis.DRImin);})
 	    .attr("x2", vis.width)
-	    .attr("y2", function(){ return vis.y(vis.DRI);});
+	    .attr("y2", function(){ return vis.y(vis.DRImin);});
+	}
+	if (vis.DRImax != 0 && vis.DRImax != null) {
+		vis.lineRef2.transition().duration(trans)
+			.style("stroke", "#666")
+			.style("stroke-width", 2)
+			.style("stroke-dasharray", "3,3")
+			.attr("x1", 0)
+	    .attr("y1", function(){ return vis.y(vis.DRImax);})
+	    .attr("x2", vis.width)
+	    .attr("y2", function(){ return vis.y(vis.DRImax);});
 	}
 
 	// Draw circles

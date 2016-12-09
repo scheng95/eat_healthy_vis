@@ -268,22 +268,23 @@ function wrangleMenuData() {
 
     const indNuts = [
         "Fiber (g)",
-        "Sugar (g)",
         "Sodium (mg/d)"
     ];
     const depNuts = [
         "Fat (g)",
         "Carbohydrate (g)",
-        "Protein (g)"
+        "Protein (g)",
+        "Sugar (g)"
     ];
     // calculate macro limits based on recommended calorie consumption
     const depNutsFactor = {
         "Fat (g)": 0.25 / 9,
         "Carbohydrate (g)": 0.45 / 4,
-        "Protein (g)": 0.3 / 4
+        "Protein (g)": 0.3 / 4,
+        "Sugar (g)": 0.20 / 4 // PERCENTAGE HERE IS TOTALLY ARBITRARY. SHOULD BE ADJUSTABLE
     };
 
-    d3.csv("data_raw/dri_all.csv", function(error, driData) {
+    d3.csv("data_raw/dri_detail.csv", function(error, driData) {
         const recs = driData.filter(function(d) { return d["Gender"] === gender && d["Age"] == age; })[0];
         indNuts.forEach(function(d) {
             displayData.push({
@@ -524,4 +525,3 @@ function updateNutritionVis(data) {
         .text("Calories");
 
 }
-

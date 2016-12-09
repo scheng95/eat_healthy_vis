@@ -93,7 +93,7 @@ function loadData() {
 
 function createVis() {
 		//FAFH_chart = new StackedAreaChart("areachart_FAFH", data_FAFH);
-		timeSeriesChart = new TimeSeriesChart("timeSeriesChart_WWEIA", data0.Income, data0.Gender, data0.DRImin, data0.DRImax);
+    timeSeriesChart = new TimeSeriesChart("timeSeriesChart_WWEIA", data0.Income, data0.Gender, data0.DRImin, data0.DRImax);
 		updateVis();
 }
 
