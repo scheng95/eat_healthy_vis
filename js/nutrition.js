@@ -363,9 +363,34 @@ function updateNutritionVis(data) {
 
     console.log(data);
 
-    let color = d3.scale.ordinal()
-        .domain([0, 5])
-        .range(colorbrewer.Set2[6]);
+    // let color = d3.scale.ordinal()
+    //     .domain([0, 5])
+    //     .range(colorbrewer.Set2[6]);
+
+    const goodColor = "rgb(147, 229, 221)";
+    const medColor = "rgb(255, 240, 156)";
+    const badColor = "rgb(224, 86, 16)";
+    // TODO don't hard code so much
+    let color = function(d) {
+        const ratio = d.data.tot / d.data.limit;
+        let fillColor;
+        if (d.data.name in {"Fat (g)":0, "Carbohydrate (g)":0, "Protein (g)":0}) {
+            if (ratio < 0.9) { fillColor = medColor; }
+            else if (0.9 <= ratio && ratio < 1.1) { fillColor = goodColor; }
+            else { fillColor = badColor; }
+        } else if (d.data.name == "Fiber (g)") {
+            if (ratio < 0.8) { fillColor = badColor; }
+            else { fillColor = goodColor; }
+        } else if (d.data.name == "Sugar (g)") {
+            if (ratio < 1.0) { fillColor = medColor; }
+            else { fillColor = badColor; }
+        } else { // sodium
+            if (ratio < 0.8) { fillColor = badColor; }
+            else if (0.8 <= ratio && ratio < 1.2) { fillColor = goodColor; }
+            else { fillColor = badColor; }
+        }
+        return fillColor;
+    };
 
     // TODO should this be here?
     let radScale = (r, rmax) => Math.max(Math.sqrt(maxRad*maxRad * (r / rmax)), 0.00001);
@@ -394,25 +419,37 @@ function updateNutritionVis(data) {
         .attr("class", "background-arc")
         .attr("d", d => arc.outerRadius(maxRad)(d));
 
-    // TODO only need to append defs once
+    // TODO only need to append defs once, put it in init
     // definitions for gradient fill
-    let pieGrads = svgPie.append("defs").selectAll("radialGradient").data(pie(displayData))
-        .enter().append("radialGradient")
+    if ($("#pie-grad-def").length <= 0) {
+        svgPie.append("defs").attr("id", "pie-grad-def");
+    }
+    let pieGrad = svgPie.select("defs#pie-grad-def");
+    let pieGrads = pieGrad.selectAll("radialGradient").data(pie(displayData));
+    let pieGradsEnter = pieGrads.enter().append("radialGradient")
         .attr("gradientUnits", "userSpaceOnUse")
         .attr("cx", 0)
         .attr("cy", 0)
         .attr("r", "100%")
-        .attr("id", function(d, i) { return "grad" + i; });
-    pieGrads.append("stop").attr("offset", "22%").style("stop-color", function(d, i) { return color(i); });
-    pieGrads.append("stop").attr("offset", "28%").style("stop-color", "white");
+        .attr("id", (d, i) => "grad" + i);
+    pieGradsEnter.append("stop")
+        .attr("class", "pie-grad-start-color")
+        .attr("offset", "22%");
+    pieGradsEnter.append("stop").attr("offset", "28%").style("stop-color", "white");
+    // update gradient color start
+    pieGrads.select(".pie-grad-start-color")
+        .style("stop-color", function(d, i) {
+            console.log("gradient " + i);
+            return color(d);
+        });
 
     // draw new slice
     g.append("path")
-        .attr("class", "foreground-arc")
-        // .style("fill", function(d, i) { return color(i); });
-        .style("fill", (d, i) => "url(#grad" + i + ")");
+        .attr("class", "foreground-arc");
     // update
     groups.select(".foreground-arc")
+        // .attr("fill", d => color(d))
+        .style("fill", (d, i) => "url(#grad" + i + ")")
         .transition()
         .duration(1000)
         .attr("d", d => arc.outerRadius(radScale(d.data.tot, d.data.limit))(d));
