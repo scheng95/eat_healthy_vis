@@ -295,17 +295,26 @@ button:hover, button>a:hover {
 }
 */
 
+.foreground-arc,
+.overlay-arc,
+.outline-arc,
+.pie-label,
+.foreground-bar,
+.overlay-bar,
+.outline-rect,
+.calorie-label {
+    pointer-events: none;
+}
+
+.background-arc:hover,
+.background-bar:hover {
+    opacity: 0.7;
+}
+
 
 /*!*********************!*/
 /*!*  TOOLTIP OVERLAY  *!*/
 /*!*********************!*/
-
-/*.background-arc,*/
-/*.overlay-arc,*/
-/*.outline-arc,*/
-/*.pie-label {*/
-    /*pointer-events: none;*/
-/*}*/
 
 /*.tooltip-title {*/
     /*display: block;*/

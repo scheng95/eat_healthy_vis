@@ -16,9 +16,8 @@ MealPlanner.prototype.initVis = function() {
     // .style("background-color", "cyan");
 
     vis.svgPie = vis.svg.append("g")
-    // center the pie
         .attr("class", "pie-group")
-        .attr("transform", "translate(" + (vis.margin.left + vis.width/2) + "," + (vis.margin.top + vis.height/2) + ")");
+        .attr("transform", "translate(" + (vis.margin.left + vis.width / 2 - 100) + "," + (vis.margin.top + vis.height/2) + ")");
 
     vis.svgBar = vis.svg.append("g")
     // center the pie
@@ -84,12 +83,14 @@ MealPlanner.prototype.initVis = function() {
     vis.pieGrad = vis.svgPie.append("defs").attr("id", "pie-grad-def");
 
     vis.barScale = d3.scale.linear()
-        .range([0, vis.width * 0.6]);
+        .range([0, vis.width * 0.75]);
 
     vis.barHeight = 30;
     vis.barColor = "rgb(45, 142, 149)";
 
     vis.barGrad = vis.svgBar.append("defs");
+
+    vis.selectedNutrient = "Calories";
 
     // load data for recommended calories
     vis.driCalories = {
@@ -333,7 +334,7 @@ MealPlanner.prototype.wrangleMenuData = function() {
         "CHOCDF": "Carbohydrate (g)",
         "FIBTG": "Fiber (g)"
     };
-    let itemNutrients = {};
+    let itemNutrients = [];
     let totIntake = {
         "Calories": 0,
         "Fat (g)": 0,
@@ -350,20 +351,24 @@ MealPlanner.prototype.wrangleMenuData = function() {
             const totNuts = recipe.totalNutrients;
             // TODO only assuming one serving here
             const servings = recipe.yield;
-            let itemNut = {};
+            let itemNut = {
+                "name": vis.selectRecipes[key].label,
+                "key": key,
+                "values": []
+            };
             for (let code in nutrientCodes) {
                 if (totNuts.hasOwnProperty(code)) {
                     const perServNutrient = totNuts[code]["quantity"] / servings;
                     totIntake[nutrientCodes[code]] += perServNutrient;
-                    itemNut[nutrientCodes[code]] = perServNutrient;
+                    itemNut.values.push({"x": nutrientCodes[code], "y": perServNutrient});
                     if (vis.detailIndex.has(parseInt(key))) {
                         selectIntake[nutrientCodes[code]] += perServNutrient;
                     }
                 } else {
-                    itemNut[nutrientCodes[code]] = 0;
+                    itemNut.values.push({"x": nutrientCodes[code], "y": 0});
                 }
             }
-            itemNutrients[key] = itemNut;
+            itemNutrients.push(itemNut);
         }
     }
 
@@ -420,13 +425,16 @@ MealPlanner.prototype.wrangleMenuData = function() {
                 "rec": recCal,
                 "sub": subCal
             }],
-            "nutData": displayData
+            "nutData": displayData,
+            "itemData": itemNutrients
         });
     });
 };
 
 MealPlanner.prototype.updateVis = function(data) {
     let vis = this;
+
+    console.log(data);
 
     const calData = data.calData;
     const displayData = data.nutData;
@@ -441,8 +449,10 @@ MealPlanner.prototype.updateVis = function(data) {
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
-        .attr("d", d => vis.arc.outerRadius(vis.maxRad)(d));
+        .attr("d", d => vis.arc.outerRadius(vis.maxRad)(d))
+        .on("click", d => mealPlanner.selectNut(d.data.name));
 
+    // TODO need this for overlay slices as well
     let pieGrads = vis.pieGrad.selectAll("radialGradient").data(vis.pie(displayData));
     let pieGradsEnter = pieGrads.enter().append("radialGradient")
         .attr("gradientUnits", "userSpaceOnUse")
@@ -502,15 +512,20 @@ MealPlanner.prototype.updateVis = function(data) {
     let bargroup = bars.enter().append("g")
         .attr("class", "bars");
 
+    // vis.barX = d => (vis.width - vis.barScale(d.rec)) / 2;
+    vis.barX = d => (vis.width - vis.barScale(d.rec)) / 2;
+    vis.barY = vis.margin.top/2 - vis.barHeight/2;
+
     // background, only draw once
     bargroup.append("rect")
         .attr("class", "background-bar")
         // TODO refactor these x, y
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2)
-        .attr("y", vis.margin.top/2 - vis.barHeight/2)
+        .attr("x", vis.barX)
+        .attr("y", vis.barY)
         .attr("width", d => vis.barScale(d.rec))
         .attr("height", vis.barHeight)
-        .attr("fill", "Lightgray");
+        .attr("fill", "Lightgray")
+        .on("click", d => mealPlanner.selectNut("Calories"));
 
     let barGrads = vis.barGrad.selectAll("linearGradient").data(calData)
         .enter().append("linearGradient")
@@ -521,14 +536,14 @@ MealPlanner.prototype.updateVis = function(data) {
         .attr("x2", "100%")
         .attr("y2", "0%")
         .attr("spreadMethod", "pad");
-    barGrads.append("stop").attr("offset", "80%").style("stop-color", vis.barColor);
-    barGrads.append("stop").attr("offset", "85%").style("stop-color", "White");
+    barGrads.append("stop").attr("offset", "87%").style("stop-color", vis.barColor);
+    barGrads.append("stop").attr("offset", "94%").style("stop-color", "White");
 
     // foreground
     bargroup.append("rect")
         .attr("class", "foreground-bar")
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2)
-        .attr("y", vis.margin.top/2 - vis.barHeight/2)
+        .attr("x", vis.barX)
+        .attr("y", vis.barY)
         .attr("height", vis.barHeight)
         .attr("fill", "url(#bar-gradient)");
     // update
@@ -540,8 +555,8 @@ MealPlanner.prototype.updateVis = function(data) {
     // draw overlay
     bargroup.append("rect")
         .attr("class", "overlay-bar")
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2)
-        .attr("y", vis.margin.top/2 - vis.barHeight/2)
+        .attr("x", vis.barX)
+        .attr("y", vis.barY)
         .attr("height", vis.barHeight);
     // update
     bars.select(".overlay-bar")
@@ -552,8 +567,8 @@ MealPlanner.prototype.updateVis = function(data) {
     // draw boundaries
     bargroup.append("rect")
         .attr("class", "outline-rect")
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2)
-        .attr("y", vis.margin.top/2 - vis.barHeight/2)
+        .attr("x", vis.barX)
+        .attr("y", vis.barY)
         .attr("width", d => vis.barScale(d.rec))
         .attr("height", vis.barHeight)
         .attr("fill-opacity", 0)
@@ -564,15 +579,81 @@ MealPlanner.prototype.updateVis = function(data) {
     // labels, only draw once
     bargroup.append("text")
         .attr("class", "calorie-label calorie-label-static")
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2 + 5)
+        .attr("x", d => vis.barX(d) + 5)
         .attr("y", vis.margin.top/2)
         .attr("dy", "-0.2em")
         .text("Calories");
     bargroup.append("text")
         .attr("class", "calorie-label calorie-label-dynamic")
-        .attr("x", d => (vis.width - vis.barScale(d.rec)) / 2 + 5)
+        .attr("x", d => vis.barX(d) + 5)
         .attr("y", vis.margin.top/2)
         .attr("dy", "1.0em");
     bars.select(".calorie-label-dynamic")
         .text(d => `${Math.round(d.tot)}/${Math.round(d.rec)}`);
+
+    /////////// extra vis
+    let stack = d3.layout.stack()
+        .offset("zero")
+        .values(d => d.values);
+
+    // console.log(data.itemData);
+    // console.log(stack(data.itemData));
+
+    let stacked = stack(data.itemData);
+    let reshapeStack = {
+        "Calories": [],
+        "Fat (g)": [],
+        "Sodium (mg/d)": [],
+        "Protein (g)": [],
+        "Sugar (g)": [],
+        "Carbohydrate (g)": [],
+        "Fiber (g)": []
+    };
+    stacked.forEach(function(d) {
+        d.values.forEach(function(v) {
+            reshapeStack[v.x].push({
+                "key": d.key,
+                "name": d.name,
+                "y": v.y,
+                "y0": v.y0
+            });
+        });
+    });
+
+    // console.log(reshapeStack[vis.selectedNutrient]);
+
+    vis.stackY0 = vis.margin.top + vis.height/2 - vis.maxRad;
+
+    vis.stackScale = d3.scale.linear()
+        .domain([0, reshapeStack[vis.selectedNutrient].reduce((a, b) => a + b.y, 0)])
+        .range([0, vis.maxRad*2]);
+
+    vis.stackColor = d3.scale.category20()
+        .domain(reshapeStack[vis.selectedNutrient].map(e => e.key));
+
+    let detailBar = vis.svgBar.selectAll(".stack")
+        .data(reshapeStack[vis.selectedNutrient]);
+    let detailBarEnter = detailBar.enter().append("rect")
+        .attr("class", "stack")
+        .attr("x", 570)
+        .attr("width", 50);
+    detailBar.exit()
+        // TODO can't get transition to work properly
+        // .transition().duration(1000)
+        .remove();
+    // TODO color and size
+    vis.svgBar.selectAll(".stack")
+        .transition().duration(1000)
+        .attr("y", d => vis.stackY0 + vis.stackScale(d.y0))
+        .attr("height", d => vis.stackScale(d.y))
+        .attr("fill", d => vis.stackColor(d.key));
+
+};
+
+MealPlanner.prototype.selectNut = function(name) {
+    let vis = this;
+
+    vis.selectedNutrient = name;
+
+    vis.wrangleMenuData();
 };
