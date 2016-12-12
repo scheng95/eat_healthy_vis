@@ -36,6 +36,7 @@
         <p>Get to know your food better. Studies have shown that eating at home has higher nutrition density than eating out at restaurants. Figure out what to make with our nutritional analysis tool.</p>
       </div>
     </div>
+      <div id="basic-vis"></div>
   </div>
   <div class="container-fluid B" id="B">
     <div class="row">
@@ -211,7 +212,7 @@
                                 <h4 class="inline">Daily Menu</h4>
                             </div>
                             <div class="panel-group" id="accordion-menu"></div>
-                            <a class="btn-vis pull-right" id="vis-button" style="display: none;"><button class="btn btn-primary btn-sm" onclick="flipVis()">Visualize</button></a>
+                            <a class="btn-vis pull-right" id="vis-button" style="display: none;"><button class="btn btn-primary btn-sm" onclick="mealPlanner.flipVis()">Visualize</button></a>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group">
@@ -226,7 +227,7 @@
                         <div class="col-md-3">
                             <div>
                                 <h4 class="inline">Daily Menu</h4>
-                                <a class="btn-vis pull-right"><button class="btn btn-primary btn-sm" onclick="flipVis()">Add more items</button></a>
+                                <a class="btn-vis pull-right"><button class="btn btn-primary btn-sm" onclick="mealPlanner.flipVis()">Add more items</button></a>
                             </div>
                             <div class="panel-group" id="static-menu"></div>
                         </div>
