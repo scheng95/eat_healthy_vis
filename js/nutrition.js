@@ -13,7 +13,6 @@ MealPlanner.prototype.initVis = function() {
     vis.svg = d3.select("#menu-vis").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
-    // .style("background-color", "cyan");
 
     vis.pieCenterY = vis.margin.top + vis.height/2 - 30;
 
@@ -41,30 +40,57 @@ MealPlanner.prototype.initVis = function() {
     //     .range(colorbrewer.Set2[6]);
 
     // color scale for good/bad in pie
-    const goodColor = "rgb(147, 229, 221)";
-    const medColor = "rgb(255, 240, 156)";
-    const badColor = "rgb(224, 86, 16)";
+    vis.goodColor = "rgb(147, 229, 221)";
+    vis.medColor = "rgb(255, 240, 156)";
+    vis.badColor = "rgb(224, 86, 16)";
     // TODO don't hard code so much
     vis.color = function(d) {
         const ratio = d.data.tot / d.data.limit;
         let fillColor;
         if (d.data.name in {"Fat (g)":0, "Carbohydrate (g)":0, "Protein (g)":0}) {
-            if (ratio < 0.9) { fillColor = medColor; }
-            else if (0.9 <= ratio && ratio < 1.1) { fillColor = goodColor; }
-            else { fillColor = badColor; }
+            if (ratio < 0.9) { fillColor = vis.medColor; }
+            else if (0.9 <= ratio && ratio < 1.1) { fillColor = vis.goodColor; }
+            else { fillColor = vis.badColor; }
         } else if (d.data.name == "Fiber (g)") {
-            if (ratio < 0.8) { fillColor = badColor; }
-            else { fillColor = goodColor; }
+            if (ratio < 0.8) { fillColor = vis.badColor; }
+            else { fillColor = vis.goodColor; }
         } else if (d.data.name == "Sugar (g)") {
-            if (ratio < 1.0) { fillColor = medColor; }
-            else { fillColor = badColor; }
+            if (ratio < 1.0) { fillColor = vis.medColor; }
+            else { fillColor = vis.badColor; }
         } else { // sodium
-            if (ratio < 0.8) { fillColor = badColor; }
-            else if (0.8 <= ratio && ratio < 1.2) { fillColor = goodColor; }
-            else { fillColor = badColor; }
+            if (ratio < 0.8) { fillColor = vis.badColor; }
+            else if (0.8 <= ratio && ratio < 1.2) { fillColor = vis.goodColor; }
+            else { fillColor = vis.badColor; }
         }
         return fillColor;
     };
+
+    // draw legend
+    const legendWidth = 20;
+    let pieLegend = vis.svgPie.append("g")
+        .attr("class", "pie-legend")
+        .attr("transform", "translate(-" + (vis.maxRad - 25) + ", 200)");
+    const colors = ["goodColor", "medColor", "badColor"];
+    const colorText = {
+        "goodColor": "Good",
+        "medColor": "Okay",
+        "badColor": "Bad"
+    };
+    for (let i = 0; i < colors.length; i++) {
+        let g = pieLegend.append("g")
+            .attr("transform", "translate(" + i*100 + ",0)");
+        g.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", legendWidth)
+            .attr("height", legendWidth)
+            .attr("fill", vis[colors[i]]);
+        g.append("text")
+            .attr("class", "legend-label")
+            .attr("x", legendWidth + 5)
+            .attr("y", legendWidth / 2)
+            .text(colorText[colors[i]]);
+    }
 
     vis.radScale = (r, rmax) => Math.max(Math.sqrt(vis.maxRad*vis.maxRad * (r / rmax)), 0.00001);
 
@@ -82,6 +108,14 @@ MealPlanner.prototype.initVis = function() {
 
     // definitions for gradient fill
     vis.pieGrad = vis.svgPie.append("defs").attr("id", "pie-grad-def");
+
+    // clip path of circle
+    vis.svgPie.append("clipPath")
+        .attr("id", "pie-clip")
+        .append("circle")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", vis.maxRad + 39);
 
     vis.barScale = d3.scale.linear()
         .range([0, vis.width * 0.75]);
@@ -501,7 +535,8 @@ MealPlanner.prototype.updateVis = function(data) {
 
     // draw new slice
     g.append("path")
-        .attr("class", "foreground-arc");
+        .attr("class", "foreground-arc")
+        .attr("clip-path", "url(#pie-clip)");
     // update
     groups.select(".foreground-arc")
         // .attr("fill", d => color(d))
@@ -512,7 +547,8 @@ MealPlanner.prototype.updateVis = function(data) {
 
     // draw selected slices
     g.append("path")
-        .attr("class", "overlay-arc");
+        .attr("class", "overlay-arc")
+        .attr("clip-path", "url(#pie-clip)");
     groups.select(".overlay-arc")
         .transition().duration(1000)
         .attr("d", d => vis.arc.outerRadius(vis.radScale(d.data.subset, d.data.limit))(d));

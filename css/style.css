@@ -160,9 +160,9 @@
     text-anchor: middle;
 }
 
+.legend-label,
 .stack-label {
     alignment-baseline: middle;
-    text-overflow: ellipsis;
 }
 
 #stack-title {
