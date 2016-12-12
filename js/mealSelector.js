@@ -55,3 +55,53 @@ $(function() {
         }
     });
 });
+
+// nutrition primer pie
+$(function() {
+    let dummyData = [
+        {"name": "Fat (g)", "val": 1},
+        {"name": "Sodium (mg/d)", "val": 1},
+        {"name": "Protein (g)", "val": 1},
+        {"name": "Sugar (g)", "val": 1},
+        {"name": "Carbohydrate (g)", "val": 1},
+        {"name": "Fiber (g)", "val": 1}
+    ];
+
+    // TODO add margin
+    let width = 300;
+    let height = 300;
+    let radius = width / 2;
+
+    let svg = d3.select("#basic-vis").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    let pie = d3.layout.pie()
+        .sort(null)
+        .value(d => d.val);
+
+    let arc = d3.svg.arc()
+        .innerRadius(0)
+        .outerRadius(radius);
+
+    let labelArc = d3.svg.arc()
+        .outerRadius(radius - 40)
+        .innerRadius(radius - 40);
+
+    svg.selectAll(".arc")
+        .data(pie(dummyData))
+        .enter().append("path")
+        .attr("class", "arc")
+        .attr("d", arc)
+        .attr("fill", "Lightgrey");
+    svg.selectAll(".pie-label")
+        .data(pie(dummyData))
+        .enter().append("text")
+        .attr("class", "pie-label")
+        .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+        .text(d => d.data.name)
+        .attr("fill", "black");
+
+});
