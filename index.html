@@ -38,31 +38,72 @@
     </div>
       <div id="basic-vis"></div>
   </div>
-  <div class="container-fluid B text-center"   id="B">
+  <div class="container-fluid B" id="B">
     <div class="row">
-      <h2>What is Healthy?</h2>
-      <br>
-      <p>Over the years, nutrition experts have stayed consistent on two recommendations:</p>
-      <br>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h3>Calories In = Calories Out</h3>
-        <p>If you consume more energy than you spend, you'll gain weight. Maintain a balance to maintain a healthy weight.</p>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <h3>Not All Calories are Equal</h3>
-        <p>You need enough of the good nutrients (vitamins, minerals, etc) and not too much of the bad (sugar, fats, cholesterol, sodium)</p>
+      <div class="col-xs-12">
+        <h2>How healthy are Americans?</h2>
       </div>
     </div>
-  </div>
-  <div class="container-fluid C">
-    <div class="row" id="WWEIA_dropdowns">
-      <h2>How healthy are Americans?</h2>
-      <br>
-      <p class="text-center">In general, people overconsume in calories, sugar, and sodium, and don't get enough fiber.</p>
-      <br><br>
-      <div class="col-xs-1 col-sm-2 col-md-3"></div>
+    <div class="row selectSection">
+      <div class="row centered"> View dietary patterns by: </div>
+      <div class="col-xs-12 col-sm-9">
+        <div class="filterType">Nutrient type</div>
+        <div class="btn-group" role="group">
+          <a href="#B" class="btn btn-secondary wide active" id="Calories">Calories</a>
+          <a href="#B" class="btn btn-secondary wide" id="Protein">Protein</a>
+          <a href="#B" class="btn btn-secondary wide" id="Carbohydrate">Carbohydrate</a>
+          <a href="#B" class="btn btn-secondary wide" id="Fat">Fat</a>
+          <a href="#B" class="btn btn-secondary wide" id="Saturated_Fat">Saturated Fat</a>
+          <a href="#B" class="btn btn-secondary wide" id="Cholesterol">Cholesterol</a>
+          <a href="#B" class="btn btn-secondary wide" id="Sugar">Sugar</a>
+          <a href="#B" class="btn btn-secondary wide" id="Sodium">Sodium</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Fiber">Fiber</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_A">Vitamin A</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_C">Vitamin C</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_E">Vitamin E</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Calcium">Calcium</a>
+          <a href="#B" class="btn btn-secondary narrow" id="Iron">Iron</a>
+        </div>
+      </div>
+      <!-- <div class="col-xs-12 col-sm-8">
+        <a href="#B" class="btn btn-secondary wide active" id="Calories">Calories</a>
+        <a href="#B" class="btn btn-secondary wide" id="Protein">Protein</a>
+        <a href="#B" class="btn btn-secondary wide" id="Carbohydrate">Carbohydrate</a>
+        <a href="#B" class="btn btn-secondary wide" id="Fat">Fat</a>
+
+        <a href="#B" class="btn btn-secondary wide" id="Saturated_Fat">Saturated Fat</a>
+        <a href="#B" class="btn btn-secondary wide" id="Cholesterol">Cholesterol</a>
+        <a href="#B" class="btn btn-secondary wide" id="Sugar">Sugar</a>
+        <a href="#B" class="btn btn-secondary wide" id="Sodium">Sodium</a>
+
+        <a href="#B" class="btn btn-secondary narrow" id="Fiber">Fiber</a>
+        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_A">Vitamin A</a>
+        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_C">Vitamin C</a>
+        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_E">Vitamin E</a>
+        <a href="#B" class="btn btn-secondary narrow" id="Calcium">Calcium</a>
+        <a href="#B" class="btn btn-secondary narrow" id="Iron">Iron</a>
+      </div> -->
+      <div class="col-xs-12 col-sm-3 float-right">
+        <div class="filterType">Age group</div>
+        <div class="btn-group" role="group">
+          <a href="#B" class="btn btn-secondary wide" id="2-5">2 - 5</a>
+          <a href="#B" class="btn btn-secondary wide" id="6-11">6 - 11</a>
+          <a href="#B" class="btn btn-secondary wide" id="12-19">12 - 19</a>
+          <a href="#B" class="btn btn-secondary wide active" id="20andover">20 and over</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <p class="text-center"> In general, people overconsume in
+        <a href="#B" id="Sugar">Sugar</a>,
+        <a href="#B" id="Sodium">Sodium</a>, and
+        <a href="#B" id="Saturated_Fat">Saturated Fat</a>, while not getting enough
+        <a href="#B" id="Fiber">Fiber</a>
+      </p>
+      <br><br> -->
+
+
+      <!--
         <div class="col-xs-10 col-sm-8 col-md-6">
           <form class="form-inline float-left">
             <div class="form-group">
@@ -94,21 +135,22 @@
                 <option value="2-5">2 - 5</option>
                 <option value="6-11">6 - 11</option>
                 <option value="12-19">12 - 19</option>
-                <option value="2 and over">All</option>
+
               </select>
             </div>
           </form>
-        </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6" id="timeSeriesChart_WWEIA"></div>
-      <div class="col-xs-12 col-sm-6">
-        <div class="row">
-          <div class="col-xs-12" id="WWEIA_Income"></div>
-          <div class="col-xs-12" id="WWEIA_Gender"></div>
+        </div> -->
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6" id="timeSeriesChart_WWEIA"></div>
+        <div class="col-xs-12 col-sm-6" id="barCharts_WWEIA">
+          <div class="row">
+            <div class="col-xs-12" id="WWEIA_Income"></div>
+            <div class="col-xs-12" id="WWEIA_Gender"></div>
+            <div class="col-xs-12" id="nutrient_disclaimer"></div>
+          </div>
         </div>
       </div>
-    </div>
   </div>
   <div class="container-fluid D text-center ">
     <div class="row"><h2>Why does a healthy diet matter and what can you do?</h2></div>
@@ -197,6 +239,24 @@
             </div>
         </div>
 
+      </div>
+    </div>
+    <div class="container-fluid E text-center">
+      <div class="row">
+        <h2>What is Healthy?</h2>
+        <br>
+        <p>Over the years, nutrition experts have stayed consistent on two recommendations:</p>
+        <br>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h3>Calories In = Calories Out</h3>
+          <p>If you consume more energy than you spend, you'll gain weight. Maintain a balance to maintain a healthy weight.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <h3>Not All Calories are Equal</h3>
+          <p>You need enough of the good nutrients (vitamins, minerals, etc) and not too much of the bad (sugar, fats, cholesterol, sodium)</p>
+        </div>
       </div>
     </div>
     <div class="container-fluid footer text-center">

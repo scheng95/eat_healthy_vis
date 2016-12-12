@@ -1,8 +1,10 @@
+var nutrient_type;
 var parseDate = d3.time.format("%Y").parse; // Date parser to convert strings to date objects
 var nutrients = ["Calories (kcal)","Protein (g)","Carbohydrate (g)","Sugar (g)","Fiber (g)","Fat (g)","Saturated Fat (g)","Monounsaturated Fat (g)","Polyunsaturated Fat (g)","Cholesterol (mg)","Vitamin E (mg)","Vitamin A (mg)","Vitamin C (mg)","Calcium (mg)","Magnesium (mg)","Iron (mg)","Sodium (mg)","Potassium (mg)","Folate (mcg)","Caffeine (mg)","Alcohol (g)"]
 var years = ["2001","2003","2005","2007","2009","2011","2013"];
 var data0;
 var FAFH_chart, timeSeriesChart, incomeChart, genderChart, timeline; // Visualization instances
+var nutrient_labels;
 var colorFAFH = "#f66"; var colorFAH = "#6f6";
 var colorLightest = "#3DC3CC";
 var colorLight = "#00BFCC";
@@ -14,6 +16,65 @@ var trans = 400;
 // Start app by loading  data
 loadData();
 
+window.onload = function() {
+
+  var Calories = $("#Calories");
+  var Protein = $("#Protein");
+  var Carbohydrate = $("#Carbohydrate");
+  var Sugar = $("#Sugar");
+  var Fat = $("#Fat");
+  var Saturated_Fat = $("#Saturated_Fat");
+  var Cholesterol = $("#Cholesterol");
+  var Fiber = $("#Fiber");
+  var Sodium = $("#Sodium");
+  var Vitamin_A = $("#Vitamin_A");
+  var Vitamin_C = $("#Vitamin_C");
+  var Vitamin_E = $("#Vitamin_E");
+  var Calcium = $("#Calcium");
+  var Iron = $("#Iron");
+
+  var child1 = $("#2-5");
+  var child2 = $("#6-11");
+  var child3 = $("#12-19");
+  var adult = $("#20andover");
+
+  var nutrient_triggers = [Calories, Protein, Carbohydrate, Sugar, Fat,
+  Saturated_Fat, Cholesterol, Fiber, Sodium, Cholesterol,
+  Vitamin_A, Vitamin_C, Vitamin_E, Calcium, Iron];
+  var age_triggers = [child1, child2, child3, adult];
+
+  nutrient_triggers.forEach(function(nutrient_trigger) {
+    nutrient_trigger.click(function() {
+      var nutrient_type = nutrient_trigger.text();
+      if (timeSeriesChart != null) {
+        timeSeriesChart.nutrient_type = nutrient_type;
+        timeSeriesChart.updateVis();
+      }
+      return false;
+    });
+  })
+
+  age_triggers.forEach(function(age_trigger) {
+    age_trigger.click(function() {
+      console.log(age_trigger);
+      var age_group = age_trigger.text();
+      if (age_group=="2 - 5") { age_group = "2-5";}
+      if (age_group=="6 - 11") { age_group = "6-11";}
+      if (age_group=="12 - 19") { age_group = "12-19";}
+      if (timeSeriesChart != null) {
+        timeSeriesChart.age_group = age_group;
+        timeSeriesChart.updateVis();
+      }
+      return false;
+    });
+  })
+
+  $(".btn-group > a").click(function(){
+    $(this).addClass("active");
+    $(this).siblings().removeClass("active");
+    $(this).parent().parent().siblings().children().children().not(this).removeClass("active");
+  });
+}
 // Scroll to div\
 $("#buttonToB").click(function() {
     $('html,body').animate({
@@ -21,27 +82,14 @@ $("#buttonToB").click(function() {
 });
 
 function loadData() {
-	/* FAFH
-	d3.csv("data/food_expenditures_1929-2014.csv", function(error, dataIncome){
-		if(!error){
-			data_FAFH = dataIncome.map(function(d){
-				return {
-					Year: parseDate(d.Year),
-					values: {
-            FAFH: +d.FAFH, FAH: +d.FAH
-        	}
-				};
-			});
-			createVis();
-		}
-	});
-	*/
+
 	d3.queue()
 		.defer(d3.csv, "data/Income.csv")
 		.defer(d3.csv, "data/Gender.csv")
 		.defer(d3.csv, "data/DRI_min.csv")
 		.defer(d3.csv, "data/DRI_max.csv")
-		.await(function(error, _dataIncome, _dataGender, _dataDRImin, _dataDRImax) {
+    .defer(d3.csv, "data/DRI_labels.csv")
+		.await(function(error, _dataIncome, _dataGender, _dataDRImin, _dataDRImax, _dataDRIlabels) {
 	    if (error) { console.error('Something went wrong: ' + error); }
 	    else {
 				var dataTypes = ["Income","Gender","DRImin","DRImax"];
@@ -67,6 +115,14 @@ function loadData() {
 					});
 				});
 
+        nutrient_labels = _dataDRIlabels.map (function(d) {
+          return {
+            nutrient_type: d["Nutrient Type"],
+            nutrient: d["Nutrient"],
+            unit: d["Unit"],
+            disclaimer: d["Disclaimer"]
+          };
+        })
 				createVis();
 
 				/* FAH and FAFH areachart data

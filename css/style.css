@@ -216,7 +216,7 @@ h1,h2,h3 {
   text-align: center;
 }
 
-.container-fluid.B {
+/*.container-fluid.B {
   background:
   linear-gradient(
     rgba(255, 255, 255, 0.85),
@@ -225,7 +225,7 @@ h1,h2,h3 {
   url('../img/fruits-veg.jpg') no-repeat center center;
   min-width: 100%;
   background-size:cover;
-}
+}*/
 .container-fluid.D {
   background:
   linear-gradient(
@@ -311,7 +311,9 @@ button:hover, button>a:hover {
 #WWEIA_dropdowns {
   margin-bottom: 30px;
 }
-/* TEMP HACKY STYLING */
+
+
+
 /* Responsive SVG
 .svg-container {
     display: inline-block;
@@ -351,36 +353,126 @@ button:hover, button>a:hover {
 /*!*  TOOLTIP OVERLAY  *!*/
 /*!*********************!*/
 
-/*.tooltip-title {*/
-    /*display: block;*/
-    /*margin-bottom: 5px;*/
-    /*font-weight: 600;*/
-/*}*/
 
-/*.d3-tip {*/
-    /*line-height: 1;*/
-    /*padding: 12px;*/
-    /*background: rgba(0, 0, 0, 0.8);*/
-    /*color: #fff;*/
-    /*border-radius: 2px;*/
-/*}*/
+.background-arc,
+.overlay-arc,
+.outline-arc,
+.pie-label {
+    pointer-events: none;
+}
 
-/*!* Creates a small triangle extender for the tooltip *!*/
-/*.d3-tip:after {*/
-    /*box-sizing: border-box;*/
-    /*display: inline;*/
-    /*font-size: 10px;*/
-    /*width: 100%;*/
-    /*line-height: 1;*/
-    /*color: rgba(0, 0, 0, 0.8);*/
-    /*content: "\25BC";*/
-    /*position: absolute;*/
-    /*text-align: center;*/
-/*}*/
+.tooltip-title {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
 
-/*!* Style northward tooltips differently *!*/
-/*.d3-tip.n:after {*/
-    /*margin: -1px 0 0 0;*/
-    /*top: 100%;*/
-    /*left: 0;*/
-/*}*/
+.d3-tip {
+    line-height: 1.2em;
+    padding: 12px;
+    background: rgba(255,255,255, 0.85);
+    color: #333;
+    font-size: 12px;
+    border-radius: 2px;
+    border: 1px solid #999;
+    text-align: center;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: white;
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+    text-shadow: 0px 1px #666;
+}
+
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+.d3-tip>.highlight {
+  font-weight: bold;
+}
+.d3-tip>.note {
+  color: #999;
+  margin-top: 10px;
+}
+
+#nutrient_disclaimer, .DRI_label {
+  color: #aaa;
+  fill: #aaa;
+  font-size: 10px;
+}
+/*button.btn.btn-secondary {
+  padding: 0;
+  border-color: #fff;
+}
+.btn-secondary {
+  background-color: #eee;
+  text-decoration: none;
+}
+.btn-secondary>a {
+  color: var(--colorMedium);
+  text-decoration: none;
+  display: block;
+}
+.btn-secondary>a:hover {
+  color: var(--colorDark);
+  text-decoration: none;
+  display: block;
+}*/
+.btn-group>a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--colorMedium);
+  border-color: #ddd;
+  border-width: 1px;
+  background-color: #f0f0f0;
+  padding: 3px 12px;
+  margin: 0 5px 5px 5px;
+  border-radius: 5px !important;
+}
+.btn-group>a:hover {
+  color: var(--colorDark);
+}
+a.active, a:active {
+    background-color: #cdcdcd;
+    box-shadow: none;
+    color: var(--colorDark);
+    outline: none;
+}
+*:focus {
+  outline: none !important;
+  outline: 0  !important;
+}
+/*.btn-group>a.wide {
+  min-width: 134px;
+}
+.btn-group>a.narrow {
+  min-width: 89px;
+}*/
+div.btn-group {
+  display: inline-block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.selectSection {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 30px 0;
+}
+.filterType {
+  margin: 5px 0
+}
+.centered {
+  text-align: center;
+}
