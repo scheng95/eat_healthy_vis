@@ -55,7 +55,8 @@ MealPlanner.prototype.initVis = function() {
             if (ratio < 0.8) { fillColor = vis.badColor; }
             else { fillColor = vis.goodColor; }
         } else if (d.data.name == "Sugar (g)") {
-            if (ratio < 1.0) { fillColor = vis.medColor; }
+            if (ratio < 0.2) { fillColor = vis.goodColor; }
+            else if (ratio < 1.0) { fillColor = vis.medColor; }
             else { fillColor = vis.badColor; }
         } else { // sodium
             if (ratio < 0.8) { fillColor = vis.badColor; }
@@ -113,6 +114,7 @@ MealPlanner.prototype.initVis = function() {
     vis.svgPie.append("clipPath")
         .attr("id", "pie-clip")
         .append("circle")
+        .attr("class", "clip-path")
         .attr("cx", 0)
         .attr("cy", 0)
         .attr("r", vis.maxRad + 39);
@@ -129,6 +131,15 @@ MealPlanner.prototype.initVis = function() {
 
     vis.stackTitle = vis.svgBar.append("text")
         .attr("id", "stack-title");
+
+    vis.stackTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('e')
+        .offset([0, 8])
+        // nothing for now, is updated when it gets data
+        .html("");
+
+    vis.svg.call(vis.stackTip);
 
     // load data for recommended calories
     vis.driCalories = {
@@ -347,9 +358,11 @@ MealPlanner.prototype.pieHighlight = function(idx) {
 
     if (vis.detailIndex.has(idx)) {
         $(`#static-menu-panel-${idx}`).removeClass("highlighted");
+        d3.select(`#stack-overlay-${idx}`).attr("opacity", 0);
         vis.detailIndex.delete(idx);
     } else {
         $(`#static-menu-panel-${idx}`).addClass("highlighted");
+        d3.select(`#stack-overlay-${idx}`).attr("opacity", 0.2);
         vis.detailIndex.add(idx);
     }
 
@@ -640,7 +653,6 @@ MealPlanner.prototype.updateVis = function(data) {
         .attr("height", vis.barHeight)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 1)
-        // .attr("stroke-dasharray", "10, 5")
         .attr("stroke", "Gray");
 
     // labels, only draw once
@@ -665,8 +677,10 @@ MealPlanner.prototype.updateVis = function(data) {
     vis.stackY0 = vis.pieCenterY - vis.maxRad;
     vis.stackWidth = 50;
 
+    const aggNutrient = data.itemData[vis.selectedNutrient].reduce((a, b) => a + b.y, 0);
+
     vis.stackScale = d3.scale.linear()
-        .domain([0, data.itemData[vis.selectedNutrient].reduce((a, b) => a + b.y, 0)])
+        .domain([0, aggNutrient])
         .range([0, vis.maxRad*2]);
 
     // vis.stackColor = d3.scale.category20()
@@ -683,14 +697,31 @@ MealPlanner.prototype.updateVis = function(data) {
         .attr("opacity", 1)
         .attr("transform", "translate(" + vis.stackX + "," + vis.stackY0 + ")");
     detailBarGroup.append("rect")
-        .attr("class", "stack")
+        .attr("class", "stack clickable")
+        .attr("id", d => "stack-layer-" + d.key)
         .attr("x", 0)
-        .attr("width", vis.stackWidth);
+        .attr("width", vis.stackWidth)
+        .on('mouseover', vis.stackTip.show)
+        .on('mouseout', vis.stackTip.hide)
+        .on("click", d => vis.pieHighlight(parseInt(d.key)));
     detailBars.select(".stack")
         .transition().duration(1000)
         .attr("y", d => vis.stackScale(d.y0))
         .attr("height", d => vis.stackScale(d.y))
         .attr("fill", (d, i) => vis.colorMenu(d.key, i));
+
+    // highlighting overlay
+    detailBarGroup.append("rect")
+        .attr("class", "stack-overlay")
+        .attr("id", d => "stack-overlay-" + d.key)
+        .attr("x", 0)
+        .attr("width", vis.stackWidth)
+        .attr("fill", "Black")
+        .attr("opacity", 0);
+    detailBars.select(".stack-overlay")
+        .transition().duration(1000)
+        .attr("y", d => vis.stackScale(d.y0))
+        .attr("height", d => vis.stackScale(d.y));
 
     detailBarGroup.append("text")
         .attr("class", "stack-label")
@@ -711,6 +742,13 @@ MealPlanner.prototype.updateVis = function(data) {
         .attr("x", vis.stackX)
         .attr("y", vis.stackY0 - 10)
         .text("Breakdown of " + cleanText(vis.selectedNutrient));
+
+    vis.stackTip
+        .html(function(d) {
+            return `This food is <b>${Math.round(d.y/aggNutrient*100)}%</b> of your total<br>intake of <b>${cleanText(vis.selectedNutrient)}</b>`;
+        });
+
+    vis.svg.call(vis.stackTip);
 };
 
 MealPlanner.prototype.colorMenu = function(key, idx) {

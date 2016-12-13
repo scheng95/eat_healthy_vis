@@ -132,8 +132,12 @@
     color: gray;
 }
 
-.highlighted > .panel-heading {
+div.highlighted > .panel-heading {
     background-color: Lightgray;
+}
+
+rect.highlighted {
+    opacity: 0.2;
 }
 
 .bars text,
@@ -331,14 +335,17 @@ button:hover, button>a:hover {
 }
 */
 
+.clip-path,
 .foreground-arc,
 .overlay-arc,
 .outline-arc,
 .pie-label,
 .foreground-bar,
 .overlay-bar,
+.stack-overlay,
 .outline-rect,
-.calorie-label {
+.calorie-label,
+.stack-label {
     pointer-events: none;
 }
 
@@ -348,18 +355,9 @@ button:hover, button>a:hover {
     cursor: pointer;
 }
 
-
 /*!*********************!*/
 /*!*  TOOLTIP OVERLAY  *!*/
 /*!*********************!*/
-
-
-.background-arc,
-.overlay-arc,
-.outline-arc,
-.pie-label {
-    pointer-events: none;
-}
 
 .tooltip-title {
     display: block;
@@ -396,6 +394,13 @@ button:hover, button>a:hover {
     margin: -1px 0 0 0;
     top: 100%;
     left: 0;
+}
+.d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -52%;
+    pointer-events: none;
 }
 .d3-tip>.highlight {
   font-weight: bold;
