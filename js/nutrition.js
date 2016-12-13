@@ -132,14 +132,25 @@ MealPlanner.prototype.initVis = function() {
     vis.stackTitle = vis.svgBar.append("text")
         .attr("id", "stack-title");
 
+    // don't set offset or html for now
+    vis.pieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('n')
+        .offset((d, i) => [[27, -9], [45, 34], [65, -9], [65, 9], [45, -34], [27, 9]][i])
+        .html(function(d) {
+            return `
+            You're getting <b>${Math.round(d.data.tot / d.data.limit * 100)}%</b> of your daily <b>${cleanText(d.data.name)}</b>.
+            <br><div class="note">Click for more details</div>`;
+        });
+    vis.svgPie.call(vis.pieTip);
+
     vis.stackTip = d3.tip()
         .attr('class', 'd3-tip')
         .direction('e')
         .offset([0, 8])
         // nothing for now, is updated when it gets data
         .html("");
-
-    vis.svg.call(vis.stackTip);
+    vis.svgBar.call(vis.stackTip);
 
     // load data for recommended calories
     vis.driCalories = {
@@ -496,7 +507,6 @@ MealPlanner.prototype.wrangleMenuData = function() {
                 "subset": selectIntake[d]
             })
         });
-        // console.log(displayData);
         vis.updateVis({
             "calData": [{
                 "tot": totCal,
@@ -512,8 +522,6 @@ MealPlanner.prototype.wrangleMenuData = function() {
 MealPlanner.prototype.updateVis = function(data) {
     let vis = this;
 
-    console.log(data);
-
     const calData = data.calData;
     const displayData = data.nutData;
 
@@ -524,11 +532,17 @@ MealPlanner.prototype.updateVis = function(data) {
     groups.exit()
         .transition().duration(1000)
         .remove();
+
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
         .attr("d", d => vis.arc.outerRadius(vis.maxRad)(d))
+        .on('mouseover', vis.pieTip.show)
+        .on('mouseout', vis.pieTip.hide)
         .on("click", d => mealPlanner.selectNut(d.data.name));
+    // have to do this hack so that tooltip updates with current data
+    groups.select(".background-arc")
+        .attr("class", "background-arc");
 
     // TODO need this for overlay slices as well
     let pieGrads = vis.pieGrad.selectAll("radialGradient").data(vis.pie(displayData));
@@ -671,8 +685,6 @@ MealPlanner.prototype.updateVis = function(data) {
         .text(d => `${Math.round(d.tot)}/${Math.round(d.rec)}`);
 
     /////////// extra vis
-    console.log(data.itemData[vis.selectedNutrient]);
-
     vis.stackX = 490;
     vis.stackY0 = vis.pieCenterY - vis.maxRad;
     vis.stackWidth = 50;
@@ -748,7 +760,7 @@ MealPlanner.prototype.updateVis = function(data) {
             return `This food is <b>${Math.round(d.y/aggNutrient*100)}%</b> of your total<br>intake of <b>${cleanText(vis.selectedNutrient)}</b>`;
         });
 
-    vis.svg.call(vis.stackTip);
+    vis.svgBar.call(vis.stackTip);
 };
 
 MealPlanner.prototype.colorMenu = function(key, idx) {
