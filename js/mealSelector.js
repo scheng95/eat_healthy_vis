@@ -59,12 +59,12 @@ $(function() {
 // nutrition primer pie
 $(function() {
     let dummyData = [
-        {"name": "Fat (g)", "val": 1},
+        {"name": "Fiber (g)", "val": 1},
         {"name": "Sodium (mg/d)", "val": 1},
-        {"name": "Protein (g)", "val": 1},
-        {"name": "Sugar (g)", "val": 1},
+        {"name": "Fat (g)", "val": 1},
         {"name": "Carbohydrate (g)", "val": 1},
-        {"name": "Fiber (g)", "val": 1}
+        {"name": "Protein (g)", "val": 1},
+        {"name": "Sugar (g)", "val": 1}
     ];
 
     // TODO add margin
