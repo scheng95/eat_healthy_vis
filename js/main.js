@@ -69,16 +69,58 @@ window.onload = function() {
     });
   })
 
+
+  $("#Fiber0").click(function() {
+    if (timeSeriesChart != null) {
+      timeSeriesChart.nutrient_type = "Fiber";
+      timeSeriesChart.updateVis();
+    }
+    $("#Fiber").addClass("active");
+    $("#Fiber").siblings().removeClass("active");
+    return false;
+  });
+  $("#Sugar0").click(function() {
+    if (timeSeriesChart != null) {
+      timeSeriesChart.nutrient_type = "Sugar";
+      timeSeriesChart.updateVis();
+    }
+    $("#Sugar").addClass("active");
+    $("#Sugar").siblings().removeClass("active");
+    return false;
+  });
+  $("#Sodium0").click(function() {
+    if (timeSeriesChart != null) {
+      timeSeriesChart.nutrient_type = "Sodium";
+      timeSeriesChart.updateVis();
+    }
+    $("#Sodium").addClass("active");
+    $("#Sodium").siblings().removeClass("active");
+    return false;
+  });
+
+
   $(".btn-group > a").click(function(){
     $(this).addClass("active");
     $(this).siblings().removeClass("active");
-    $(this).parent().parent().siblings().children().children().not(this).removeClass("active");
+    //$(this).parent().parent().siblings().children().children().not(this).removeClass("active");
   });
 }
 // Scroll to div\
-$("#buttonToB").click(function() {
+$(".scrollToB").click(function() {
     $('html,body').animate({
         scrollTop: $("#B").offset().top},'slow');
+});
+$(".scrollToC").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#C").offset().top},'slow');
+});
+$(".scrollToD").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#D").offset().top},'slow');
+});
+$(".scrollToRef").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#footer").offset().top},'slow');
 });
 
 function loadData() {

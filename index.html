@@ -7,93 +7,80 @@
     <title>Eating Healthy</title>
 
     <!-- Load Google Font -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:100,400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container-fluid A text-center">
-    <div class="row"><h1>How can we eat better?</h1></div>
-    <div class="row">
-      <br><br>
-      <button class="button btn" id="buttonToB">
-        <a href="#B">Continue</a>
-      </button>
-      <br><br><br>
+    <div class="row A">
+      <div class="col-xs-12 col-sm-2"></div>
+      <div class="col-xs-12 col-sm-8">
+        <h1>NUTRITION 101</h1><br>
+        <p>
+          Unhealthy diets are the top contributors to premature
+          deaths and years lost to disease/disability in the US.<sup class="scrollToRef"><a href="#footer">1</a></sup>
+          More than 2/3 of Americans are overweight or obese,<sup class="scrollToRef"><a href="#footer">2</a></sup>
+          and our healthcare costs are rising every year.<sup class="scrollToRef"><a href="#footer">3</a></sup>
+        </p>
+        <br>
+        <p>We need to eat better...but how? Here's our approach to an answer:</p>
+        <br>
+        <ol class="intro-list">
+          <li>We explored <a class="scrollToB" href="#B">how Americans have been eating for the past decade</a>.</li>
+          <li>We picked out <a class="scrollToC" href="#C">6 of the most important metrics to focus on.</a></li>
+          <li>We help users <a class="scrollToD" href="#D">measure their own diets</a> against these 6 metrics.</li>
+        </ol>
+        <br><br><br>
+        <button class="button btn scrollToB">
+          <a href="#B">GOT IT</a>
+        </button>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-        <h3>What is healthy?</h3>
-        <p>Confused? So is everyone. Generally, eating more healthy means spending as much energy as you eat, eating a variety of nutritious foods and limiting empty calories. </p>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <h3>Why does it matter?</h3>
-        <p>Over 2/3 of American adults are overweight or obese. Heart disease, stroke, and diabetes are among the top ten causes of death, and they are all diet-related. See how the average American is eating.</p>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <h3>What can you do?</h3>
-        <p>Get to know your food better. Studies have shown that eating at home has higher nutrition density than eating out at restaurants. Figure out what to make with our nutritional analysis tool.</p>
-      </div>
-    </div>
-      <div id="basic-vis"></div>
   </div>
   <div class="container-fluid B" id="B">
     <div class="row">
       <div class="col-xs-12">
-        <h2>How healthy are Americans?</h2>
+        <h2>HOW ARE AMERICANS EATING?</h2>
       </div>
     </div>
     <div class="row selectSection">
-      <div class="row centered"> View dietary patterns by: </div>
+      <!-- <div class="row centered"> View dietary patterns by: </div> -->
       <div class="col-xs-12 col-sm-9">
         <div class="filterType">Nutrient type</div>
         <div class="btn-group" role="group">
-          <a href="#B" class="btn btn-secondary wide active" id="Calories">Calories</a>
-          <a href="#B" class="btn btn-secondary wide" id="Protein">Protein</a>
-          <a href="#B" class="btn btn-secondary wide" id="Carbohydrate">Carbohydrate</a>
-          <a href="#B" class="btn btn-secondary wide" id="Fat">Fat</a>
-          <a href="#B" class="btn btn-secondary wide" id="Saturated_Fat">Saturated Fat</a>
-          <a href="#B" class="btn btn-secondary wide" id="Cholesterol">Cholesterol</a>
-          <a href="#B" class="btn btn-secondary wide" id="Sugar">Sugar</a>
-          <a href="#B" class="btn btn-secondary wide" id="Sodium">Sodium</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Fiber">Fiber</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_A">Vitamin A</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_C">Vitamin C</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Vitamin_E">Vitamin E</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Calcium">Calcium</a>
-          <a href="#B" class="btn btn-secondary narrow" id="Iron">Iron</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide active" id="Calories">Calories</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Protein">Protein</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Carbohydrate">Carbohydrate</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Fat">Fat</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Saturated_Fat">Saturated Fat</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Cholesterol">Cholesterol</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Sugar">Sugar</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="Sodium">Sodium</a>
+          <a href="#B" class="scrollToB btn btn-secondary narrow" id="Fiber">Fiber</a>
+          <a href="#B" class="scrollToB btn btn-secondary narrow" id="Vitamin_A">Vitamin A</a>
+          <!-- <a href="#B" class="scrollToB btn btn-secondary narrow" id="Vitamin_C">Vitamin C</a> -->
+          <a href="#B" class="scrollToB btn btn-secondary narrow" id="Vitamin_E">Vitamin E</a>
+          <a href="#B" class="scrollToB btn btn-secondary narrow" id="Calcium">Calcium</a>
+          <a href="#B" class="scrollToB btn btn-secondary narrow" id="Iron">Iron</a>
         </div>
       </div>
-      <!-- <div class="col-xs-12 col-sm-8">
-        <a href="#B" class="btn btn-secondary wide active" id="Calories">Calories</a>
-        <a href="#B" class="btn btn-secondary wide" id="Protein">Protein</a>
-        <a href="#B" class="btn btn-secondary wide" id="Carbohydrate">Carbohydrate</a>
-        <a href="#B" class="btn btn-secondary wide" id="Fat">Fat</a>
-
-        <a href="#B" class="btn btn-secondary wide" id="Saturated_Fat">Saturated Fat</a>
-        <a href="#B" class="btn btn-secondary wide" id="Cholesterol">Cholesterol</a>
-        <a href="#B" class="btn btn-secondary wide" id="Sugar">Sugar</a>
-        <a href="#B" class="btn btn-secondary wide" id="Sodium">Sodium</a>
-
-        <a href="#B" class="btn btn-secondary narrow" id="Fiber">Fiber</a>
-        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_A">Vitamin A</a>
-        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_C">Vitamin C</a>
-        <a href="#B" class="btn btn-secondary narrow" id="Vitamin_E">Vitamin E</a>
-        <a href="#B" class="btn btn-secondary narrow" id="Calcium">Calcium</a>
-        <a href="#B" class="btn btn-secondary narrow" id="Iron">Iron</a>
-      </div> -->
       <div class="col-xs-12 col-sm-3 float-right">
         <div class="filterType">Age group</div>
         <div class="btn-group" role="group">
-          <a href="#B" class="btn btn-secondary wide" id="2-5">2 - 5</a>
-          <a href="#B" class="btn btn-secondary wide" id="6-11">6 - 11</a>
-          <a href="#B" class="btn btn-secondary wide" id="12-19">12 - 19</a>
-          <a href="#B" class="btn btn-secondary wide active" id="20andover">20 and over</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="2-5">2 - 5</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="6-11">6 - 11</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide" id="12-19">12 - 19</a>
+          <a href="#B" class="scrollToB btn btn-secondary wide active" id="20andover">20 and over</a>
         </div>
       </div>
     </div>
-
+    <br>
+    <!-- <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-8"><hr></div>
+    </div> -->
     <!-- <p class="text-center"> In general, people overconsume in
         <a href="#B" id="Sugar">Sugar</a>,
         <a href="#B" id="Sodium">Sodium</a>, and
@@ -153,22 +140,56 @@
       </div>
   </div>
   <div class="container-fluid D text-center ">
-    <div class="row"><h2>Why does a healthy diet matter and what can you do?</h2></div>
+    <div class="row"><h2>CAN YOU DO BETTER?</h2></div>
     <div class="row">
-      <div class="col-xs-12 col-sm-6">
-        <h3>We're getting sicker.</h3>
-        <p>Over 2/3 of American adults are overweight or obese. Heart disease, stroke, and diabetes are among the top ten causes of death, and they are all diet-related.</p>
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <h3>We're not trying to change.</h3>
-        <p>The amount of money spent eating out has surpassed 50% of the average consumer's food budget. Studies have shown that restaurant foods are less nutritious and more caloric than home-made meals.</p>
-      </div>
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6"><hr></div>
     </div>
+    <br><br>
     <div class="row">
-      <div class="col-xs-12">
-        <h3>What can you do?</h3>
-        <p>Get to know your food better and have better control over your caloric/nutrition intake by preparing your own food! Don't know what to make or how healthy a recipe is? Analyze it here.</p>
+      <div class="col-xs-12 col-md-5">
+        <div id="basic-vis"></div>
       </div>
+    <div class="col-xs-12 col-md-7">
+      <div class="row intro">
+        <ul>
+          <li><span class="strong">Carbohydrate</span>, <span class="strong">Protein</span>, and <span class="strong">Fat</span>
+            are the macronutrients that make up the bulk of our daily energy intake</li>
+          <li><span class="strong">Dietary Fiber</span> is the indigestible part of plants that affect how we absorb nutrients.
+            It's essential for a healthy diet by helping us feel full, aiding digestion, and preventing constipation.
+            Most Americans <a href="#B" class="scrollToB" id="Fiber0">don't get enough</a> fiber.
+          </li>
+          <li><span class="strong">Sugar</span> is not necessary for a healthy diet. It should be kept to a minimum.
+            Most Americans <a href="#B" class="scrollToB" id="Sugar0">eat way too much</a> sugar, and it's leading to diseases like
+            diabetes, metabolic syndrome, heart disease, non-alcoholic fatty liver disease, cancer... the list goes on.
+          </li>
+          <li><span class="strong">Sodium</span> is a mineral found in salt. We need it to survive, but too much of it will increase blood pressure and lead to heart attacks & strokes.
+            Unfortunately, most Americans <a href="#B" class="scrollToB" id="Sodium0">consume too much</a> sodium.
+          </li>
+        </ul>
+
+
+        <br><br>
+        <button class="button btn scrollToB">
+          <a href="#B">GOT IT</a>
+        </button>
+        <br><br><br>
+      </div>
+      <!-- <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <h3>What is healthy?</h3>
+          <p>Confused? So is everyone. Generally, eating more healthy means spending as much energy as you eat, eating a variety of nutritious foods and limiting empty calories. </p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h3>Why does it matter?</h3>
+          <p>Over 2/3 of American adults are overweight or obese. Heart disease, stroke, and diabetes are among the top ten causes of death, and they are all diet-related. See how the average American is eating.</p>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h3>What can you do?</h3>
+          <p>Get to know your food better. Studies have shown that eating at home has higher nutrition density than eating out at restaurants. Figure out what to make with our nutritional analysis tool.</p>
+        </div>
+      </div> -->
+    </div>
     </div>
   </div>
   <div class="container-fluid E">
@@ -260,8 +281,27 @@
       </div>
     </div>
     <div class="container-fluid footer text-center">
-      <div class="row footer">
+      <div class="row footer" id="footer">
           <h5>Acknowledgements</h5>
+          <ol>
+            <li>
+              Institute for Health Metrics and Evaluation.
+              <a href="http://www.healthdata.org/sites/default/files/files/policy_report/2013/USHealth/IHME_GBD_USHealth_FullReport.pdf">
+                The state of US Health: Innovations, Insights, and Recommendations from the Global Burden of Disease Study</a>.
+              Seattle, WA: IHME, 2013.
+            </li>
+            <li>
+              National Institutes of Health. Overweight and Obesity Statistics. Retrieved from
+              <a href="https://www.niddk.nih.gov/health-information/health-statistics/Pages/overweight-obesity-statistics.aspx">
+                niddk.nih.gov</a>, 2016.
+            </li>
+            <li>
+              Centers for Medicare and Medicaid. National Health Expenditure Accounts. Retrieved from
+              <a href="https://www.cms.gov/research-statistics-data-and-systems/statistics-trends-and-reports/nationalhealthexpenddata/nationalhealthaccountshistorical.html">
+                cms.gov</a>, 2016.
+            </li>
+
+          </ol>
       </div>
     </div>
 
