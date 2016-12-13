@@ -59,24 +59,25 @@ $(function() {
 // nutrition primer pie
 $(function() {
     let dummyData = [
-        {"name": "Fiber (g)", "val": 1},
-        {"name": "Sodium (mg/d)", "val": 1},
-        {"name": "Fat (g)", "val": 1},
-        {"name": "Carbohydrate (g)", "val": 1},
-        {"name": "Protein (g)", "val": 1},
-        {"name": "Sugar (g)", "val": 1}
+        {"name": "Fat (g)", "val": 1, "color": 0},
+        {"name": "Carbohydrate (g)", "val": 1, "color": 0},
+        {"name": "Protein (g)", "val": 1, "color": 0},
+        {"name": "Sugar (g)", "val": 1, "color": 2},
+        {"name": "Sodium (mg/d)", "val": 1, "color": 2},
+        {"name": "Fiber (g)", "val": 1, "color": 1}
     ];
 
     // TODO add margin
-    let width = 300;
-    let height = 300;
+    let margin = {top: 10, right: 10, bottom: 10, left: 10};
+    let width = 350 - margin.left - margin.right;
+    let height = 350 - margin.top - margin.bottom;
     let radius = width / 2;
 
     let svg = d3.select("#basic-vis").append("svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
         .append("g")
-        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        .attr("transform", "translate(" + (margin.left + width/2) + "," + (margin.top + height/2) + ")");
 
     let pie = d3.layout.pie()
         .sort(null)
@@ -87,15 +88,18 @@ $(function() {
         .outerRadius(radius);
 
     let labelArc = d3.svg.arc()
-        .outerRadius(radius - 40)
-        .innerRadius(radius - 40);
+        .outerRadius(radius - 50)
+        .innerRadius(radius - 50);
+
+    let colors = colorbrewer.Blues[6];
 
     svg.selectAll(".arc")
         .data(pie(dummyData))
         .enter().append("path")
         .attr("class", "arc")
         .attr("d", arc)
-        .attr("fill", "Lightgrey");
+        .attr("fill", d => colors[d.data.color])
+        .attr("stroke", "Gray");
     svg.selectAll(".pie-label")
         .data(pie(dummyData))
         .enter().append("text")

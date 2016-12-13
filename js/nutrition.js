@@ -443,8 +443,8 @@ MealPlanner.prototype.wrangleMenuData = function() {
     let displayData = [];
 
     const indNuts = [
-        "Fiber (g)",
-        "Sodium (mg/d)"
+        "Sodium (mg/d)",
+        "Fiber (g)"
     ];
     const depNuts = [
         "Fat (g)",
@@ -489,20 +489,20 @@ MealPlanner.prototype.wrangleMenuData = function() {
 
     d3.csv("data_raw/dri_detail.csv", function(error, driData) {
         const recs = driData.filter(function(d) { return d["Gender"] === gender && d["Age"] == age; })[0];
-        indNuts.forEach(function(d) {
-            displayData.push({
-                "slice": 1,
-                "name": d,
-                "limit": +recs[d],
-                "tot": totIntake[d],
-                "subset": selectIntake[d]
-            })
-        });
         depNuts.forEach(function(d) {
             displayData.push({
                 "slice": 1,
                 "name": d,
                 "limit": recCal * depNutsFactor[d],
+                "tot": totIntake[d],
+                "subset": selectIntake[d]
+            })
+        });
+        indNuts.forEach(function(d) {
+            displayData.push({
+                "slice": 1,
+                "name": d,
+                "limit": +recs[d],
                 "tot": totIntake[d],
                 "subset": selectIntake[d]
             })
