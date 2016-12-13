@@ -248,9 +248,13 @@ h1,h2,h3 {
 .container-fluid.footer{
   background-color: #f0f0f0;
 }
+.container-fluid.C {
+  background-color: #f0f0f0;
+  min-width: 100%;
+}
 .container-fluid.D {
-  background-image: url("../img/food.png");
-  background-repeat: repeat;
+  /*background-image: url("../img/food.png");
+  background-repeat: repeat;*/
   min-width: 100%;
 }
 .container-fluid.footer{
