@@ -184,7 +184,7 @@ MealPlanner.prototype.nutritionAnalysis = function(recipe) {
 
     // var proxyUrl = "http://localhost:5000/n";
     // const git = "https://flaskwebproject120161124101015.scm.azurewebsites.net:443/flaskwebproject120161124101015.git";
-    const baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/n";
+    const baseUrl = "https://flaskwebproject120161124101015.azurewebsites.net/n";
 
     const payload = {
         "app_id": app_id,
@@ -209,7 +209,7 @@ MealPlanner.prototype.recipeSearch = function(query) {
     const app_key = "6632220a737740e2eeb51be026a62788";
 
     // var baseUrl = "http://edamamproxy.azurewebsites.net/r";
-    const baseUrl = "http://flaskwebproject120161124101015.azurewebsites.net/r";
+    const baseUrl = "https://flaskwebproject120161124101015.azurewebsites.net/r";
     // var baseUrl = "http://localhost:5000/r";
 
     const proxyUrl = baseUrl + `?q=${query}&app_id=${app_id}&app_key=${app_key}`;
