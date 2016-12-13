@@ -227,6 +227,13 @@
                 <div id="meal-planner">
                     <div class="row" id="recipe-block">
                         <h3>2. What do you eat in a day?</h3>
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search meals..." id="input-recipe-search">
+                                <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
+                            </div>
+                            <div class="" id="recipe-results"></div>
+                        </div>
                         <div class="col-md-3">
                             <!-- TODO make overflow scroll, or limit num items -->
                             <div>
@@ -235,25 +242,18 @@
                             <div class="panel-group" id="accordion-menu"></div>
                             <a class="btn-vis pull-right" id="vis-button" style="display: none;"><button class="btn btn-primary btn-sm" onclick="mealPlanner.flipVis()">Visualize</button></a>
                         </div>
-                        <div class="col-md-9">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search meals..." id="input-recipe-search">
-                                <span class="input-group-btn"><button class="btn btn-default" type="button" id="recipe-search-button"><span class="glyphicon glyphicon-search"></span></button></span>
-                            </div>
-                            <div class="" id="recipe-results"></div>
-                        </div>
                     </div>
                     <div class="row" id="menu-vis-block" style="display: none;">
                         <h3>3. How nutritious is your daily diet?</h3>
+                        <div class="col-md-9">
+                            <div id="menu-vis"></div>
+                        </div>
                         <div class="col-md-3">
                             <div>
                                 <h4 class="inline">Daily Menu</h4>
                                 <a class="btn-vis pull-right"><button class="btn btn-primary btn-sm" onclick="mealPlanner.flipVis()">Add more items</button></a>
                             </div>
                             <div class="panel-group" id="static-menu"></div>
-                        </div>
-                        <div class="col-md-9">
-                            <div id="menu-vis"></div>
                         </div>
                     </div>
                 </div>

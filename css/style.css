@@ -86,7 +86,27 @@
 }
 
 .panel-default > .panel-heading {
-    background-color: white;
+    background-color: transparent;
+    border: 1px;
+    padding: 0;
+    padding-left: 3px;
+}
+
+.panel-default > .static-menu-header {
+    padding: 0;
+}
+
+.panel-title-col {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    padding-right: 3px;
+}
+
+.panel-x {
+    padding: 0;
+    padding-top: 4px;
+    padding-right: 4px;
 }
 
 .panel-body a>img,
@@ -104,12 +124,20 @@
     margin: 0;
 }
 
-.panel-heading > .row  div {
-    padding: 0;
+/*.panel-heading > .row  div {*/
+    /*padding: 0;*/
+/*}*/
+
+.xbutton {
+    color: gray;
 }
 
-.highlighted > .panel-heading {
+div.highlighted > .panel-heading {
     background-color: Lightgray;
+}
+
+rect.highlighted {
+    opacity: 0.2;
 }
 
 .bars text,
@@ -134,6 +162,16 @@
 
 .pie-label {
     text-anchor: middle;
+}
+
+.legend-label,
+.stack-label {
+    alignment-baseline: middle;
+}
+
+#stack-title {
+    fill: Black;
+    font-size: 16px;
 }
 
 .overlay-arc,
@@ -309,34 +347,29 @@ button:hover, button>a:hover {
 }
 */
 
+.clip-path,
 .foreground-arc,
 .overlay-arc,
 .outline-arc,
 .pie-label,
 .foreground-bar,
 .overlay-bar,
+.stack-overlay,
 .outline-rect,
-.calorie-label {
+.calorie-label,
+.stack-label {
     pointer-events: none;
 }
 
 .background-arc:hover,
 .background-bar:hover {
     opacity: 0.7;
+    cursor: pointer;
 }
-
 
 /*!*********************!*/
 /*!*  TOOLTIP OVERLAY  *!*/
 /*!*********************!*/
-
-
-.background-arc,
-.overlay-arc,
-.outline-arc,
-.pie-label {
-    pointer-events: none;
-}
 
 .tooltip-title {
     display: block;
@@ -353,6 +386,7 @@ button:hover, button>a:hover {
     border-radius: 2px;
     border: 1px solid #999;
     text-align: center;
+    pointer-events: none;
 }
 
 /* Creates a small triangle extender for the tooltip */
@@ -367,12 +401,21 @@ button:hover, button>a:hover {
     position: absolute;
     text-align: center;
     text-shadow: 0px 1px #666;
+    pointer-events: none;
 }
 
 .d3-tip.n:after {
     margin: -1px 0 0 0;
     top: 100%;
     left: 0;
+    pointer-events: none;
+}
+.d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -52%;
+    pointer-events: none;
 }
 .d3-tip>.highlight {
   font-weight: 600;

@@ -13,14 +13,14 @@ MealPlanner.prototype.initVis = function() {
     vis.svg = d3.select("#menu-vis").append("svg")
         .attr("width", vis.width + vis.margin.left + vis.margin.right)
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom);
-    // .style("background-color", "cyan");
+
+    vis.pieCenterY = vis.margin.top + vis.height/2 - 30;
 
     vis.svgPie = vis.svg.append("g")
         .attr("class", "pie-group")
-        .attr("transform", "translate(" + (vis.margin.left + vis.width / 2 - 100) + "," + (vis.margin.top + vis.height/2) + ")");
+        .attr("transform", "translate(" + (vis.margin.left + vis.width / 2 - 140) + "," + vis.pieCenterY + ")");
 
     vis.svgBar = vis.svg.append("g")
-    // center the pie
         .attr("class", "bar-group")
         .attr("transform", "translate(" + vis.margin.left + ",0)");
 
@@ -40,30 +40,58 @@ MealPlanner.prototype.initVis = function() {
     //     .range(colorbrewer.Set2[6]);
 
     // color scale for good/bad in pie
-    const goodColor = "rgb(147, 229, 221)";
-    const medColor = "rgb(255, 240, 156)";
-    const badColor = "rgb(224, 86, 16)";
+    vis.goodColor = "rgb(147, 229, 221)";
+    vis.medColor = "rgb(255, 240, 156)";
+    vis.badColor = "rgb(224, 86, 16)";
     // TODO don't hard code so much
     vis.color = function(d) {
         const ratio = d.data.tot / d.data.limit;
         let fillColor;
         if (d.data.name in {"Fat (g)":0, "Carbohydrate (g)":0, "Protein (g)":0}) {
-            if (ratio < 0.9) { fillColor = medColor; }
-            else if (0.9 <= ratio && ratio < 1.1) { fillColor = goodColor; }
-            else { fillColor = badColor; }
+            if (ratio < 0.9) { fillColor = vis.medColor; }
+            else if (0.9 <= ratio && ratio < 1.1) { fillColor = vis.goodColor; }
+            else { fillColor = vis.badColor; }
         } else if (d.data.name == "Fiber (g)") {
-            if (ratio < 0.8) { fillColor = badColor; }
-            else { fillColor = goodColor; }
+            if (ratio < 0.8) { fillColor = vis.badColor; }
+            else { fillColor = vis.goodColor; }
         } else if (d.data.name == "Sugar (g)") {
-            if (ratio < 1.0) { fillColor = medColor; }
-            else { fillColor = badColor; }
+            if (ratio < 0.2) { fillColor = vis.goodColor; }
+            else if (ratio < 1.0) { fillColor = vis.medColor; }
+            else { fillColor = vis.badColor; }
         } else { // sodium
-            if (ratio < 0.8) { fillColor = badColor; }
-            else if (0.8 <= ratio && ratio < 1.2) { fillColor = goodColor; }
-            else { fillColor = badColor; }
+            if (ratio < 0.8) { fillColor = vis.badColor; }
+            else if (0.8 <= ratio && ratio < 1.2) { fillColor = vis.goodColor; }
+            else { fillColor = vis.badColor; }
         }
         return fillColor;
     };
+
+    // draw legend
+    const legendWidth = 20;
+    let pieLegend = vis.svgPie.append("g")
+        .attr("class", "pie-legend")
+        .attr("transform", "translate(-" + (vis.maxRad - 25) + ", 200)");
+    const colors = ["goodColor", "medColor", "badColor"];
+    const colorText = {
+        "goodColor": "Good",
+        "medColor": "Okay",
+        "badColor": "Bad"
+    };
+    for (let i = 0; i < colors.length; i++) {
+        let g = pieLegend.append("g")
+            .attr("transform", "translate(" + i*100 + ",0)");
+        g.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", legendWidth)
+            .attr("height", legendWidth)
+            .attr("fill", vis[colors[i]]);
+        g.append("text")
+            .attr("class", "legend-label")
+            .attr("x", legendWidth + 5)
+            .attr("y", legendWidth / 2)
+            .text(colorText[colors[i]]);
+    }
 
     vis.radScale = (r, rmax) => Math.max(Math.sqrt(vis.maxRad*vis.maxRad * (r / rmax)), 0.00001);
 
@@ -82,6 +110,15 @@ MealPlanner.prototype.initVis = function() {
     // definitions for gradient fill
     vis.pieGrad = vis.svgPie.append("defs").attr("id", "pie-grad-def");
 
+    // clip path of circle
+    vis.svgPie.append("clipPath")
+        .attr("id", "pie-clip")
+        .append("circle")
+        .attr("class", "clip-path")
+        .attr("cx", 0)
+        .attr("cy", 0)
+        .attr("r", vis.maxRad + 39);
+
     vis.barScale = d3.scale.linear()
         .range([0, vis.width * 0.75]);
 
@@ -91,6 +128,29 @@ MealPlanner.prototype.initVis = function() {
     vis.barGrad = vis.svgBar.append("defs");
 
     vis.selectedNutrient = "Calories";
+
+    vis.stackTitle = vis.svgBar.append("text")
+        .attr("id", "stack-title");
+
+    // don't set offset or html for now
+    vis.pieTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('n')
+        .offset((d, i) => [[27, -9], [45, 34], [65, -9], [65, 9], [45, -34], [27, 9]][i])
+        .html(function(d) {
+            return `
+            You're getting <b>${Math.round(d.data.tot / d.data.limit * 100)}%</b> of your daily <b>${cleanText(d.data.name)}</b>.
+            <br><div class="note">Click for more details</div>`;
+        });
+    vis.svgPie.call(vis.pieTip);
+
+    vis.stackTip = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction('e')
+        .offset([0, 8])
+        // nothing for now, is updated when it gets data
+        .html("");
+    vis.svgBar.call(vis.stackTip);
 
     // load data for recommended calories
     vis.driCalories = {
@@ -229,13 +289,13 @@ MealPlanner.prototype.addRecipe = function(selectIdx) {
     const newMenuItem =
     `<div class="panel-heading">
         <div class="row">
-            <div class="col-md-11">
+            <div class="col-md-11 panel-title-col">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion-menu" href="#collapse${currIdx}">${recipe.label}</a>
                 </h4>
             </div>
-            <div class="col-md-1">
-                <span class="clickable glyphicon glyphicon-remove-circle" onclick="mealPlanner.removeRecipe(${currIdx})"></span>
+            <div class="col-md-1 panel-x">
+                <span class="clickable glyphicon glyphicon-remove-circle xbutton" onclick="mealPlanner.removeRecipe(${currIdx})"></span>
             </div>
         </div>
     </div>
@@ -252,15 +312,15 @@ MealPlanner.prototype.addRecipe = function(selectIdx) {
     </div>`;
 
     const staticMenuItem =
-    `<div class="panel-heading">
-        <div class="row">
-            <div class="col-md-11">
+    `<div class="panel-heading static-menu-header" id="static-menu-color-${currIdx}">
+        <div class="row parent">
+            <div class="col-md-11 panel-title-col">
                 <h4 class="panel-title clickable" onclick="mealPlanner.pieHighlight(${currIdx})">
                     ${recipe.label}
                 </h4>
             </div>
-            <div class="col-md-1">
-                <span class="clickable glyphicon glyphicon-remove-circle" onclick="mealPlanner.removeRecipe(${currIdx})"></span>
+            <div class="col-md-1 panel-x">
+                <span class="clickable glyphicon glyphicon-remove-circle xbutton" onclick="mealPlanner.removeRecipe(${currIdx})"></span>
             </div>
         </div>
      </div>`;
@@ -309,9 +369,11 @@ MealPlanner.prototype.pieHighlight = function(idx) {
 
     if (vis.detailIndex.has(idx)) {
         $(`#static-menu-panel-${idx}`).removeClass("highlighted");
+        d3.select(`#stack-overlay-${idx}`).attr("opacity", 0);
         vis.detailIndex.delete(idx);
     } else {
         $(`#static-menu-panel-${idx}`).addClass("highlighted");
+        d3.select(`#stack-overlay-${idx}`).attr("opacity", 0.2);
         vis.detailIndex.add(idx);
     }
 
@@ -398,6 +460,33 @@ MealPlanner.prototype.wrangleMenuData = function() {
         "Sugar (g)": 0.20 / 4 // PERCENTAGE HERE IS TOTALLY ARBITRARY. SHOULD BE ADJUSTABLE
     };
 
+    // arrange stacked bar layout
+    let stack = d3.layout.stack()
+        .offset("zero")
+        .values(d => d.values);
+
+    let stacked = stack(itemNutrients);
+    let reshapeStack = {
+        "Calories": [],
+        "Fat (g)": [],
+        "Sodium (mg/d)": [],
+        "Protein (g)": [],
+        "Sugar (g)": [],
+        "Carbohydrate (g)": [],
+        "Fiber (g)": []
+    };
+    stacked.forEach(function(d) {
+        d.values.forEach(function(v) {
+            reshapeStack[v.x].push({
+                "key": d.key,
+                "name": d.name,
+                "y": v.y,
+                "y0": v.y0
+            });
+        });
+    });
+
+
     d3.csv("data_raw/dri_detail.csv", function(error, driData) {
         const recs = driData.filter(function(d) { return d["Gender"] === gender && d["Age"] == age; })[0];
         indNuts.forEach(function(d) {
@@ -418,7 +507,6 @@ MealPlanner.prototype.wrangleMenuData = function() {
                 "subset": selectIntake[d]
             })
         });
-        // console.log(displayData);
         vis.updateVis({
             "calData": [{
                 "tot": totCal,
@@ -426,15 +514,13 @@ MealPlanner.prototype.wrangleMenuData = function() {
                 "sub": subCal
             }],
             "nutData": displayData,
-            "itemData": itemNutrients
+            "itemData": reshapeStack
         });
     });
 };
 
 MealPlanner.prototype.updateVis = function(data) {
     let vis = this;
-
-    console.log(data);
 
     const calData = data.calData;
     const displayData = data.nutData;
@@ -446,11 +532,17 @@ MealPlanner.prototype.updateVis = function(data) {
     groups.exit()
         .transition().duration(1000)
         .remove();
+
     // background, only draw once
     g.append("path")
         .attr("class", "background-arc")
         .attr("d", d => vis.arc.outerRadius(vis.maxRad)(d))
+        .on('mouseover', vis.pieTip.show)
+        .on('mouseout', vis.pieTip.hide)
         .on("click", d => mealPlanner.selectNut(d.data.name));
+    // have to do this hack so that tooltip updates with current data
+    groups.select(".background-arc")
+        .attr("class", "background-arc");
 
     // TODO need this for overlay slices as well
     let pieGrads = vis.pieGrad.selectAll("radialGradient").data(vis.pie(displayData));
@@ -470,7 +562,8 @@ MealPlanner.prototype.updateVis = function(data) {
 
     // draw new slice
     g.append("path")
-        .attr("class", "foreground-arc");
+        .attr("class", "foreground-arc")
+        .attr("clip-path", "url(#pie-clip)");
     // update
     groups.select(".foreground-arc")
         // .attr("fill", d => color(d))
@@ -481,7 +574,8 @@ MealPlanner.prototype.updateVis = function(data) {
 
     // draw selected slices
     g.append("path")
-        .attr("class", "overlay-arc");
+        .attr("class", "overlay-arc")
+        .attr("clip-path", "url(#pie-clip)");
     groups.select(".overlay-arc")
         .transition().duration(1000)
         .attr("d", d => vis.arc.outerRadius(vis.radScale(d.data.subset, d.data.limit))(d));
@@ -573,7 +667,6 @@ MealPlanner.prototype.updateVis = function(data) {
         .attr("height", vis.barHeight)
         .attr("fill-opacity", 0)
         .attr("stroke-opacity", 1)
-        // .attr("stroke-dasharray", "10, 5")
         .attr("stroke", "Gray");
 
     // labels, only draw once
@@ -592,62 +685,95 @@ MealPlanner.prototype.updateVis = function(data) {
         .text(d => `${Math.round(d.tot)}/${Math.round(d.rec)}`);
 
     /////////// extra vis
-    let stack = d3.layout.stack()
-        .offset("zero")
-        .values(d => d.values);
+    vis.stackX = 490;
+    vis.stackY0 = vis.pieCenterY - vis.maxRad;
+    vis.stackWidth = 50;
 
-    // console.log(data.itemData);
-    // console.log(stack(data.itemData));
-
-    let stacked = stack(data.itemData);
-    let reshapeStack = {
-        "Calories": [],
-        "Fat (g)": [],
-        "Sodium (mg/d)": [],
-        "Protein (g)": [],
-        "Sugar (g)": [],
-        "Carbohydrate (g)": [],
-        "Fiber (g)": []
-    };
-    stacked.forEach(function(d) {
-        d.values.forEach(function(v) {
-            reshapeStack[v.x].push({
-                "key": d.key,
-                "name": d.name,
-                "y": v.y,
-                "y0": v.y0
-            });
-        });
-    });
-
-    // console.log(reshapeStack[vis.selectedNutrient]);
-
-    vis.stackY0 = vis.margin.top + vis.height/2 - vis.maxRad;
+    const aggNutrient = data.itemData[vis.selectedNutrient].reduce((a, b) => a + b.y, 0);
 
     vis.stackScale = d3.scale.linear()
-        .domain([0, reshapeStack[vis.selectedNutrient].reduce((a, b) => a + b.y, 0)])
+        .domain([0, aggNutrient])
         .range([0, vis.maxRad*2]);
 
-    vis.stackColor = d3.scale.category20()
-        .domain(reshapeStack[vis.selectedNutrient].map(e => e.key));
+    // vis.stackColor = d3.scale.category20()
+    //     .domain(data.itemData[vis.selectedNutrient].map(e => e.key));
 
-    let detailBar = vis.svgBar.selectAll(".stack")
-        .data(reshapeStack[vis.selectedNutrient]);
-    let detailBarEnter = detailBar.enter().append("rect")
-        .attr("class", "stack")
-        .attr("x", 570)
-        .attr("width", 50);
-    detailBar.exit()
-        // TODO can't get transition to work properly
-        // .transition().duration(1000)
-        .remove();
-    // TODO color and size
-    vis.svgBar.selectAll(".stack")
+    vis.stackColor = d3.scale.linear().domain([0, data.itemData[vis.selectedNutrient].length])
+        .interpolate(d3.interpolateHcl)
+        .range([d3.rgb("#3182bd"), d3.rgb('#FFFFFF')]);
+
+    let detailBars = vis.svgBar.selectAll("g.layer")
+        .data(data.itemData[vis.selectedNutrient], d => d.key);
+    let detailBarGroup = detailBars.enter().append("g")
+        .attr("class", "layer")
+        .attr("opacity", 1)
+        .attr("transform", "translate(" + vis.stackX + "," + vis.stackY0 + ")");
+    detailBarGroup.append("rect")
+        .attr("class", "stack clickable")
+        .attr("id", d => "stack-layer-" + d.key)
+        .attr("x", 0)
+        .attr("width", vis.stackWidth)
+        .on('mouseover', vis.stackTip.show)
+        .on('mouseout', vis.stackTip.hide)
+        .on("click", d => vis.pieHighlight(parseInt(d.key)));
+    detailBars.select(".stack")
         .transition().duration(1000)
-        .attr("y", d => vis.stackY0 + vis.stackScale(d.y0))
+        .attr("y", d => vis.stackScale(d.y0))
         .attr("height", d => vis.stackScale(d.y))
-        .attr("fill", d => vis.stackColor(d.key));
+        .attr("fill", (d, i) => vis.colorMenu(d.key, i));
 
+    // highlighting overlay
+    detailBarGroup.append("rect")
+        .attr("class", "stack-overlay")
+        .attr("id", d => "stack-overlay-" + d.key)
+        .attr("x", 0)
+        .attr("width", vis.stackWidth)
+        .attr("fill", "Black")
+        .attr("opacity", 0);
+    detailBars.select(".stack-overlay")
+        .transition().duration(1000)
+        .attr("y", d => vis.stackScale(d.y0))
+        .attr("height", d => vis.stackScale(d.y));
+
+    detailBarGroup.append("text")
+        .attr("class", "stack-label")
+        .attr("x", vis.stackWidth + 5)
+        .attr("width", 50);
+    detailBars.select(".stack-label")
+        .text(d => clipText(d.name))
+        .transition().duration(1000)
+        .attr("y", d => vis.stackScale(d.y0) + vis.stackScale(d.y)/2);
+
+    detailBars.exit()
+        // TODO can't get transition to work properly
+        .transition().duration(1000)
+        .attr("opacity", 0)
+        .remove();
+
+    vis.stackTitle
+        .attr("x", vis.stackX)
+        .attr("y", vis.stackY0 - 10)
+        .text("Breakdown of " + cleanText(vis.selectedNutrient));
+
+    vis.stackTip
+        .html(function(d) {
+            return `This food is <b>${Math.round(d.y/aggNutrient*100)}%</b> of your total<br>intake of <b>${cleanText(vis.selectedNutrient)}</b>`;
+        });
+
+    vis.svgBar.call(vis.stackTip);
+};
+
+MealPlanner.prototype.colorMenu = function(key, idx) {
+    let vis = this;
+
+    const color = vis.stackColor(idx);
+
+    // color menu accordion
+    $(`#static-menu-panel-${key}`).css({
+        "border-left": "4px solid " + color
+    });
+
+    return color;
 };
 
 MealPlanner.prototype.selectNut = function(name) {
@@ -657,3 +783,21 @@ MealPlanner.prototype.selectNut = function(name) {
 
     vis.wrangleMenuData();
 };
+
+function clipText(text) {
+    const limit = 25;
+    let clip = text.substring(0, limit);
+    if (text.length > limit) {
+        clip += "...";
+    }
+    return clip
+}
+
+function cleanText(text) {
+    let cleanText = text;
+    let breakIdx = text.indexOf(' ');
+    if (breakIdx != -1) {
+        cleanText = text.substring(0, breakIdx);
+    }
+    return cleanText;
+}
